@@ -15,6 +15,11 @@ const Promo = require('./routes/Admin/Promo')
 const Users = require('./routes/Admin/Users')
 
 
+const Auth = require('./routes/user.route')
+
+
+
+
 const app = express()
 require('dotenv').config()
 
@@ -32,6 +37,9 @@ app.use('/api/admin/Audio', Audio)
 app.use('/api/admin/Lyrics', Lyrics)
 app.use('/api/admin/Promo', Promo)
 app.use('/api/admin/Users', Users)
+
+
+app.use('/api/auth/', Auth)
 
 
 
