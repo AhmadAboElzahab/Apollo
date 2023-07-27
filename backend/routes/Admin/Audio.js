@@ -4,6 +4,7 @@ const path = require('path');
 const Audio = require('../../models/Audio.model');
 const router = express.Router();
 const fs = require('fs');
+router.use(adminAuthorization)
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

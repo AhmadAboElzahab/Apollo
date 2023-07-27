@@ -7,7 +7,7 @@ const fs = require('fs');
 const sharp = require('sharp');
 const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
 
-//router.use(adminAuthorization)
+router.use(adminAuthorization)
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
