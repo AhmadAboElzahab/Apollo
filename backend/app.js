@@ -2,7 +2,7 @@ const express = require('express')
 const errorHandler = require('./middleware/errorHandler.middleware')
 const responseHandler = require('./middleware/responseHandler.middleware')
 const mongoose = require('mongoose')
-
+const path = require('path')
 const Likes = require('./routes/User/Likes')
 const Comments = require('./routes/User/Comments')
 const Payment = require('./routes/User/Payments')
@@ -20,8 +20,11 @@ const Auth = require('./routes/user.route')
 
 
 
+
 const app = express()
 require('dotenv').config()
+
+app.use(express.static(path.join(__dirname, "uploads")))
 
 app.use(express.json());
 app.use(errorHandler);
