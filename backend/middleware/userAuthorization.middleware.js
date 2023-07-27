@@ -13,8 +13,8 @@ const userAuthorization = (req, res, next) => {
         req.user = decoded;
 
         // Check if the user has 'user' role (excluding admins)
-        if (req.user.role === 'admin') {
-            return res.status(403).json({ message: 'Access denied. Admins are not allowed.' });
+        if (req.user.role !== 'user') {
+            return res.status(403).json({ message: 'Access denied. Users are  allowed Only.' });
         }
 
         // Store the user ID in the request object
