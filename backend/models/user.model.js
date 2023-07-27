@@ -6,25 +6,27 @@ const Schema = mongoose.Schema
 const userSchema = new Schema({
     email: {
         type: String,
-        required: [true,'Please enter an email'],
+        required: [true, 'Please enter an email'],
         unique: true,
-        validate:[validator.isEmail,'Please enter a valid email']
+        validate: [validator.isEmail, 'Please enter a valid email']
     },
     password: {
         type: String,
-        required: [true,'Please enter a password'],
+        required: [true, 'Please enter a password'],
     },
     name: {
         type: String,
-        required: [true,'Please enter your name'],
+        required: [true, 'Please enter your name'],
     },
     role: {
         type: String,
-        required: true
+        enum: ['user', 'admin'],
+        default: 'user'
+
     },
     avatar: {
         type: String,
-      
+
     },
 
 })
