@@ -11,8 +11,8 @@ const ArtworkSchema = new Schema({
         required: true
     },
     art: {
-        type: String,
-        required: true
+        data: Buffer,
+        contentType: String
     }
 
 })
