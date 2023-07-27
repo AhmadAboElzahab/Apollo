@@ -11,7 +11,7 @@ const ArtworkSchema = new Schema({
         required: true
     },
     art: {
-        type: String, // Store the image name (file path) as a string
+        type: String,
         required: true
     },
     price: {

@@ -15,8 +15,8 @@ const storage = multer.diskStorage({
     },
     filename: (req, file, cb) => {
         const uniqueSuffix = new Date().toISOString().replace(/:/g, "-");
-        const originalNameWithoutExt = file.originalname.split('.').slice(0, -1).join('.'); // Get the original filename without extension
-        cb(null, "original_" + uniqueSuffix + "_" + originalNameWithoutExt + ".png"); // Save the file with original name and .png extension
+        const originalNameWithoutExt = file.originalname.split('.').slice(0, -1).join('.');
+        cb(null, "original_" + uniqueSuffix + "_" + originalNameWithoutExt + ".png");
     }
 });
 
