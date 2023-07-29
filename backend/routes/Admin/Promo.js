@@ -69,6 +69,23 @@ router.put('/:id', async (req, res) => {
 
 
 
+router.post('/check', async (req, res) => {
+    try {
+        const { amount, code } = req.body;
+        const findCode = await Promo.findOne({ code });
+
+        if (findCode) {
+            const newAmount = amount - ((findCode.value * amount) / 100)
+            res.json({ price: newAmount })
+        } else {
+            res.status(404).json({ error: 'Promo code not found' }); 
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal server error' }); 
+    }
+});
+
 
 
 module.exports = router;
