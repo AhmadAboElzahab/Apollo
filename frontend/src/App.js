@@ -12,9 +12,9 @@ export default function App() {
       <div className=" mx-auto w-screen  h-screen ">
         <Navbar />
         <div className='flex items-center justify-center'> <div class="glitch" data-text="Apollo">Apollo</div></div>
-        <div className='flex items-center justify-center text-white text-6xl ' > All Assets in One Place</div>
-
+        <div className='flex items-center justify-center text-white text-6xl' > All Assets in One Place</div>
         <img src={apollo} alt="" className="bottom-0 main_image mx-auto " width="550px" /></div>
+
     </div>
   )
 }
