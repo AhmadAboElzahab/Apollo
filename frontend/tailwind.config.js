@@ -9,7 +9,8 @@ module.exports = {
         glitch: {
           pink: '#ff00ff',
           yellow: '#ffff00',
-          cyan: "#00ffff"
+          cyan: "#00ffff",
+          white: "#E3D7FC"
         },
       },
       spacing: {
