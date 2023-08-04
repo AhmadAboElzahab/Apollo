@@ -12,8 +12,9 @@ export default function Navbar() {
                             </div>
 
                             <div className="flex items-center justify-end ">
-                                <input type="checkbox" name="hamburger" id="hamburger" className="peer" hidden />
+                                <input type="checkbox" name="hamburger" id="hamburger" className="peer invisible" hidden />
                                 <label for="hamburger" className="peer-checked:hamburger relative z-10 -mr-6 block cursor-pointer p-6 lg:hidden">
+
                                     <div aria-hidden="true" className="m-auto h-0.5 w-6 rounded bg-glitch-white transition duration-300"></div>
                                     <div aria-hidden="true" className="m-auto mt-2 h-0.5 w-6 rounded bg-glitch-white transition duration-300"></div>
                                 </label>

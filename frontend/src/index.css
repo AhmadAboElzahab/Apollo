@@ -14,6 +14,10 @@ body {
 
 }
 
+.bg_grid {
+    background-image: url("./assets/grid.svg");
+
+}
 
 
 .background {
@@ -74,7 +78,7 @@ body {
 
 .glitch {
     position: relative;
-    font-size: 50px;
+    font-size: 30px;
     font-weight: bold;
     color: #FFFFFF;
     letter-spacing: 3px;

@@ -1,37 +1,45 @@
-import Navbar from './Components/Navbar'
-import apollo from './assets/apollo.png'
+import Home from './pages/Home'
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Navigate,
+  Outlet,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
+
+import ErrorPage from './pages/ErrorPage'
+import Unauthorized from './pages/Unauthorized'
+import AdminLayout from './layout/AdminLayout'
 
 export default function App() {
   return (
-    <div class="background">
-
-      <pre></pre>
-      <pre></pre>
-      <pre></pre>
-
-      <div className="mx-auto w-screen h-screen flex flex-col justify-between">
-
-        <Navbar />
+    <RouterProvider
+      router={createBrowserRouter(
+        createRoutesFromElements(
+          <>
 
 
-        <div className='flex flex-col items-center justify-center text-6xl text-center'>
-          <h1 className='bounce-in-left  text-white'> All Assets </h1>
+            <Route
+              path="/admin"
+              element={
+
+                <AdminLayout />
+
+              }
+            >
 
 
-          <h2 className=" bounce-in-right font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-            in One Place
-          </h2>
-
-        </div>
+            </Route>
 
 
-        <div className='p-0 flex flex-col justify-center items-center text-white'>
-          <div className='flex flex-grow items-end'>
-            <img src={apollo} alt="" className=' h-auto main_image max-w-full w-[80%] sm:w-[500px] md:w-[500px] lg:w-[600px]' />
-          </div>
-        </div>
-
-      </div>
-    </div>
-  )
+            <Route path="/" element={<Home />} />
+            <Route path="Unauthorized" element={<Unauthorized />} />
+            <Route path="*" element={<ErrorPage />} />
+          </>
+        )
+      )}
+    />
+  );
 }
+
