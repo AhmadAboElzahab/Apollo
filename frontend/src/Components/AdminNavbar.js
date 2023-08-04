@@ -46,7 +46,7 @@ export default function AdminNavbar() {
         <nav className="space-y-6 px-2 py-5">
           <div>
             <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
-              <div>Hello</div>
+              <div>General</div>
             </div>
             <NavLink onClick={close} to="" className="link_style">
               Home
@@ -54,6 +54,39 @@ export default function AdminNavbar() {
             <NavLink onClick={close} to="Category" className="link_style">
               Category
             </NavLink>
+            <br />
+            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
+              <div> Products</div>
+            </div>
+            <NavLink onClick={close} to="Category" className="link_style">
+              Beats
+            </NavLink>{" "}
+            <NavLink onClick={close} to="Category" className="link_style">
+              Lyrics
+            </NavLink>{" "}
+            <NavLink onClick={close} to="Category" className="link_style">
+              Artworks
+            </NavLink>
+            <br />
+            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
+              <div> Accounting</div>
+            </div>
+            <NavLink onClick={close} to="Category" className="link_style">
+              Prediction
+            </NavLink>
+            <NavLink onClick={close} to="Category" className="link_style">
+              History
+            </NavLink>{" "}
+            <NavLink onClick={close} to="Category" className="link_style">
+              Promo Codes
+            </NavLink>
+            <br />
+            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
+              <div> Social Media</div>
+            </div>
+            <NavLink onClick={close} to="Category" className="link_style">
+              Instagram
+            </NavLink>{" "}
           </div>
         </nav>
       </div>
