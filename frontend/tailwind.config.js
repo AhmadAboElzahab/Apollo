@@ -5,13 +5,20 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './ui/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,jsx}', // Add the path for src files from your second config
-    './public/index.html', // Add the path for public/index.html from your second config
+    './src/**/*.{js,jsx}',
+    './public/index.html',
   ],
   darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        vercel: {
+          pink: '#FF0080',
+          blue: '#0070F3',
+          cyan: '#50E3C2',
+          orange: '#F5A623',
+          violet: '#7928CA',
+        },
         gray: colors.zinc,
         'gray-1000': 'rgb(17,17,19)',
         'gray-1100': 'rgb(10,10,11)',
@@ -28,7 +35,6 @@ module.exports = {
         )}, 50px, ${theme('colors.gray.800')} 50%)`,
       }),
       keyframes: ({ theme }) => ({
-        // Add the keyframes from your first config here
         rerender: {
           '0%': {
             ['border-color']: theme('colors.vercel.pink'),

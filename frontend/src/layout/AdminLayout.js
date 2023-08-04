@@ -4,7 +4,7 @@ import {
     ScrollRestoration,
     useNavigate,
 } from "react-router-dom";
-import { Boundary } from '../Components/';
+import { Boundary } from '../Components/boundary';
 import AdminNavbar from "../Components/AdminNavbar";
 export default function AdminLayout() {
     return (
@@ -18,9 +18,11 @@ export default function AdminLayout() {
                         </div>
                     </div>
 
+
+
                     <div className="bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20">
                         <div className="rounded-lg bg-black p-3.5 lg:p-6">
-                            <h1 className="text-white text-3xl">Content</h1>
+
 
                             <Boundary labels={['parallel-routes/page.tsx']} size="small">
                                 <div className="prose prose-sm prose-invert max-w-none">
@@ -30,7 +32,33 @@ export default function AdminLayout() {
                                             Parallel Routes allow you to simultenously or conditionally render
                                             multiple pages, with independent navigation, in the same layout.
                                         </li>
+                                        <li>
+                                            Parallel Routes can be used for advanced routing patterns like{' '}
+                                            <a href="https://nextjs.org/docs/app/building-your-application/routing/parallel-routes#conditional-routes">
+                                                Conditional Routes
+                                            </a>{' '}
+                                            and{' '}
+                                            <a href="https://nextjs.org/docs/app/building-your-application/routing/intercepting-routes">
+                                                Intercepted Routes
+                                            </a>
+                                            .
+                                        </li>
+                                        <li>
+                                            Try using the tabs in one parallel route to navigate. Notice the URL
+                                            changes but the unaffected parallel route is preserved.
+                                        </li>
+                                        <li>
+                                            Try using the browser&apos;s backwards and forwards navigation.
+                                            Notice the browser&apos;s URL history state and active UI state is
+                                            correctly synced.
+                                        </li>
+                                        <li>
+                                            Try navigating to a tab in one parallel route and refreshing the
+                                            browser. Notice you can choose what UI to show parallel routes that
+                                            don&apos;t match the initial URL.
+                                        </li>
                                     </ul>
+
                                 </div>
                             </Boundary>
 

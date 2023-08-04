@@ -5,10 +5,6 @@ const Label = ({
     children,
     animateRerendering,
     color,
-}: {
-    children: React.ReactNode;
-    animateRerendering?: boolean;
-    color?: 'default' | 'pink' | 'blue' | 'violet' | 'cyan' | 'orange';
 }) => {
     return (
         <div
@@ -32,12 +28,6 @@ export const Boundary = ({
     size = 'default',
     color = 'default',
     animateRerendering = true,
-}: {
-    children: React.ReactNode;
-    labels?: string[];
-    size?: 'small' | 'default';
-    color?: 'default' | 'pink' | 'blue' | 'violet' | 'cyan' | 'orange';
-    animateRerendering?: boolean;
 }) => {
     return (
         <div
