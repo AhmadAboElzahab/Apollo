@@ -45,7 +45,7 @@ export default function AdminNavbar() {
       >
         <nav className="space-y-6 px-2 py-5">
           <div>
-            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
+            <div className="mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80">
               <div>General</div>
             </div>
             <NavLink onClick={close} to="" className="link_style">
@@ -55,38 +55,49 @@ export default function AdminNavbar() {
               Category
             </NavLink>
             <br />
-            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
-              <div> Products</div>
+            <div className="mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80">
+              <div>Products</div>
             </div>
             <NavLink onClick={close} to="Category" className="link_style">
               Beats
-            </NavLink>{" "}
+            </NavLink>
             <NavLink onClick={close} to="Category" className="link_style">
               Lyrics
-            </NavLink>{" "}
+            </NavLink>
             <NavLink onClick={close} to="Category" className="link_style">
               Artworks
             </NavLink>
             <br />
-            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
-              <div> Accounting</div>
+            <div className="mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80">
+              <div>Accounting</div>
             </div>
             <NavLink onClick={close} to="Category" className="link_style">
               Prediction
             </NavLink>
             <NavLink onClick={close} to="Category" className="link_style">
               History
-            </NavLink>{" "}
+            </NavLink>
             <NavLink onClick={close} to="Category" className="link_style">
               Promo Codes
             </NavLink>
             <br />
-            <div className="mb-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400/80">
-              <div> Social Media</div>
+            <div className="mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80">
+              <div>Social Media</div>
             </div>
             <NavLink onClick={close} to="Category" className="link_style">
               Instagram
-            </NavLink>{" "}
+            </NavLink>
+
+            <br />
+            <div className="mb-2 px-3 text-xs font-semibold  tracking-wider text-gray-400/80">
+              <div>Settings</div>
+            </div>
+            <NavLink onClick={close} to="Category" className="link_style">
+              Account
+            </NavLink>
+            <NavLink onClick={close} to="Category" className="link_style">
+              Log out
+            </NavLink>
           </div>
         </nav>
       </div>
