@@ -16,7 +16,7 @@ export default function DeleteCategory() {
   return (
     <>
       <div>
-        <button type="button" onClick={openModal}>
+        <button type="button" className="text-red-500" onClick={openModal}>
           Delete
         </button>
       </div>

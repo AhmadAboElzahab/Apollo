@@ -56,11 +56,13 @@ export default function EditCategory() {
                     <p className="text-sm text-gray-500 mb-2">
                       You Are Trying to Edit a Category
                     </p>
-                    <label class="text-sm text-gray-500" for="username">
-                      Username
+                    <label class="text-sm text-gray-500" for="Title">
+                      Title
                     </label>
                     <input
-                      class="bg-gray-100 appearance-none border-2 border-gray-100 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-gray-500     "
+                      id="Title"
+                      name="Title"
+                      class="bg-gray-300 appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-300 focus:border-gray-300     "
                       type="txt"
                       placeholder="******************"
                     />
