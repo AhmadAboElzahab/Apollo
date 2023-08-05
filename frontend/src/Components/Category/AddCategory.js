@@ -14,7 +14,7 @@ export default function AddCategory() {
                 Title
               </label>
               <input
-                className="bg-gray-900  appearance-none border-2 border-gray-1100 rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-800 focus:border-zinc-800 focus:text-white"
+                className="bg-gray-900 text-md appearance-none border-2 border-gray-1100 rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-800 focus:border-zinc-800 focus:text-white"
                 type="txt"
                 id="categoryTitle"
                 name="categoryTitle"
@@ -27,7 +27,7 @@ export default function AddCategory() {
                 For
               </label>
               <select
-                className="bg-gray-900  appearance-none border-2 border-gray-1100 rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-800 focus:border-zinc-800 focus:text-white"
+                className="bg-gray-900 text-sm appearance-none border-2 border-gray-1100 rounded-md w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-800 focus:border-zinc-800 focus:text-white"
                 id="ForProduct"
                 name="ForProduct"
               >

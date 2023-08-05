@@ -1,6 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { CiWarning } from "react-icons/ci";
 
 export default function DeleteCategory() {
   let [isOpen, setIsOpen] = useState(false);
