@@ -1,18 +1,18 @@
-import AddCategory from "../../Components/Category/AddCategory";
-import Categories from "../../Components/Category/Categories";
+import AddBeat from "../../Components/Beat/AddBeat";
+import Beats from "../../Components/Beat/Beats";
 import PageHeader from "../../Components/PageHeader";
 
-export default function Category() {
+export default function Beat() {
   return (
     <>
-      <PageHeader title="Category" />
+      <PageHeader title="Beat" />
       <div className=" my-5 w-full flex flex-col space-y-4 lg:flex-row lg:space-x-4 lg:space-y-0 gap-4 ">
         <div className=" order-2  lg:w-2/3  lg:order-1">
-          <Categories />
+          <Beats />
         </div>
 
         <div className="order-1  lg:w-1/3  lg:order-2">
-          <AddCategory />
+          <AddBeat />
         </div>
       </div>
     </>

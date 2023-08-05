@@ -11,16 +11,14 @@ export default function Categories() {
             <table class="table-auto">
               <thead>
                 <tr>
-                  <th>Song</th>
-                  <th>Artist</th>
-                  <th>Year</th>
-                  <th>Year</th>
+                  <th>Category</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                  <td>Malcolm Lockyer</td>
                   <td>1961</td>
                   <td>
                     <EditCategory />
@@ -30,14 +28,34 @@ export default function Categories() {
                   </td>
                 </tr>
                 <tr>
-                  <td>Witchy Woman</td>
-                  <td>The Eagles</td>
-                  <td>1972</td>
+                  <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                  <td>1961</td>
+                  <td>
+                    <EditCategory />
+                  </td>
+                  <td>
+                    <DeleteCategory />
+                  </td>
                 </tr>
                 <tr>
-                  <td>Shining Star</td>
-                  <td>Earth, Wind, and Fire</td>
-                  <td>1975</td>
+                  <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                  <td>1961</td>
+                  <td>
+                    <EditCategory />
+                  </td>
+                  <td>
+                    <DeleteCategory />
+                  </td>
+                </tr>
+                <tr>
+                  <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                  <td>1961</td>
+                  <td>
+                    <EditCategory />
+                  </td>
+                  <td>
+                    <DeleteCategory />
+                  </td>
                 </tr>
               </tbody>
             </table>
