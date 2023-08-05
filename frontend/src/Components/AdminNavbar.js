@@ -5,8 +5,11 @@ import clsx from "clsx";
 
 export default function AdminNavbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isActive, setIsActive] = useState(false);
   const close = () => setIsOpen(false);
+
+  const handleCheckboxChange = () => {
+    setIsOpen((prev) => !prev);
+  };
   return (
     <div className="fixed top-0 z-10 flex w-full flex-col border-b border-gray-800 bg-black lg:bottom-0 lg:z-auto lg:w-72 lg:border-b-0 lg:border-r lg:border-gray-800">
       <div className="flex h-14 items-center px-4 py-4 lg:h-auto">
@@ -21,22 +24,30 @@ export default function AdminNavbar() {
             </div>
           </div>
         </NavLink>
-      </div>
-      <button
-        type="button"
-        className="group absolute right-0 top-0 flex h-14 items-center gap-x-2 px-4 lg:hidden"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <div className="font-medium text-gray-100 group-hover:text-gray-400">
-          Menu
-        </div>
-        {isOpen ? (
-          <XIcon className="block w-6 text-gray-400" />
-        ) : (
-          <MenuAlt2Icon className="block w-6 text-gray-400" />
-        )}
-      </button>
 
+        <input
+          type="checkbox"
+          name="hamburger"
+          id="hamburger"
+          className="peer invisible"
+          hidden
+          checked={isOpen}
+          onChange={handleCheckboxChange}
+        />
+        <label
+          for="hamburger"
+          className="peer-checked:hamburger relative z-10 -mr-6 block cursor-pointer p-6 lg:hidden"
+        >
+          <div
+            aria-hidden="true"
+            className="m-auto h-0.5 w-6 rounded bg-white transition duration-300"
+          ></div>
+          <div
+            aria-hidden="true"
+            className="m-auto mt-2 h-0.5 w-6 rounded bg-white transition duration-300"
+          ></div>
+        </label>
+      </div>
       <div
         className={clsx("overflow-y-auto lg:static lg:block", {
           "fixed inset-x-0 bottom-0 top-14 mt-px bg-black": isOpen,
