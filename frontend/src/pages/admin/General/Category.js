@@ -1,6 +1,6 @@
-import AddCategory from '../../Components/Category/AddCategory';
-import Categories from '../../Components/Category/Categories';
-import PageHeader from '../../Components/PageHeader';
+import AddCategory from '../../../Components/Category/AddCategory';
+import Categories from '../../../Components/Category/Categories';
+import PageHeader from '../../../Components/PageHeader';
 
 export default function Category() {
   return (

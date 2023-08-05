@@ -9,8 +9,8 @@ import {
 import ErrorPage from './pages/ErrorPage';
 import Unauthorized from './pages/Unauthorized';
 import AdminLayout from './layout/AdminLayout';
-import AdminHome from './pages/admin/AdminHome';
-import Category from './pages/admin/Category';
+import AdminHome from './pages/admin/General/AdminHome';
+import Category from './pages/admin/General/Category';
 
 import Beat from './pages/admin/Products/Beat';
 import Artwok from './pages/admin/Products/Artwok';

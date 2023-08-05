@@ -1,5 +1,5 @@
-import PageHeader from '../../Components/PageHeader';
-import { Boundary } from '../../Components/boundary';
+import PageHeader from '../../../Components/PageHeader';
+import { Boundary } from '../../../Components/boundary';
 
 export default function AdminHome() {
   return (
