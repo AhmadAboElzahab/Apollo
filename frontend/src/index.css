@@ -13,11 +13,11 @@ body {
 }
 
 .bg_grid {
-  background-image: url("./assets/grid.svg");
+  background-image: url('./assets/grid.svg');
 }
 
 .background {
-  background-image: url("./assets/grid.svg");
+  background-image: url('./assets/grid.svg');
   position: absolute;
   overflow: hidden;
   width: 100%;
@@ -95,8 +95,7 @@ body {
 }
 
 .glitch:after {
-  animation: glitch-it 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both
-    infinite;
+  animation: glitch-it 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
   color: #ff00ff;
   z-index: -2;
 }

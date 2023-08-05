@@ -1,5 +1,3 @@
 export default function EditBeat() {
-  return (
-    <div>EditBeat</div>
-  )
+  return <div>EditBeat</div>;
 }
