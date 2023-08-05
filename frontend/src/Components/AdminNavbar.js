@@ -54,7 +54,7 @@ export default function AdminNavbar() {
             <div className='mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80'>
               <div>General</div>
             </div>
-            <NavLink onClick={close} to='' className='link_style'>
+            <NavLink end onClick={close} to='' className='link_style'>
               Home
             </NavLink>
             <NavLink onClick={close} to='Category' className='link_style'>
@@ -64,7 +64,7 @@ export default function AdminNavbar() {
             <div className='mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80'>
               <div>Products</div>
             </div>
-            <NavLink end onClick={close} to='Beat' className='link_style'>
+            <NavLink onClick={close} to='Beat' className='link_style'>
               Beats
             </NavLink>
             <NavLink onClick={close} to='Lyrics' className='link_style'>
