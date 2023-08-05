@@ -190,3 +190,6 @@ body {
     @apply block rounded-md px-5 py-2 text-sm font-medium text-gray-400 hover:bg-gray-800 hover:text-white;
   }
 }
+.active {
+  color: white;
+}
