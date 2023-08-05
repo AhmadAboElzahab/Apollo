@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { MenuAlt2Icon, XIcon } from "@heroicons/react/solid";
 import clsx from "clsx";
 
 export default function AdminNavbar() {

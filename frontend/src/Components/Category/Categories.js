@@ -14,8 +14,7 @@ export default function Categories() {
                   <th>Song</th>
                   <th>Artist</th>
                   <th>Year</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                  <th>Year</th>
                 </tr>
               </thead>
               <tbody>

@@ -17,7 +17,7 @@ export default function DeleteCategory() {
     <>
       <div>
         <button type="button" onClick={openModal}>
-          <span className="text-red-500 hover:tex-red-400">Delete</span>
+          Delete
         </button>
       </div>
 
@@ -49,7 +49,7 @@ export default function DeleteCategory() {
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
-                    className="text-xl font-medium leading-6 text-gray-900"
+                    className="text-xlg font-medium leading-6 text-gray-900"
                   >
                     Delete
                   </Dialog.Title>

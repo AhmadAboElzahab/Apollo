@@ -1,4 +1,4 @@
-import Home from "./pages/Home";
+import HomeBlock from "./pages/Home";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -23,7 +23,7 @@ export default function App() {
               <Route path="Category" element={<Category />} />
             </Route>
 
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomeBlock />} />
             <Route path="Unauthorized" element={<Unauthorized />} />
             <Route path="*" element={<ErrorPage />} />
           </>
