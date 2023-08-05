@@ -11,7 +11,9 @@ import Unauthorized from './pages/Unauthorized';
 import AdminLayout from './layout/AdminLayout';
 import AdminHome from './pages/admin/AdminHome';
 import Category from './pages/admin/Category';
-import Beat from './pages/admin/Beat';
+
+import Beat from './pages/admin/Products/Beat';
+import Artwok from './pages/admin/Products/Artwok';
 
 export default function App() {
   return (
@@ -23,6 +25,7 @@ export default function App() {
               <Route index element={<AdminHome />} />
               <Route path='Category' element={<Category />} />
               <Route path='Beat' element={<Beat />} />
+              <Route path='Beat' element={<Artwok />} />
             </Route>
 
             <Route path='/' element={<HomeBlock />} />

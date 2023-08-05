@@ -1,6 +1,6 @@
-import AddBeat from '../../Components/Beat/AddBeat';
-import Beats from '../../Components/Beat/Beats';
-import PageHeader from '../../Components/PageHeader';
+import AddBeat from '../../../Components/Beat/AddBeat';
+import Beats from '../../../Components/Beat/Beats';
+import PageHeader from '../../../Components/PageHeader';
 
 export default function Beat() {
   return (
