@@ -14,6 +14,7 @@ import Category from './pages/admin/Category';
 
 import Beat from './pages/admin/Products/Beat';
 import Artwok from './pages/admin/Products/Artwok';
+import Lyrics from './pages/admin/Products/Lyrics';
 
 export default function App() {
   return (
@@ -25,7 +26,8 @@ export default function App() {
               <Route index element={<AdminHome />} />
               <Route path='Category' element={<Category />} />
               <Route path='Beat' element={<Beat />} />
-              <Route path='Beat' element={<Artwok />} />
+              <Route path='Artwork' element={<Artwok />} />
+              <Route path='Lyrics' element={<Lyrics />} />
             </Route>
 
             <Route path='/' element={<HomeBlock />} />

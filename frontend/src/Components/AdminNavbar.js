@@ -67,10 +67,10 @@ export default function AdminNavbar() {
             <NavLink end onClick={close} to='Beat' className='link_style'>
               Beats
             </NavLink>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='Lyrics' className='link_style'>
               Lyrics
             </NavLink>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='Artwork' className='link_style'>
               Artworks
             </NavLink>
             <br />
