@@ -77,20 +77,20 @@ export default function AdminNavbar() {
             <div className='mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80'>
               <div>Accounting</div>
             </div>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='Prediction' className='link_style'>
               Prediction
             </NavLink>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='History' className='link_style'>
               History
             </NavLink>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='PromoCodes' className='link_style'>
               Promo Codes
             </NavLink>
             <br />
             <div className='mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80'>
               <div>Social Media</div>
             </div>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='Instagram' className='link_style'>
               Instagram
             </NavLink>
 
@@ -98,10 +98,10 @@ export default function AdminNavbar() {
             <div className='mb-2 px-3 text-xs font-semibold  tracking-wider text-gray-400/80'>
               <div>Settings</div>
             </div>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='Account' className='link_style'>
               Account
             </NavLink>
-            <NavLink onClick={close} to='Category' className='link_style'>
+            <NavLink onClick={close} to='LogOut' className='link_style'>
               Log out
             </NavLink>
           </div>
