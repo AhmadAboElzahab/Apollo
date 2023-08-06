@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require("multer");
 const path = require("path");
 const Artwork = require("../../models/Artwork.model");
+const Category = require("../../models/Category.model");
 const router = express.Router();
 const fs = require("fs");
 const sharp = require("sharp");
@@ -100,10 +101,30 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const artworks = await Artwork.find();
-    res.json({ data: artworks }).status(200);
-  } catch (err) {
-    res.json({ error: err }).status(500);
+    const allArtworks = await Lyrics.find();
+
+    const categoryIds = [...new Set(allArtworks.map((art) => art.category))];
+
+    const categories = await Category.find({ _id: { $in: categoryIds } });
+
+    const categoryMap = {};
+    categories.forEach((category) => {
+      categoryMap[category._id.toString()] = category.title;
+    });
+
+    const ArtworksWithCategories = allArtworks.map((art) => ({
+      _id: art._id,
+      title: art.title,
+      lyrics: art.lyrics,
+      category: categoryMap[lyric.category.toString()],
+      price: art.price,
+      art: art.art,
+    }));
+
+    res.json(ArtworksWithCategories);
+  } catch (error) {
+    console.error("Error fetching Artworks:", error);
+    res.status(500).json({ error: "Failed to fetch Artworks." });
   }
 });
 
