@@ -23,6 +23,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:type", async (req, res) => {
+  try {
+    const Categories = await Category.find({ type: req.params.type });
+    res.json(Categories);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch Categoris." });
+  }
+});
+
 router.put("/:id", async (req, res) => {
   try {
     const { title } = req.body;
