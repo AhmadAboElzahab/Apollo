@@ -2,6 +2,7 @@ import { Boundary } from '../boundary';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
+import { mutate } from 'swr';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function AddArtwork() {
@@ -70,6 +71,7 @@ export default function AddArtwork() {
         if (xhr.status === 200) {
           const data = JSON.parse(xhr.responseText);
           toast.success('New Artwork Added');
+          mutate('/api/admin/Artwork');
           resetForm();
         } else {
           toast.error('Artwork Could not be Added');
@@ -83,7 +85,7 @@ export default function AddArtwork() {
   return (
     <div className='bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20'>
       <div className='rounded-lg bg-black p-3.5 lg:p-6'>
-        <Boundary labels={['Add New Beat']} size='small'>
+        <Boundary labels={['Add Artwork']} size='small'>
           <form onSubmit={handleSubmit}>
             <div className='prose prose-sm prose-invert max-w-none'>
               <div className='mb-6'>
