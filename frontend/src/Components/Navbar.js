@@ -6,7 +6,7 @@ export default function Navbar() {
           <div className='px-6 lg:container md:px-12 lg:mx-auto lg:px-6 lg:py-4'>
             <div className='flex items-center justify-between'>
               <div className='relative z-30 '>
-                <div class='glitch z-10' data-text='Apollo'>
+                <div className='glitch z-10' data-text='Apollo'>
                   Apollo
                 </div>
               </div>
@@ -20,7 +20,7 @@ export default function Navbar() {
                   hidden
                 />
                 <label
-                  for='hamburger'
+                  htmlFor='hamburger'
                   className='peer-checked:hamburger relative z-10 -mr-6 block cursor-pointer p-6 lg:hidden'
                 >
                   <div

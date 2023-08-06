@@ -14,7 +14,7 @@ export default function AdminNavbar() {
       <div className='flex h-14 items-center px-4 py-4 lg:h-auto'>
         <NavLink href='/' className='group flex w-full items-center gap-x-2.5' onClick={close}>
           <div className='relative z-30 '>
-            <div class='glitch z-10 text-xl' data-text='Apollo'>
+            <div className='glitch z-10 text-xl' data-text='Apollo'>
               Apollo
             </div>
           </div>
@@ -30,7 +30,7 @@ export default function AdminNavbar() {
           onChange={handleCheckboxChange}
         />
         <label
-          for='hamburger'
+          xc='hamburger'
           className='peer-checked:hamburger relative z-10 -mr-6 block cursor-pointer p-6 lg:hidden'
         >
           <div

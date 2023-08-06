@@ -3,7 +3,7 @@ import apollo from '../assets/apollo.png';
 
 export default function Home() {
   return (
-    <div class='background'>
+    <div className='background'>
       <pre></pre>
       <pre></pre>
       <pre></pre>

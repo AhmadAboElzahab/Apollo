@@ -7,7 +7,7 @@ export default function Beats() {
       <div className='rounded-lg bg-black p-3.5 lg:p-6'>
         <Boundary labels={['Categories']} size='small'>
           <div className='prose prose-sm prose-invert max-w-none'>
-            <table class='table-auto'>
+            <table className='table-auto'>
               <thead>
                 <tr>
                   <th>Category</th>
