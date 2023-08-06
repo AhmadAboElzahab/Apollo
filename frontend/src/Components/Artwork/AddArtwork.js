@@ -6,8 +6,19 @@ export default function AddArtwork() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+
   const handleImageChange = (event) => {
-    setImage(event.target.files[0]);
+    const selectedImage = event.target.files[0];
+
+    if (selectedImage) {
+      setImage(selectedImage);
+      const reader = new FileReader();
+      reader.onload = () => {
+        setImagePreview(reader.result);
+      };
+      reader.readAsDataURL(selectedImage);
+    }
   };
 
   const handleSubmit = async (event) => {
@@ -61,8 +72,15 @@ export default function AddArtwork() {
               </div>
 
               <div className='mb-6'>
+                {imagePreview && (
+                  <>
+                    <label>Image Preview:</label>{' '}
+                    <img src={imagePreview} alt='Preview' className='rounded-2xl' />
+                  </>
+                )}
+
                 <label className='text-md text-white m-2' htmlFor='file-input'>
-                  Beat
+                  Image
                 </label>
                 <input
                   type='file'
