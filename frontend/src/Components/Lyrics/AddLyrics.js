@@ -2,14 +2,48 @@ import { AiOutlinePlus } from 'react-icons/ai';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { mutate } from 'swr';
+import useSWR from 'swr';
+import { toast } from 'react-toastify';
+const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function AddLyrics() {
+  const { data, error } = useSWR('/api/admin/Category/Lyrics', fetcher);
+
   let [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('');
   const [lyrics, setLyrics] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
 
+  const addLyrics = async () => {
+    if (!title || !lyrics || !category || !price) {
+      toast.error('All Field mus be filled');
+    } else {
+      try {
+        const response = await fetch('/api/admin/Lyrics', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ title, category, lyrics, price }),
+        });
+
+        if (response.ok) {
+          mutate('/api/admin/Lyrics');
+          setTitle('');
+          setCategory('');
+          setLyrics('');
+          setPrice('');
+          closeModal();
+          toast.success('New Lyrics Added');
+        } else {
+          console.error('Failed to add Lyrics:', response.statusText);
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    }
+  };
   function closeModal() {
     setIsOpen(false);
   }
@@ -67,45 +101,63 @@ export default function AddLyrics() {
                         name='value'
                         className='bg-gray-300 appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-300 focus:border-gray-300'
                         type='txt'
+                        value={title}
+                        onChange={(e) => {
+                          setTitle(e.target.value);
+                        }}
                       />
                     </div>
 
                     <div className='mb-6'>
-                      <label className='text-sm text-gray-500' htmlFor='value'>
+                      <label className='text-sm text-gray-500' htmlFor='Category'>
                         Category
                       </label>
                       <select
                         className='bg-gray-300 appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-300 focus:border-gray-300 '
-                        id='BeatCategory'
-                        name='BeatCategory'
+                        id='Category'
+                        name='Category'
+                        value={category}
+                        onChange={(e) => {
+                          setCategory(e.target.value);
+                        }}
                       >
                         <option value=''>Please Select</option>
-                        <option value='Lyrics'>Lyrics</option>
-                        <option value='Beats'>Beats</option>
-                        <option value='Artworks'>Artworks</option>
+                        {data && data.map((d) => <option value={d._id}>{d.title}</option>)}
                       </select>
                     </div>
                     <div className='mb-6'>
-                      <label className='text-sm text-gray-500' htmlFor='value'>
+                      <label className='text-sm text-gray-500' htmlFor='Lyrics'>
                         Lyrics
                       </label>
                       <textarea
                         rows={5}
                         className='bg-gray-300 appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-300 focus:border-gray-300 row-4 resize-y'
-                        id='Description'
-                        name='Description'
+                        id='Lyrics'
+                        name='Lyrics'
+                        value={lyrics}
+                        onChange={(e) => {
+                          setLyrics(e.target.value);
+                        }}
                       />
                     </div>
 
                     <div className='mb-6'>
-                      <label className='text-sm text-gray-500' htmlFor='value'>
+                      <label className='text-sm text-gray-500' htmlFor='Price'>
                         Price
                       </label>
                       <input
-                        id='value'
-                        name='value'
+                        id='Price'
+                        name='Price'
                         className='bg-gray-300 appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-300 focus:border-gray-300'
                         type='txt'
+                        onChange={(e) => {
+                          const regex = /^\d+(\.\d{0,2})?$/;
+
+                          if (regex.test(e.target.value) || e.target.value === '') {
+                            setPrice(e.target.value);
+                          }
+                        }}
+                        value={price}
                       />
                     </div>
                   </div>
@@ -114,7 +166,7 @@ export default function AddLyrics() {
                     <button
                       type='button'
                       className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                      onClick={openModal}
+                      onClick={addLyrics}
                     >
                       Proceed
                     </button>

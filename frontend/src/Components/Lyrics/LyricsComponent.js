@@ -1,7 +1,7 @@
 import { Boundary } from '../boundary';
 
 import useSWR from 'swr';
-import DeleteLyrics from './DleteLyrics';
+import DeleteLyrics from './DeleteLyrics';
 import AddLyrics from './AddLyrics';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
