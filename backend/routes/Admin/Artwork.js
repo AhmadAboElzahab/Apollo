@@ -101,7 +101,7 @@ router.delete("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
   try {
-    const allArtworks = await Lyrics.find();
+    const allArtworks = await Artwork.find();
 
     const categoryIds = [...new Set(allArtworks.map((art) => art.category))];
 
@@ -115,8 +115,8 @@ router.get("/", async (req, res) => {
     const ArtworksWithCategories = allArtworks.map((art) => ({
       _id: art._id,
       title: art.title,
-      lyrics: art.lyrics,
-      category: categoryMap[lyric.category.toString()],
+      description: art.description,
+      category: categoryMap[art.category.toString()],
       price: art.price,
       art: art.art,
     }));
