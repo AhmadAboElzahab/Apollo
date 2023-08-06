@@ -1,5 +1,6 @@
 import { Boundary } from '../boundary';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export default function AddArtwork() {
   const [title, setTitle] = useState('');
@@ -7,6 +8,9 @@ export default function AddArtwork() {
   const [price, setPrice] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [showProgressBar, setShowProgressBar] = useState(false);
 
   const handleImageChange = (event) => {
     const selectedImage = event.target.files[0];
@@ -24,31 +28,51 @@ export default function AddArtwork() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    setUploadProgress(0);
+    setButtonDisabled(true);
+    setShowProgressBar(true);
+
+    const resetForm = () => {
+      setTitle('');
+      setDescription('');
+      setPrice('');
+      setImage(null);
+      setImagePreview(null);
+    };
     const formData = new FormData();
     formData.append('image', image);
     formData.append('title', title);
     formData.append('description', description);
     formData.append('price', price);
 
-    try {
-      const response = await fetch('/api/admin/Artwork', {
-        method: 'POST',
-        body: formData,
-      });
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', '/api/admin/Artwork', true);
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Upload successful:', data);
-        // Reset form fields and state as needed
-      } else {
-        console.error('Upload failed:', response.statusText);
-        // Handle error as needed
+    xhr.upload.addEventListener('progress', (event) => {
+      if (event.lengthComputable) {
+        const progress = (event.loaded / event.total) * 100;
+        setUploadProgress(progress);
       }
-    } catch (error) {
-      console.error('Upload failed:', error);
-      // Handle error as needed
-    }
+    });
+
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        setButtonDisabled(false);
+        setShowProgressBar(false);
+
+        if (xhr.status === 200) {
+          const data = JSON.parse(xhr.responseText);
+          toast.success('New Artwork Added');
+          resetForm();
+        } else {
+          toast.error('Artwork Could not be Added');
+        }
+      }
+    };
+
+    xhr.send(formData);
   };
+
   return (
     <div className='bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20'>
       <div className='rounded-lg bg-black p-3.5 lg:p-6'>
@@ -75,7 +99,7 @@ export default function AddArtwork() {
                 {imagePreview && (
                   <>
                     <label>Image Preview:</label>{' '}
-                    <img src={imagePreview} alt='Preview' className='rounded-2xl' />
+                    <img src={imagePreview} alt='Preview' className='rounded-2xl ' />
                   </>
                 )}
 
@@ -138,12 +162,37 @@ export default function AddArtwork() {
                   value={price}
                   onChange={(e) => setPrice(e.target.value)}
                 />
+                {showProgressBar && (
+                  <div className='mb-6'>
+                    <label>Upload Progress:</label>
+                    <div className='relative pt-1'>
+                      <div className='flex mb-2 items-center justify-between'>
+                        <div>
+                          <span className='text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-purple-600 bg-purple-200'>
+                            {uploadProgress.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className='text-right'>
+                          <span className='text-xs font-semibold inline-block text-purple-600'>
+                            {Math.round(uploadProgress)}%
+                          </span>
+                        </div>
+                      </div>
+                      <div className='overflow-hidden h-2 mb-4 text-xs flex rounded bg-purple-200'>
+                        <div
+                          style={{ width: `${uploadProgress}%` }}
+                          className='shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500'
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-
               <div className='flex flex-row-reverse p-2'>
                 <button
                   type='submit'
                   className='text-md text-white bg-gray-800 hover:bg-gray-500 px-4 py-2 rounded-md'
+                  disabled={buttonDisabled}
                 >
                   Add
                 </button>
