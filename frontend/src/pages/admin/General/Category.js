@@ -1,8 +1,11 @@
 import AddCategory from '../../../Components/Category/AddCategory';
 import Categories from '../../../Components/Category/Categories';
 import PageHeader from '../../../Components/PageHeader';
+import { useDocumentTitle } from '../../../Hooks/useDocumentTitle';
 
 export default function Category() {
+  const [documentTitle, setDoucmentTitle] = useDocumentTitle('Category');
+
   return (
     <>
       <PageHeader title='Category' />

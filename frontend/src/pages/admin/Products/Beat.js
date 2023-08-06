@@ -1,8 +1,11 @@
 import AddBeat from '../../../Components/Beat/AddBeat';
 import Beats from '../../../Components/Beat/Beats';
 import PageHeader from '../../../Components/PageHeader';
+import { useDocumentTitle } from '../../../Hooks/useDocumentTitle';
 
 export default function Beat() {
+  const [documentTitle, setDoucmentTitle] = useDocumentTitle('Beat');
+
   return (
     <>
       <PageHeader title='Beat' />

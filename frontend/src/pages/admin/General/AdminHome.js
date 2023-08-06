@@ -1,7 +1,10 @@
 import PageHeader from '../../../Components/PageHeader';
 import { Boundary } from '../../../Components/boundary';
+import { useDocumentTitle } from '../../../Hooks/useDocumentTitle';
 
 export default function AdminHome() {
+  const [documentTitle, setDoucmentTitle] = useDocumentTitle('Dashboard');
+
   return (
     <>
       <PageHeader title='Hello' />
