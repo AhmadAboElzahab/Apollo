@@ -1,9 +1,10 @@
 import { Boundary } from '../../boundary';
 import useSWR from 'swr';
+import DeletePromo from './DeletePromo';
+import EditPromo from './EditPromo';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function Codes() {
   const { data, error } = useSWR('/api/admin/promo', fetcher);
-  console.log(data);
 
   return (
     <div className='bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20'>
@@ -22,11 +23,15 @@ export default function Codes() {
               <tbody>
                 {data &&
                   data.map((d) => (
-                    <tr>
+                    <tr key={d._id}>
                       <td>{d.code}</td>
                       <td>{d.value}</td>
-                      <th>Edit</th>
-                      <th>Delete</th>
+                      <td>
+                        <EditPromo codeId={d._id} codeValue={d.value} />
+                      </td>
+                      <td>
+                        <DeletePromo codeId={d._id} />
+                      </td>
                     </tr>
                   ))}
               </tbody>
