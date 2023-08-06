@@ -1,8 +1,41 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
+import { mutate } from 'swr';
+import { toast } from 'react-toastify';
 
-export default function EditCategory() {
+export default function EditCategory({ categoryId, categoryTitle }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [title, setTitle] = useState('');
+
+  useEffect(() => {
+    setTitle(categoryTitle);
+  }, [categoryTitle]);
+
+  const EditCode = async () => {
+    if (!title) {
+      toast.error('Title Should not Be Empty !');
+    } else {
+      try {
+        const response = await fetch(`/api/admin/Category/${categoryId}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ title }),
+        });
+
+        if (response.ok) {
+          mutate('/api/admin/Category');
+          closeModal();
+          toast.success('Title Updated');
+        } else {
+          console.error('Failed to edit Title:', response.statusText);
+        }
+      } catch (error) {
+        console.error('An error occurred:', error);
+      }
+    }
+  };
 
   function closeModal() {
     setIsOpen(false);
@@ -11,7 +44,6 @@ export default function EditCategory() {
   function openModal() {
     setIsOpen(true);
   }
-
   return (
     <>
       <div>
@@ -50,16 +82,21 @@ export default function EditCategory() {
                     Edit
                   </Dialog.Title>
                   <div className='mt-2'>
-                    <p className='text-sm text-gray-500 mb-2'>You Are Trying to Edit a Category</p>
-                    <label className='text-sm text-gray-500' htmlFor='Title'>
-                      Title
+                    <p className='text-sm text-gray-500 mb-2'>
+                      You Are Trying to Edit a Category Title
+                    </p>
+                    <label className='text-sm text-gray-500' htmlFor='value'>
+                      Value
                     </label>
                     <input
-                      id='Title'
-                      name='Title'
+                      id='value'
+                      name='value'
                       className='bg-gray-300 appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-gray-300 focus:border-gray-300     '
                       type='txt'
-                      placeholder='******************'
+                      onChange={(e) => {
+                        setTitle(e.target.value);
+                      }}
+                      value={title}
                     />
                   </div>
 
@@ -67,7 +104,7 @@ export default function EditCategory() {
                     <button
                       type='button'
                       className='inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2'
-                      onClick={closeModal}
+                      onClick={EditCode}
                     >
                       Proceed
                     </button>

@@ -1,7 +1,17 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import { mutate } from 'swr';
 
-export default function DeleteCategory() {
+export default function DeletePromo({ categoryId }) {
+  const DeleteCode = async () => {
+    const response = await fetch(`/api/admin/Category/${categoryId}`, {
+      method: 'DELETE',
+    });
+    if (response.ok) {
+      mutate('/api/admin/Category');
+      closeModal();
+    }
+  };
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -57,7 +67,7 @@ export default function DeleteCategory() {
                     <button
                       type='button'
                       className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                      onClick={closeModal}
+                      onClick={DeleteCode}
                     >
                       Proceed
                     </button>
