@@ -30,7 +30,7 @@ export default function AdminNavbar() {
           onChange={handleCheckboxChange}
         />
         <label
-          xc='hamburger'
+          htmlFor='hamburger'
           className='peer-checked:hamburger relative z-10 -mr-6 block cursor-pointer p-6 lg:hidden'
         >
           <div
