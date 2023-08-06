@@ -20,8 +20,10 @@ router.get("/", async (req, res) => {
   try {
     const allLyrics = await Lyrics.find();
 
-    const categoryIds = allLyrics.map((lyric) => lyric.category);
+    const categoryIds = [...new Set(allLyrics.map((lyric) => lyric.category))];
+
     const categories = await Category.find({ _id: { $in: categoryIds } });
+
     const categoryMap = {};
     categories.forEach((category) => {
       categoryMap[category._id.toString()] = category.title;
@@ -31,12 +33,13 @@ router.get("/", async (req, res) => {
       _id: lyric._id,
       title: lyric.title,
       lyrics: lyric.lyrics,
-      category: categoryMap[lyric.category],
+      category: categoryMap[lyric.category.toString()], // Map category name using category ID
       price: lyric.price,
     }));
 
     res.json(lyricsWithCategories);
   } catch (error) {
+    console.error("Error fetching lyrics:", error);
     res.status(500).json({ error: "Failed to fetch lyrics." });
   }
 });

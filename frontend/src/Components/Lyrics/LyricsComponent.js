@@ -8,6 +8,9 @@ const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function LyricsComponent() {
   const { data, error } = useSWR('/api/admin/Lyrics', fetcher);
 
+  if (error) {
+    return <>{error}</>;
+  }
   return (
     <div className='bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20 relative'>
       <AddLyrics />
@@ -29,7 +32,7 @@ export default function LyricsComponent() {
                   data.map((d) => (
                     <tr key={d._id}>
                       <td>{d.title}</td>
-                      <td>{d.type}</td>
+
                       <td></td>
                       <td></td>
                       <td>
