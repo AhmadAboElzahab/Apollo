@@ -3,6 +3,8 @@ import { Boundary } from '../boundary';
 import useSWR from 'swr';
 import DeleteLyrics from './DeleteLyrics';
 import AddLyrics from './AddLyrics';
+import ViewLyrics from './ViewLyrics';
+import EditLyrics from './EditLyrics';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function LyricsComponent() {
@@ -22,6 +24,7 @@ export default function LyricsComponent() {
                 <tr>
                   <th>Lyrics</th>
                   <th>Category</th>
+                  <th>Price</th>
                   <th>View</th>
                   <th>Edit</th>
                   <th>Delete</th>
@@ -32,9 +35,14 @@ export default function LyricsComponent() {
                   data.map((d) => (
                     <tr key={d._id}>
                       <td>{d.title}</td>
-
-                      <td></td>
-                      <td></td>
+                      <td>{d.category}</td>
+                      <td>{d.price}</td>
+                      <td>
+                        <ViewLyrics l={d} />
+                      </td>
+                      <td>
+                        <EditLyrics l={d} />
+                      </td>
                       <td>
                         <DeleteLyrics LyricId={d._id} />
                       </td>

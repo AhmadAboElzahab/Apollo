@@ -56,17 +56,33 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
-    const { title, lyrics, category, price } = req.body;
+    const { title, lyrics, price } = req.body;
+    const updatedFields = {};
+
+    if (title) {
+      updatedFields.title = title;
+    }
+
+    if (lyrics) {
+      updatedFields.lyrics = lyrics;
+    }
+
+    if (price) {
+      updatedFields.price = price;
+    }
+
     const updatedLyric = await Lyrics.findByIdAndUpdate(
       req.params.id,
-      { title, lyrics, category, price },
-      { new: true } // Return the updated document
+      updatedFields,
+      { new: true }
     );
+
     if (!updatedLyric) {
       return res.status(404).json({ error: "Lyric not found." });
     }
+
     res.json(updatedLyric);
   } catch (error) {
     res.status(500).json({ error: "Failed to update the lyric." });
