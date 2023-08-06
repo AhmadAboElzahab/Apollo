@@ -1,11 +1,16 @@
 import { Boundary } from '../boundary';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
+import useSWR from 'swr';
+const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function AddArtwork() {
+  const { data, error } = useSWR('/api/admin/Category/Artworks', fetcher);
+
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
   const [image, setImage] = useState(null);
   const [imagePreview, setImagePreview] = useState(null);
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -36,12 +41,14 @@ export default function AddArtwork() {
       setTitle('');
       setDescription('');
       setPrice('');
+      setCategory('');
       setImage(null);
       setImagePreview(null);
     };
     const formData = new FormData();
     formData.append('image', image);
     formData.append('title', title);
+    formData.append('category', category);
     formData.append('description', description);
     formData.append('price', price);
 
@@ -129,11 +136,18 @@ export default function AddArtwork() {
                   className='bg-gray-900 text-sm appearance-none border-2 border-gray-1100 rounded-md w-full py-2 px-4 text-white leading-tight focus:outline-none focus:bg-gray-800 focus:border-zinc-800 focus:text-white'
                   id='BeatCategory'
                   name='BeatCategory'
+                  value={category}
+                  onChange={(e) => {
+                    setCategory(e.target.value);
+                  }}
                 >
                   <option value=''>Please Select</option>
-                  <option value='Lyrics'>Lyrics</option>
-                  <option value='Beats'>Beats</option>
-                  <option value='Artworks'>Artworks</option>
+                  {data &&
+                    data.map((d) => (
+                      <option key={d._id} value={d._id}>
+                        {d.title}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div className='mb-6'>
@@ -145,6 +159,7 @@ export default function AddArtwork() {
                   className='bg-gray-900 text-sm appearance-none border-2 border-gray-1100 resize-y rounded-md w-full py-2 px-4 text-white leading-tight focus:outline-none focus:bg-gray-800 focus:border-zinc-800 focus:text-white'
                   id='Description'
                   name='Description'
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                 />
               </div>

@@ -38,7 +38,7 @@ const upload = multer({
 });
 
 router.post("/", upload.single("image"), async (req, res) => {
-  const { title, description, price } = req.body;
+  const { title, description, price, category } = req.body;
   const fileName = req.file.filename;
 
   const convertedImagePath = path.join(
@@ -60,6 +60,7 @@ router.post("/", upload.single("image"), async (req, res) => {
     title,
     description,
     price,
+    category,
     art: path.basename(convertedImagePath),
   });
 
