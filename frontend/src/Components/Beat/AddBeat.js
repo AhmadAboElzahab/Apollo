@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Boundary } from '../boundary';
 import useSWR from 'swr';
+import { toast } from 'react-toastify';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function AddBeat() {
@@ -61,11 +62,10 @@ export default function AddBeat() {
         setShowProgressBar(false);
 
         if (xhr.status === 200) {
-          console.log('Upload successful');
-          // Reset input fields after successful submission
+          toast.success('Beat Added Successfully');
           resetForm();
         } else {
-          console.error('Upload failed');
+          toast.error('Beat Could not Be Added ');
         }
       }
     };
@@ -80,20 +80,28 @@ export default function AddBeat() {
           <form>
             <div className='prose prose-sm prose-invert max-w-none'>
               <div className='mb-6'>
-                <label className='text-md text-gray-100 m-2' htmlFor='categoryTitle'>
+                <label className='text-md text-gray-100 m-2' htmlFor='Title'>
                   Title
                 </label>
                 <input
                   className='placeholder-gray-500 bg-gray-900 text-md appearance-none border-2 border-gray-1100 rounded-md w-full py-2 px-4 text-white leading-tight focus:outline-none focus:bg-gray-800 focus:border-zinc-800 focus:text-white'
                   type='txt'
-                  id='categoryTitle'
-                  name='categoryTitle'
+                  id='Title'
+                  name='Title'
                   placeholder='Enter Title'
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </div>
               <div className='mb-6'>
+                {previewUrl && (
+                  <>
+                    <label className='text-md text-white m-2' htmlFor='file-input'>
+                      Audio
+                    </label>
+                    <audio controls src={previewUrl} />
+                  </>
+                )}
                 <label className='text-md text-white m-2' htmlFor='file-input'>
                   Audio
                 </label>
@@ -105,7 +113,6 @@ export default function AddBeat() {
                   accept='audio/*'
                   onChange={handleFileChange}
                 />
-                {previewUrl && <audio controls src={previewUrl} />}
               </div>
               <div className='mb-6'>
                 <label className='text-md text-white m-2' htmlFor='BeatCategory'>
