@@ -1,5 +1,5 @@
+import DeleteItem from '../DeleteItem';
 import { Boundary } from '../boundary';
-import DeleteCategory from './DeleteCategory';
 import EditCategory from './EditCategory';
 import useSWR from 'swr';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
@@ -35,7 +35,7 @@ export default function Categories() {
                         />
                       </td>
                       <td>
-                        <DeleteCategory categoryId={d._id} />
+                        <DeleteItem Id={d._id} URL='/api/admin/Category' />
                       </td>
                     </tr>
                   ))}

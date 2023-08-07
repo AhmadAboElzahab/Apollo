@@ -1,14 +1,19 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
+import { toast } from 'react-toastify';
 import { mutate } from 'swr';
 
-export default function DeletePromo({ categoryId }) {
+export default function DeleteItem({ Id, URL }) {
   const DeleteCode = async () => {
-    const response = await fetch(`/api/admin/Category/${categoryId}`, {
+    const response = await fetch(`${URL}/${Id}`, {
       method: 'DELETE',
     });
     if (response.ok) {
-      mutate('/api/admin/Category');
+      toast.success('Deleted Successfully');
+      mutate(URL);
+      closeModal();
+    } else {
+      toast.error('Unable to Delete');
       closeModal();
     }
   };
@@ -60,7 +65,7 @@ export default function DeletePromo({ categoryId }) {
                     Delete
                   </Dialog.Title>
                   <div className='mt-2'>
-                    <p className='text-sm text-gray-500'>You Are Trying to Delete a Category</p>
+                    <p className='text-sm text-gray-600'>You Are Trying to Delete </p>
                   </div>
 
                   <div className='flex flex-row-reverse mt-8 gap-5'>

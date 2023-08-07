@@ -1,7 +1,7 @@
 import { Boundary } from '../boundary';
 
 import useSWR from 'swr';
-import DeleteLyrics from './DeleteLyrics';
+import DeleteItem from '../DeleteItem';
 import AddLyrics from './AddLyrics';
 import ViewLyrics from './ViewLyrics';
 import EditLyrics from './EditLyrics';
@@ -44,7 +44,7 @@ export default function LyricsComponent() {
                         <EditLyrics l={d} />
                       </td>
                       <td>
-                        <DeleteLyrics LyricId={d._id} />
+                        <DeleteItem Id={d._id} URL='/api/admin/Lyrics' />
                       </td>
                     </tr>
                   ))}

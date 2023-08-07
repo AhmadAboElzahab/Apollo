@@ -1,5 +1,8 @@
 import { Boundary } from '../boundary';
+import { Popover, Transition } from '@headlessui/react';
+
 import useSWR from 'swr';
+import DeleteItem from '../DeleteItem';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function Artworks() {
@@ -28,24 +31,35 @@ export default function Artworks() {
                       alt={d.title}
                     />
                   </div>
-                  <div class='py-3 px-3 text-sm'>
-                    <p>
-                      <span className='text-gray-400'>Title : </span>
-                      {d.title}
-                    </p>
-                    <p>
-                      <span className='text-gray-400'>Description : </span>
-                      {d.description.slice(0, 50) + '...'}
-                    </p>
-                    <p>
-                      {' '}
-                      <span className='text-gray-400'>Price : </span>
-                      {d.price}
-                    </p>
-                    <p>
-                      <span className='text-gray-400'>Category : </span>
-                      {d.category}
-                    </p>
+                  <div class='py-3 px-3 text-sm flex flex-row'>
+                    <div>
+                      <p>
+                        <span className='text-gray-400'>Title : </span>
+                        {d.title}
+                      </p>
+                      <p>
+                        <span className='text-gray-400'>Description : </span>
+                        {d.description.slice(0, 50) + '...'}
+                      </p>
+                      <p>
+                        {' '}
+                        <span className='text-gray-400'>Price : </span>
+                        {d.price}
+                      </p>
+                      <p>
+                        <span className='text-gray-400'>Category : </span>
+                        {d.category}
+                      </p>
+                    </div>
+                    <div className='bg-blue-500 ml-[auto]'>
+                      <Popover>
+                        <Popover.Button className='bg-red-400 '>Solutions</Popover.Button>
+
+                        <Popover.Panel>
+                          <DeleteItem Id={d._id} URL='/api/admin/Artwork' />
+                        </Popover.Panel>
+                      </Popover>
+                    </div>
                   </div>
                 </div>
               ))}

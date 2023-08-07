@@ -1,6 +1,5 @@
 import { Boundary } from '../boundary';
 import EditBeat from './EditBeat';
-import DeleteBeat from './DeleteBeat';
 export default function Beats() {
   return (
     <div className='bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20'>
@@ -22,19 +21,7 @@ export default function Beats() {
                   <td>
                     <EditBeat />
                   </td>
-                  <td>
-                    <DeleteBeat />
-                  </td>
-                </tr>{' '}
-                <tr>
-                  <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-                  <td>1961</td>
-                  <td>
-                    <EditBeat />
-                  </td>
-                  <td>
-                    <DeleteBeat />
-                  </td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
@@ -42,9 +29,15 @@ export default function Beats() {
                   <td>
                     <EditBeat />
                   </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+                  <td>1961</td>
                   <td>
-                    <DeleteBeat />
+                    <EditBeat />
                   </td>
+                  <td></td>
                 </tr>
               </tbody>
             </table>
