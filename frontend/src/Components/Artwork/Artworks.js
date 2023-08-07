@@ -1,5 +1,7 @@
 import { Boundary } from '../boundary';
 import { Popover, Transition } from '@headlessui/react';
+import EditArtwork from './EditArtwork';
+import { FiChevronDown } from 'react-icons/fi';
 
 import useSWR from 'swr';
 import DeleteItem from '../DeleteItem';
@@ -39,7 +41,7 @@ export default function Artworks() {
                       </p>
                       <p>
                         <span className='text-gray-400'>Description : </span>
-                        {d.description.slice(0, 50) + '...'}
+                        {d.description.slice(0, 20) + '...'}
                       </p>
                       <p>
                         {' '}
@@ -51,12 +53,17 @@ export default function Artworks() {
                         {d.category}
                       </p>
                     </div>
-                    <div className='bg-blue-500 ml-[auto]'>
+                    <div className=' ml-[auto]'>
                       <Popover>
-                        <Popover.Button className='bg-red-400 '>Solutions</Popover.Button>
+                        <Popover.Button className='flex '>
+                          <span>Options</span>
+
+                          <FiChevronDown className='text-xl' />
+                        </Popover.Button>
 
                         <Popover.Panel>
                           <DeleteItem Id={d._id} URL='/api/admin/Artwork' />
+                          <EditArtwork a={d} />
                         </Popover.Panel>
                       </Popover>
                     </div>
