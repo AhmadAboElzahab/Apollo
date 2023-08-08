@@ -45,7 +45,6 @@ const encodeImageToBlurhash = (path) =>
       });
   });
 
-
 router.post('/', upload.single('image'), async (req, res) => {
   const { title, description, price, category } = req.body;
   const fileName = req.file.filename;

@@ -1,10 +1,10 @@
-const express = require("express");
-const Promo = require("../../models/Promo.model");
-const adminAuthorization = require("../../middleware/adminAuthorization.middleware");
+const express = require('express');
+const Promo = require('../../models/Promo.model');
+const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
 const router = express.Router();
-const couponCode = require("coupon-code");
+const couponCode = require('coupon-code');
 
-router.get("/", async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const promoCodes = await Promo.find();
     res.status(200).json(promoCodes);
@@ -13,11 +13,10 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     const { value } = req.body;
-    if (value === "")
-      return res.status(400).json({ error: "value Should not be empty" });
+    if (value === '') return res.status(400).json({ error: 'value Should not be empty' });
 
     const promo = new Promo({
       code: couponCode.generate({ parts: 1 }),
@@ -31,37 +30,32 @@ router.post("/", async (req, res) => {
     res.status(500).json({ error: err });
   }
 });
-router.delete("/:id", async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const promoId = req.params.id;
     const deletedPromo = await Promo.findByIdAndDelete(promoId);
 
     if (!deletedPromo) {
-      return res.status(404).json({ error: "Promo not found" });
+      return res.status(404).json({ error: 'Promo not found' });
     }
 
-    res.status(200).json({ message: "Promo Code Deleted successfuly" });
+    res.status(200).json({ message: 'Promo Code Deleted successfuly' });
   } catch (err) {
     res.status(500).json({ error: err });
   }
 });
 
-router.put("/:id", async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const promoId = req.params.id;
     const { value } = req.body;
 
-    if (value === "")
-      return res.status(400).json({ error: "value Should not be empty" });
+    if (value === '') return res.status(400).json({ error: 'value Should not be empty' });
 
-    const updatedPromo = await Promo.findByIdAndUpdate(
-      promoId,
-      { value },
-      { new: true }
-    );
+    const updatedPromo = await Promo.findByIdAndUpdate(promoId, { value }, { new: true });
 
     if (!updatedPromo) {
-      return res.status(404).json({ error: "Promo not found" });
+      return res.status(404).json({ error: 'Promo not found' });
     }
 
     res.status(200).json({ data: updatedPromo });
@@ -70,7 +64,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.post("/check", async (req, res) => {
+router.post('/check', async (req, res) => {
   try {
     const { amount, code } = req.body;
     const findCode = await Promo.findOne({ code });
@@ -79,11 +73,11 @@ router.post("/check", async (req, res) => {
       const newAmount = amount - (findCode.value * amount) / 100;
       res.json({ price: newAmount });
     } else {
-      res.status(404).json({ error: "Promo code not found" });
+      res.status(404).json({ error: 'Promo code not found' });
     }
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: 'Internal server error' });
   }
 });
 
