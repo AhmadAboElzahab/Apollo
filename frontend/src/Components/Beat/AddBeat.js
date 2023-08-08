@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Boundary } from '../boundary';
-import useSWR from 'swr';
+import useSWR, { mutate } from 'swr';
 import { toast } from 'react-toastify';
 import WavesurferComponent from '../WavesurferComponent';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
@@ -64,6 +64,7 @@ export default function AddBeat() {
 
         if (xhr.status === 200) {
           toast.success('Beat Added Successfully');
+          mutate('/api/admin/audio');
           resetForm();
         } else {
           toast.error('Beat Could not Be Added ');
@@ -98,7 +99,7 @@ export default function AddBeat() {
                 {previewUrl && (
                   <>
                     <label className='text-md text-white m-2' htmlFor='file-input'>
-                      Audio
+                      Wave
                     </label>
                     <WavesurferComponent audioUrl={previewUrl} />
                   </>
