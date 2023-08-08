@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react';
 import { toast } from 'react-toastify';
 import { mutate } from 'swr';
 
-export default function DeleteItem({ Id, URL }) {
+export default function DeleteItem({ Id, URL, errMessage }) {
   const DeleteCode = async () => {
     const response = await fetch(`${URL}/${Id}`, {
       method: 'DELETE',
@@ -13,7 +13,7 @@ export default function DeleteItem({ Id, URL }) {
       mutate(URL);
       closeModal();
     } else {
-      toast.error('Unable to Delete');
+      toast.error(errMessage ? errMessage : 'Unable to Delete');
       closeModal();
     }
   };

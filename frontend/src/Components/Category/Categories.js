@@ -35,7 +35,11 @@ export default function Categories() {
                         />
                       </td>
                       <td>
-                        <DeleteItem Id={d._id} URL='/api/admin/Category' />
+                        <DeleteItem
+                          Id={d._id}
+                          URL='/api/admin/Category'
+                          errMessage='Category Holds Items'
+                        />
                       </td>
                     </tr>
                   ))}
