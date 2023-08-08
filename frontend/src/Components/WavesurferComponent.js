@@ -1,29 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
 import WaveSurfer from 'wavesurfer.js';
+import { BsPause, BsPlay } from 'react-icons/bs';
 
 const WavesurferComponent = ({ audioUrl }) => {
   const wavesurferRef = useRef(null);
   const containerRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const ctx = document.createElement('canvas').getContext('2d');
-  const gradient = ctx.createLinearGradient(0, 0, 0, 150);
-  gradient.addColorStop(0, 'rgb(200, 0, 200)');
-  gradient.addColorStop(0.7, 'rgb(100, 0, 100)');
-  gradient.addColorStop(1, 'rgb(100, 100, 0)');
   useEffect(() => {
     if (containerRef.current) {
       const wavesurferInstance = WaveSurfer.create({
         container: containerRef.current,
         responsive: true,
-        height: 150,
-        waveColor: gradient,
-        progressColor: 'paleturquoise',
-        cursorColor: '#57BAB6',
-        cursorWidth: 4,
+        waveColor: '#a21caf',
+        progressColor: '#4a044e',
         barWidth: 2,
         barGap: 1,
         barRadius: 2,
+        height: '70',
       });
 
       wavesurferInstance.load(audioUrl);
@@ -44,7 +38,8 @@ const WavesurferComponent = ({ audioUrl }) => {
     }
   }, [audioUrl]);
 
-  const togglePlayback = () => {
+  const togglePlayback = (e) => {
+    e.preventDefault();
     const wavesurferInstance = wavesurferRef.current;
 
     if (!isPlaying) {
@@ -56,15 +51,18 @@ const WavesurferComponent = ({ audioUrl }) => {
 
   return (
     <>
-      <div className='wavesurfer-container p-8 relative'>
-        <div ref={containerRef} id='waveform' />
+      <div className='relative'>
+        <div className='wavesurfer-container p-8 w-full m-auto'>
+          <div ref={containerRef} className='w-full h-full p-0' id='waveform' />
+        </div>
+        <div className='bg-gradient-to-r from-fuchsia-800 to-fuchsia-500 absolute w-[80%] left-[10%] h-[20%] top-[35%]  blur-3xl '></div>
+        <button
+          className='text-white bg-gray-800 hover:bg-gray-500 p-2 text-3xl  rounded-full absolute left-[45%] top-[35%] z-[5] md:left-[50%]'
+          onClick={togglePlayback}
+        >
+          {isPlaying ? <BsPause /> : <BsPlay />}
+        </button>
       </div>
-      <button
-        className='bg-white text-black text-4xl px-4 py-2 rounded-md'
-        onClick={togglePlayback}
-      >
-        {isPlaying ? 'Pause' : 'Play'}
-      </button>
     </>
   );
 };

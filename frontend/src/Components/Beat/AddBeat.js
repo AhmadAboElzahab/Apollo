@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Boundary } from '../boundary';
 import useSWR from 'swr';
 import { toast } from 'react-toastify';
+import WavesurferComponent from '../WavesurferComponent';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function AddBeat() {
@@ -99,7 +100,7 @@ export default function AddBeat() {
                     <label className='text-md text-white m-2' htmlFor='file-input'>
                       Audio
                     </label>
-                    <audio controls src={previewUrl} />
+                    <WavesurferComponent audioUrl={previewUrl} />
                   </>
                 )}
                 <label className='text-md text-white m-2' htmlFor='file-input'>
