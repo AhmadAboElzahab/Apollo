@@ -57,10 +57,10 @@ const WavesurferComponent = ({ audioUrl }) => {
         </div>
         <div className='bg-gradient-to-r from-fuchsia-800 to-fuchsia-500 absolute w-[80%] left-[10%] h-[20%] top-[35%]  blur-3xl '></div>
         <button
-          className='text-white bg-gray-800 hover:bg-gray-500 p-2 text-3xl  rounded-full absolute left-[45%] top-[35%] z-[5] md:left-[50%]'
+          className='text-white bg-black hover:bg-zinc-900 p-2 text-3xl  rounded-full absolute left-[35%] top-[35%] z-[5] md:left-[45%] lg:left-[45%]'
           onClick={togglePlayback}
         >
-          {isPlaying ? <BsPause /> : <BsPlay />}
+          {isPlaying ? <BsPause /> : <BsPlay className='pl-1' />}
         </button>
       </div>
     </>
