@@ -57,22 +57,30 @@ router.delete("/:id", async (req, res) => {
     const Art = await Artwork.find({ category: req.params.id });
     const Aud = await Audio.find({ category: req.params.id });
     const Lyric = await Lyrics.find({ category: req.params.id });
-    if (Art) {
-      res.json({ message: "Can't Delete it holds Artworks", Art });
+
+    let messages = [];
+    if (Art.length > 0) {
+      messages.push("Can't Delete it holds Artworks");
     }
-    if (Aud) {
-      res.json({ message: "Can't Delete it holds Beats", Aud });
+    if (Aud.length > 0) {
+      messages.push("Can't Delete it holds Beats");
     }
-    if (Lyric) {
-      res.json({ message: "Can't Delete it holds Lyrics", Lyric });
+    if (Lyric.length > 0) {
+      messages.push("Can't Delete it holds Lyrics");
     }
+
+    if (messages.length > 0) {
+      return res.status(500).json({ messages });
+    }
+
     const deletedCategory = await Category.findByIdAndRemove(req.params.id);
     if (!deletedCategory) {
       return res.status(404).json({ error: "Category not found." });
     }
+
     res.json({ message: "Category deleted successfully." });
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch Categoris." });
+    res.status(500).json(error);
   }
 });
 
