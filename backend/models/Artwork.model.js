@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const ArtworkSchema = new Schema({
@@ -18,10 +18,14 @@ const ArtworkSchema = new Schema({
     type: String,
     required: true,
   },
+  blurHash: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     required: true,
   },
 });
 
-module.exports = mongoose.model("Artwork", ArtworkSchema);
+module.exports = mongoose.model('Artwork', ArtworkSchema);
