@@ -19,7 +19,6 @@ export default function OptimizedImage({ src, blurHash }) {
           src={src}
           style={{ display: !loaded ? 'none' : 'block' }}
           alt={''}
-          loading='lazy'
           onLoad={() => setLoaded(true)}
         />
         <img
@@ -27,7 +26,6 @@ export default function OptimizedImage({ src, blurHash }) {
           style={{ display: !loaded ? 'none' : 'block' }}
           src={src}
           alt={''}
-          loading='lazy'
           onLoad={() => setLoaded(true)}
         />
       </div>
