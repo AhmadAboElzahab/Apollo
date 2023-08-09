@@ -15,7 +15,6 @@ const Promo = require('./routes/Admin/Promo');
 const Users = require('./routes/Admin/Users');
 const Telegram = require('./routes/Admin/Telegram');
 const Category = require('./routes/Admin/Category');
-
 const Auth = require('./routes/user.route');
 
 const app = express();
