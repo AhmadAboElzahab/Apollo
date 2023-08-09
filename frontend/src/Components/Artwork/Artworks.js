@@ -5,6 +5,7 @@ import { FiChevronDown } from 'react-icons/fi';
 
 import useSWR from 'swr';
 import DeleteItem from '../DeleteItem';
+import OptimizedImage from '../OptimizedImage';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function Artworks() {
@@ -21,16 +22,13 @@ export default function Artworks() {
             {data &&
               data.map((d) => (
                 <div class='w-full border border-gray-800 rounded-lg shadow'>
-                  <div className='relative'>
-                    <img
-                      className=' object-cover rounded-t-lg bg-cover h-[300px] w-full absolute z-[9]'
+                  <div
+                    className='flex flex-row flex-wrap gap-x-[10px] gap-y-[2em] visible'
+                    style={{ contentVisibility: 'visible' }}
+                  >
+                    <OptimizedImage
                       src={`http://localhost:4000/artworks/${d.art}`}
-                      alt={d.title}
-                    />
-                    <img
-                      className=' object-cover rounded-t-lg bg-cover h-[300px] w-full blur-xl  '
-                      src={`http://localhost:4000/artworks/${d.art}`}
-                      alt={d.title}
+                      blurHash={d.blurHash}
                     />
                   </div>
                   <div class='py-3 px-3 text-sm flex flex-row'>

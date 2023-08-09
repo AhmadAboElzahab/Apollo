@@ -118,6 +118,7 @@ router.get('/', async (req, res) => {
       category: categoryMap[art.category.toString()],
       price: art.price,
       art: art.art,
+      blurHash: art.blurHash,
     }));
 
     res.json(ArtworksWithCategories);
