@@ -41,7 +41,7 @@ export default function LyricsComponent() {
                               case 'Artwork':
                                 return 'text-xs text-center uppercase px-2 py-1 bg-blue-800/25 text-blue-800 rounded-full';
                               default:
-                                return 'text-xs text-center uppercase px-2 py-1 bg-purple-800/25 text-purple-800 rounded-full';
+                                return 'text-xs text-center uppercase px-2 py-1 bg-white/25 text-white rounded-full';
                             }
                           })()}
                         >
@@ -49,8 +49,9 @@ export default function LyricsComponent() {
                         </div>
                       </td>
                       <td>{d.body}</td>
+                      <td>{d.Message_id}</td>
                       <td>
-                        <DeleteItem Id={d._id} URL='/api/admin/Telegram' />
+                        <DeleteItem Id={d.Message_id} URL='/api/admin/Telegram' />
                       </td>
                     </tr>
                   ))}

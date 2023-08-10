@@ -227,18 +227,22 @@ router.post('/shareaudio/:id', async (req, res) => {
 });
 
 router.delete('/:id', async (req, res) => {
-  const id = req.params.id;
+  const Message_id = req.params.id;
+
+  const TelegramLog = await Telegram.findOne({ Message_id });
+  const { _id } = TelegramLog;
   const url = `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/deleteMessage`;
   const data = new URLSearchParams({
     chat_id: process.env.TELEGRAM_CHAT_ID,
-    message_id: id,
+    message_id: Message_id,
   });
   const response = await fetch(url, {
     method: 'POST',
     body: data,
   });
   if (response.ok) {
-    res.status(500).json({ success: true, message: 'Deleted' });
+    await Telegram.findOneAndRemove({ _id });
+    res.status(200).json({ success: true, message: 'Deleted' });
   } else {
     res.status(500).json({ success: false, message: await response.json() });
   }
