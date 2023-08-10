@@ -2,7 +2,7 @@ import { Boundary } from '../../boundary';
 import useSWR from 'swr';
 import DeletePromo from './DeletePromo';
 import EditPromo from './EditPromo';
-import ShareToTelegram from '../../ShareToTelegram';
+import ShareToTelegram from '../../SocialMedia/ShareToTelegram';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function Codes() {
   const { data, error } = useSWR('/api/admin/promo', fetcher);
