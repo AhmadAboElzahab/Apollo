@@ -83,9 +83,7 @@ export default function ShareToTelegram({ type, id }) {
                     <button
                       type='button'
                       className={`inline-flex justify-center rounded-md px-4 py-2 text-sm font-medium ${
-                        isLoading
-                          ? 'bg-gray-300 cursor-not-allowed'
-                          : 'bg-blue-100 hover:bg-blue-200'
+                        isLoading ? 'bg-gray-300 cursor-wait' : 'bg-blue-100 hover:bg-blue-200'
                       }`}
                       onClick={Share}
                       disabled={isLoading}
