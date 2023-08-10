@@ -4,19 +4,31 @@ import { toast } from 'react-toastify';
 import { BiLogoTelegram } from 'react-icons/bi';
 
 export default function ShareToTelegram({ type, id }) {
+  const url = `/api/admin/Telegram/${type}/${id}`;
+  const [isLoading, setIsLoading] = useState(false);
+
   const Share = async () => {
-    const response = await fetch(`${URL}/${Id}`, {
-      method: 'POST',
-    });
-    if (response.ok) {
-      toast.success('Shared Successfully');
-      mutate(URL);
-      closeModal();
-    } else {
-      toast.error(errMessage ? errMessage : 'Unable to Share');
+    try {
+      setIsLoading(true);
+      const response = await fetch(url, {
+        method: 'POST',
+      });
+
+      if (response.ok) {
+        toast.success('Shared Successfully');
+        closeModal();
+      } else {
+        const errMessage = await response.text();
+        toast.error(errMessage ? errMessage : 'Unable to Share');
+      }
+    } catch (error) {
+      toast.error('An error occurred');
+    } finally {
+      setIsLoading(false);
       closeModal();
     }
   };
+
   let [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -26,7 +38,6 @@ export default function ShareToTelegram({ type, id }) {
   function openModal() {
     setIsOpen(true);
   }
-
   return (
     <>
       <div>
@@ -71,10 +82,13 @@ export default function ShareToTelegram({ type, id }) {
                   <div className='flex flex-row-reverse mt-8 gap-5'>
                     <button
                       type='button'
-                      className='inline-flex justify-center rounded-md border border-transparent bg-red-100 px-4 py-2 text-sm font-medium text-red-900 hover:bg-red-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-red-500 focus-visible:ring-offset-2'
-                      onClick={DeleteCode}
+                      className={`inline-flex justify-center rounded-md px-4 py-2 text-sm font-medium ${
+                        isLoading ? 'bg-gray-300 cursor-not-allowed' : 'bg-red-100 hover:bg-red-200'
+                      }`}
+                      onClick={Share}
+                      disabled={isLoading}
                     >
-                      Proceed
+                      {isLoading ? 'Sharing...' : 'Proceed'}
                     </button>
                     <button
                       type='button'
