@@ -49,7 +49,6 @@ export default function LyricsComponent() {
                         </div>
                       </td>
                       <td>{d.body}</td>
-                      <td>{d.Message_id}</td>
                       <td>
                         <DeleteItem Id={d.Message_id} URL='/api/admin/Telegram' />
                       </td>

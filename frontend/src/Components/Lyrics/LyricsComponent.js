@@ -5,6 +5,7 @@ import DeleteItem from '../DeleteItem';
 import AddLyrics from './AddLyrics';
 import ViewLyrics from './ViewLyrics';
 import EditLyrics from './EditLyrics';
+import ShareToTelegram from '../SocialMedia/ShareToTelegram';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function LyricsComponent() {
@@ -28,6 +29,7 @@ export default function LyricsComponent() {
                   <th>View</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  <th className='text-center'>Share</th>
                 </tr>
               </thead>
               <tbody>
@@ -45,6 +47,9 @@ export default function LyricsComponent() {
                       </td>
                       <td>
                         <DeleteItem Id={d._id} URL='/api/admin/Lyrics' />
+                      </td>
+                      <td className='text-center'>
+                        <ShareToTelegram type='ShareLyrics' id={d._id} />
                       </td>
                     </tr>
                   ))}

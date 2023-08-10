@@ -19,7 +19,7 @@ export default function ShareToTelegram({ type, id }) {
         closeModal();
       } else {
         const errMessage = await response.text();
-        toast.error(errMessage ? errMessage : 'Unable to Share');
+        toast.error('Unable to Share Try Again Later');
       }
     } catch (error) {
       toast.error('An error occurred');

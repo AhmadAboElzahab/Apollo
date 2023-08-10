@@ -5,6 +5,7 @@ import useSWR from 'swr';
 import EditBeat from './EditBeat';
 import WavesurferComponent from '../WavesurferComponent';
 import DeleteItem from '../DeleteItem';
+import ShareToTelegram from '../SocialMedia/ShareToTelegram';
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
@@ -63,6 +64,7 @@ export default function Beats() {
                         <Popover.Panel>
                           <DeleteItem Id={d._id} URL='/api/admin/audio' />
                           <EditBeat a={d} />
+                          <ShareToTelegram type='shareaudio' id={d._id} />
                         </Popover.Panel>
                       </Popover>
                     </div>

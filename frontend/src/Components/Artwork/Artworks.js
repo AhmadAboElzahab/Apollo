@@ -6,6 +6,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import useSWR from 'swr';
 import DeleteItem from '../DeleteItem';
 import OptimizedImage from '../OptimizedImage';
+import ShareToTelegram from '../SocialMedia/ShareToTelegram';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function Artworks() {
@@ -62,6 +63,7 @@ export default function Artworks() {
                         <Popover.Panel>
                           <DeleteItem Id={d._id} URL='/api/admin/Artwork' />
                           <EditArtwork a={d} />
+                          <ShareToTelegram type='shareartwork' id={d._id} />
                         </Popover.Panel>
                       </Popover>
                     </div>
