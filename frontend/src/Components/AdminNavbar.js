@@ -90,8 +90,8 @@ export default function AdminNavbar() {
             <div className='mb-2 px-3 text-xs font-semibold   tracking-wider text-gray-400/80'>
               <div>Social Media</div>
             </div>
-            <NavLink onClick={close} to='Instagram' className='link_style'>
-              Instagram
+            <NavLink onClick={close} to='Telegram' className='link_style'>
+              Telegram
             </NavLink>
 
             <br />

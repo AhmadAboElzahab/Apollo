@@ -20,7 +20,7 @@ import PromoCodes from './pages/admin/Accounting/PromoCodes';
 import History from './pages/admin/Accounting/History';
 import Prediction from './pages/admin/Accounting/Prediction';
 
-import Instagram from './pages/admin/SocialMedia/Instagram';
+import Telegram from './pages/admin/SocialMedia/Telegram';
 
 import Account from './pages/admin/Setting/Account';
 
@@ -42,7 +42,7 @@ export default function App() {
               <Route path='History' element={<History />} />
               <Route path='PromoCodes' element={<PromoCodes />} />
 
-              <Route path='Instagram' element={<Instagram />} />
+              <Route path='Telegram' element={<Telegram />} />
 
               <Route path='Account' element={<Account />} />
             </Route>
