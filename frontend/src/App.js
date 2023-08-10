@@ -13,7 +13,7 @@ import AdminHome from './pages/admin/General/AdminHome';
 import Category from './pages/admin/General/Category';
 
 import Beat from './pages/admin/Products/Beat';
-import Artwok from './pages/admin/Products/Artwok';
+import Artwork from './pages/admin/Products/Artwork';
 import Lyrics from './pages/admin/Products/Lyrics';
 
 import PromoCodes from './pages/admin/Accounting/PromoCodes';
@@ -35,7 +35,7 @@ export default function App() {
               <Route path='Category' element={<Category />} />
 
               <Route path='Beat' element={<Beat />} />
-              <Route path='Artwork' element={<Artwok />} />
+              <Route path='Artwork' element={<Artwork />} />
               <Route path='Lyrics' element={<Lyrics />} />
 
               <Route path='Prediction' element={<Prediction />} />
