@@ -41,7 +41,7 @@ export default function ShareToTelegram({ type, id }) {
   return (
     <>
       <div>
-        <button type='button' className='text-blue-500 hover:text-blue-400' onClick={openModal}>
+        <button type='button' className='text-sky-500 hover:text-sky-400' onClick={openModal}>
           <BiLogoTelegram />
         </button>
       </div>
@@ -83,7 +83,9 @@ export default function ShareToTelegram({ type, id }) {
                     <button
                       type='button'
                       className={`inline-flex justify-center rounded-md px-4 py-2 text-sm font-medium ${
-                        isLoading ? 'bg-gray-300 cursor-not-allowed' : 'bg-red-100 hover:bg-red-200'
+                        isLoading
+                          ? 'bg-gray-300 cursor-not-allowed'
+                          : 'bg-blue-100 hover:bg-blue-200'
                       }`}
                       onClick={Share}
                       disabled={isLoading}

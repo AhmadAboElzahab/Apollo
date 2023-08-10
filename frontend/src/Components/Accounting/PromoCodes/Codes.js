@@ -2,6 +2,7 @@ import { Boundary } from '../../boundary';
 import useSWR from 'swr';
 import DeletePromo from './DeletePromo';
 import EditPromo from './EditPromo';
+import ShareToTelegram from '../../ShareToTelegram';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function Codes() {
   const { data, error } = useSWR('/api/admin/promo', fetcher);
@@ -18,6 +19,7 @@ export default function Codes() {
                   <th>Value</th>
                   <th>Edit</th>
                   <th>Delete</th>
+                  <th className='text-center'>Share</th>
                 </tr>
               </thead>
               <tbody>
@@ -31,6 +33,9 @@ export default function Codes() {
                       </td>
                       <td>
                         <DeletePromo codeId={d._id} />
+                      </td>
+                      <td className='text-center'>
+                        <ShareToTelegram type='SharePromo' id={d._id} />
                       </td>
                     </tr>
                   ))}

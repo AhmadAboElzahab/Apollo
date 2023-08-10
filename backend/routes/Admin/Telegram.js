@@ -7,7 +7,6 @@ const Lyrics = require('../../models/Lyrics.model');
 const fs = require('fs');
 const path = require('path');
 const Telegram = require('../../models/Telegram.model');
-
 router.post('/ShareLyrics/:id', async (req, res) => {
   const _id = req.params.id;
 
@@ -38,20 +37,25 @@ router.post('/ShareLyrics/:id', async (req, res) => {
     );
     const data = await response.json();
 
+    console.log('Telegram Response:', response); // Log the response
+    console.log('Telegram Data:', data); // Log the data
+
     if (response.ok) {
       const messageId = data.result.message_id;
 
-      const savedTelegramMessage = await new Telegram({
+      await new Telegram({
         type: 'Lyrics',
         Message_id: messageId,
         body: text,
       }).save();
-      res.status(200).json(await response.json());
+      res.status(200).json({ message: 'Lyrics Shared Successfully' });
     } else {
-      res.status(500).json({ message: error });
+      console.error(data); // Log the error
+      res.status(500).json({ message: 'Error sharing lyrics' });
     }
   } catch (error) {
-    res.status(500).json({ message: error });
+    console.error(error); // Log the error
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
@@ -80,21 +84,23 @@ router.post('/SharePromo/:id', async (req, res) => {
         }),
       },
     );
-    const data = await response.json();
+
+    const telegramResponse = await response.json(); // Parse the Telegram API response
 
     if (response.ok) {
-      const messageId = data.result.message_id;
+      const messageId = telegramResponse.result.message_id;
 
       const savedTelegramMessage = await new Telegram({
         type: 'promo',
         Message_id: messageId,
         body: text,
       }).save();
-      res.status(200).json(await response.json());
+      res.status(200).json(telegramResponse);
     } else {
-      res.status(500).json({ message: 'Error' });
+      res.status(response.status).json(telegramResponse);
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: 'Server Error' });
   }
 });
@@ -112,28 +118,29 @@ router.post('/shareartwork/:id', async (req, res) => {
 
     fs.readFile(convertedImagePath, async (err, data) => {
       if (err) {
+        console.error(err); // Log the error
         return res.status(500).json({ message: 'Error reading image' });
       }
 
-      const imageBlob = new Blob([data], { type: 'image/jpeg' });
-
-      const formData = new FormData();
-      formData.append('chat_id', process.env.TELEGRAM_CHAT_ID);
-      formData.append('photo', imageBlob, 'image.jpg');
-      formData.append('caption', caption);
-
-      const telegramApiUrl = `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendPhoto`;
-
       try {
+        const imageBlob = new Blob([data], { type: 'image/jpeg' });
+
+        const formData = new FormData();
+        formData.append('chat_id', process.env.TELEGRAM_CHAT_ID);
+        formData.append('photo', imageBlob, 'image.jpg');
+        formData.append('caption', caption);
+
+        const telegramApiUrl = `https://api.telegram.org/bot${process.env.TELEGRAM_TOKEN}/sendPhoto`;
+
         const telegramResponse = await fetch(telegramApiUrl, {
           method: 'POST',
           body: formData,
         });
 
-        const data = await telegramResponse.json();
+        const responseData = await telegramResponse.json();
 
-        if (data.ok) {
-          const messageId = data.result.message_id;
+        if (responseData.ok) {
+          const messageId = responseData.result.message_id;
 
           await new Telegram({
             type: 'Artwork',
@@ -143,17 +150,19 @@ router.post('/shareartwork/:id', async (req, res) => {
           }).save();
           res.status(200).json({ message: 'Artwork Shared Successfully' });
         } else {
+          console.error(responseData); // Log the error
           res.status(500).json({ message: 'Artwork Could not be Shared' });
         }
       } catch (error) {
-        res.status(500).json({ success: false, message: 'Error sending image' });
+        console.error(error); // Log the error
+        res.status(500).json({ message: 'Error sending image' });
       }
     });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
+    console.error(error); // Log the error
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
-
 router.post('/shareaudio/:id', async (req, res) => {
   try {
     const _id = req.params.id;
@@ -168,6 +177,7 @@ router.post('/shareaudio/:id', async (req, res) => {
 
     fs.readFile(convertedAudioPath, async (err, data) => {
       if (err) {
+        console.error(err); // Log the error
         return res.status(500).json({ message: 'Error reading audio' });
       }
 
@@ -187,6 +197,9 @@ router.post('/shareaudio/:id', async (req, res) => {
         });
 
         const data = await telegramResponse.json();
+        console.log('Telegram Response:', telegramResponse); // Log the response
+        console.log('Telegram Data:', data); // Log the data
+
         if (data.ok) {
           const messageId = data.result.message_id;
 
@@ -198,13 +211,16 @@ router.post('/shareaudio/:id', async (req, res) => {
           }).save();
           res.status(200).json({ message: 'Beat Shared Successfully' });
         } else {
+          console.error(data); // Log the error
           res.status(500).json({ message: 'Beat Could not be Shared' });
         }
       } catch (error) {
+        console.error(error); // Log the error
         res.status(500).json({ success: false, message: 'Error sending audio' });
       }
     });
   } catch (error) {
+    console.error(error); // Log the error
     res.status(500).json({ success: false, message: 'Internal Server Error' });
   }
 });
