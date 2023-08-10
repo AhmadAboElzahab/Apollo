@@ -1,6 +1,6 @@
 import { Boundary } from '../../boundary';
 import useSWR from 'swr';
-import DeletePromo from './DeletePromo';
+import DeleteItem from '../../DeleteItem';
 import EditPromo from './EditPromo';
 import ShareToTelegram from '../../SocialMedia/ShareToTelegram';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
@@ -32,7 +32,7 @@ export default function Codes() {
                         <EditPromo codeId={d._id} codeValue={d.value} />
                       </td>
                       <td>
-                        <DeletePromo codeId={d._id} />
+                        <DeleteItem URL='/api/admin/promo' Id={d._id} />
                       </td>
                       <td className='text-center'>
                         <ShareToTelegram type='SharePromo' id={d._id} />
