@@ -55,7 +55,7 @@ const WavesurferComponent = ({ audioUrl }) => {
         <div className='wavesurfer-container p-8 w-full m-auto'>
           <div ref={containerRef} className='w-full h-full p-0' id='waveform' />
         </div>
-        <div className='bg-gradient-to-r from-fuchsia-800 to-fuchsia-500 absolute w-[80%] left-[10%] h-[20%] top-[35%]  blur-3xl '></div>
+        <div className='bg-gradient-to-r from-fuchsia-800 to-fuchsia-500 absolute w-[80%] left-[5%] h-[20%] top-[35%]  blur-3xl '></div>
         <button
           className='text-white bg-black hover:bg-zinc-900 p-2 text-3xl  rounded-full absolute left-[35%] top-[35%] z-[5] md:left-[45%] lg:left-[45%]'
           onClick={togglePlayback}
