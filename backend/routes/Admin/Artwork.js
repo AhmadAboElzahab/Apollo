@@ -52,10 +52,9 @@ router.post('/', upload.single('image'), async (req, res) => {
   const convertedImagePath = path.join(
     __dirname,
     '../../uploads/artworks/',
-    'converted_' + fileName,
+    'converted_' + fileName + '.webp', // Ensure the WebP extension
   );
-
-  await sharp(req.file.path).jpeg({ quality: 80 }).toFile(convertedImagePath);
+  await sharp(req.file.path).webp({ quality: 80 }).toFile(convertedImagePath);
   const blurhashString = await encodeImageToBlurhash(convertedImagePath);
   fs.unlinkSync(req.file.path);
 
