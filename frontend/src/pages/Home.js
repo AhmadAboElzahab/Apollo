@@ -1,4 +1,3 @@
-import Navbar from '../Components/Navbar';
 import apollo from '../assets/apollo.png';
 
 export default function Home() {
