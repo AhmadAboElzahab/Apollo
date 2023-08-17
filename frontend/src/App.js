@@ -1,4 +1,4 @@
-import HomeBlock from './pages/Home';
+import Home from './pages/Home';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -9,7 +9,10 @@ import {
 
 import ErrorPage from './pages/ErrorPage';
 import Unauthorized from './pages/Unauthorized';
+
 import AdminLayout from './layout/AdminLayout';
+import HomeLayout from './layout/HomeLayout';
+
 import AdminHome from './pages/admin/General/AdminHome';
 import Category from './pages/admin/General/Category';
 
@@ -57,10 +60,13 @@ export default function App() {
               <Route path='Account' element={<Account />} />
             </Route>
 
-            <Route path='/' element={<HomeBlock />} />
+            <Route path='/' element={<HomeLayout />}>
+              <Route index element={<Home />} />
+              <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
+            </Route>
+
             <Route path='Unauthorized' element={<Unauthorized />} />
             <Route path='*' element={<ErrorPage />} />
-            <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
           </>,
         ),
       )}
