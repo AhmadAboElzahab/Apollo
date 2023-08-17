@@ -23,6 +23,7 @@ import Prediction from './pages/admin/Accounting/Prediction';
 import Telegram from './pages/admin/SocialMedia/Telegram';
 
 import Account from './pages/admin/Setting/Account';
+import Login from './pages/Login';
 
 export default function App() {
   return (
@@ -30,6 +31,7 @@ export default function App() {
       router={createBrowserRouter(
         createRoutesFromElements(
           <>
+            <Route path='/login' element={<Login />} />
             <Route path='/admin' element={<AdminLayout />}>
               <Route index element={<AdminHome />} />
               <Route path='Category' element={<Category />} />
