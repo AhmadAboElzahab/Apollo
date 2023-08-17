@@ -2,6 +2,7 @@ import HomeBlock from './pages/Home';
 import {
   createBrowserRouter,
   createRoutesFromElements,
+  Navigate,
   Route,
   RouterProvider,
 } from 'react-router-dom';
@@ -25,14 +26,21 @@ import Telegram from './pages/admin/SocialMedia/Telegram';
 import Account from './pages/admin/Setting/Account';
 import Login from './pages/Login';
 
+import { useAuthContext } from './Hooks/useAuthContext';
+
 export default function App() {
+  const { user, role } = useAuthContext();
   return (
     <RouterProvider
       router={createBrowserRouter(
         createRoutesFromElements(
           <>
-            <Route path='/login' element={<Login />} />
-            <Route path='/admin' element={<AdminLayout />}>
+            <Route
+              path='admin'
+              element={
+                role === 'admin' ? <AdminLayout /> : <Navigate to='/Unauthorized' replace={true} />
+              }
+            >
               <Route index element={<AdminHome />} />
               <Route path='Category' element={<Category />} />
 
@@ -52,6 +60,7 @@ export default function App() {
             <Route path='/' element={<HomeBlock />} />
             <Route path='Unauthorized' element={<Unauthorized />} />
             <Route path='*' element={<ErrorPage />} />
+            <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
           </>,
         ),
       )}

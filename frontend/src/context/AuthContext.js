@@ -1,4 +1,5 @@
 import { createContext, useReducer, useEffect } from 'react';
+import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
 
@@ -16,21 +17,19 @@ export const authReducer = (state, action) => {
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
-    role: null,
   });
 
   useEffect(() => {
-    const userData = sessionStorage.getItem('userData');
-
-    if (userData) {
-      const { user, role } = JSON.parse(userData);
-      dispatch({ type: 'LOGIN', payload: { user, role } });
+    const userCookie = Cookies.get('user');
+    if (userCookie && userCookie !== 'undefined') {
+      try {
+        const user = JSON.parse(userCookie);
+        dispatch({ type: 'LOGIN', payload: user });
+      } catch (error) {
+        console.error('Error parsing user cookie:', error);
+      }
     }
   }, []);
-
-  useEffect(() => {
-    sessionStorage.setItem('userData', JSON.stringify({ user: state.user, role: state.role }));
-  }, [state.user, state.role]);
 
   console.log('AuthContext state:', state);
 
