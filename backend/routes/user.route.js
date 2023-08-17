@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.SECRET_KEY);
     res
       .cookie('token', token, { httpOnly: true, secure: true })
-      .json({ message: 'Login successful' })
+      .json({ name: user.name, role: user.role })
       .status(200);
   } catch (err) {
     console.error(err);
@@ -47,22 +47,6 @@ router.post('/register', async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });
-  }
-});
-router.get('/token', async (req, res) => {
-  const token = req.cookies.token;
-  if (!token) {
-    return res.status(401).json({ error: 'Token not found' });
-  }
-  try {
-    const decoded = jwt.verify(token, process.env.SECRET_KEY);
-    const user = await User.findOne({ _id: decoded.id });
-    if (!user) {
-      return res.status(401).json({ error: 'User not found' });
-    }
-    res.json({ id: user.id, username: user.name, role: user.role });
-  } catch (error) {
-    return res.status(401).json({ error: 'Invalid token' });
   }
 });
 
