@@ -20,7 +20,7 @@ export const useLogin = () => {
 
     if (!response.ok) {
       setIsLoading(false);
-      setError(json.error);
+      setError(json.message);
     }
     if (response.ok) {
       Cookies.set('user', JSON.stringify(json));

@@ -18,7 +18,7 @@ const Login = () => {
       <form className=' w-80 mt-8 mx-auto ' onSubmit={handleSubmit}>
         <img src={logo} alt='logo' className='w-[200px] mx-auto mb-10  wobble' />
 
-        <label className='block mb-2 text-white'>Email address:</label>
+        <label className='block mb-2 text-glitch-white'>Email address:</label>
         <input
           className='w-full border bg-glitch-white rounded py-2 px-3 mb-4'
           type='email'
@@ -26,7 +26,7 @@ const Login = () => {
           value={email}
         />
 
-        <label className='block mb-2 text-white'>Password:</label>
+        <label className='block mb-2 text-glitch-white'>Password:</label>
         <input
           className='w-full border bg-glitch-white rounded py-2 px-3 mb-4'
           type='password'
@@ -41,7 +41,7 @@ const Login = () => {
           {isLoading ? 'Logging in...' : 'Log in'}
         </button>
 
-        {error && <div className='text-red-500 mt-2'>{error}</div>}
+        <div className='text-red-500 mt-2 h-20'> {error && error}</div>
       </form>
     </div>
   );
