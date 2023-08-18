@@ -1,7 +1,28 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 export default function Navbar() {
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
-    <div className=''>
+    <div
+      className={`sticky top-0 z-50 overflow-hidden  ${
+        scrolling ? 'backdrop-filter backdrop-blur border-b border-gray-800' : ''
+      } text-white`}
+    >
       <header>
         <div className='relative '>
           <div className='px-6 lg:container md:px-12 lg:mx-auto lg:px-6 lg:py-4'>
