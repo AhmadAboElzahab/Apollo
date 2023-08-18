@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 export default function Navbar() {
   return (
     <div className=''>
@@ -37,24 +38,25 @@ export default function Navbar() {
                   <div className='flex h-full flex-col justify-between lg:flex-row lg:items-center'>
                     <ul className='space-y-8 px-6 pt-32  md:px-12 lg:flex lg:space-x-4 lg:space-y-0 lg:pt-0 '>
                       <li>
-                        <a href='#' className='group relative  before:inset-x-0 before:bottom-0 '>
+                        <Link to='/' className='group relative  before:inset-x-0 before:bottom-0 '>
                           <span className='relative text-glitch-white text-xl'>Home</span>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href='#' className='group relative  before:inset-x-0 before:bottom-0 '>
-                          <span className='relative text-glitch-white text-xl'>Home</span>
-                        </a>
+                        <Link
+                          to='/shop'
+                          className='group relative  before:inset-x-0 before:bottom-0 '
+                        >
+                          <span className='relative text-glitch-white text-xl'>Shop</span>
+                        </Link>
                       </li>
                       <li>
-                        <a href='#' className='group relative  before:inset-x-0 before:bottom-0 '>
-                          <span className='relative text-glitch-white text-xl'>Home</span>
-                        </a>
-                      </li>
-                      <li>
-                        <a href='#' className='group relative  before:inset-x-0 before:bottom-0 '>
-                          <span className='relative text-glitch-white text-xl'>Home</span>
-                        </a>
+                        <Link
+                          to='/login'
+                          className='group relative  before:inset-x-0 before:bottom-0 '
+                        >
+                          <span className='relative text-glitch-white text-xl'>Log in</span>
+                        </Link>
                       </li>
                     </ul>
                   </div>

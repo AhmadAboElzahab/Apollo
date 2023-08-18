@@ -12,6 +12,7 @@ import Unauthorized from './pages/Unauthorized';
 
 import AdminLayout from './layout/AdminLayout';
 import HomeLayout from './layout/HomeLayout';
+import ShopLayout from './layout/ShopLayout';
 
 import AdminHome from './pages/admin/General/AdminHome';
 import Category from './pages/admin/General/Category';
@@ -28,6 +29,8 @@ import Telegram from './pages/admin/SocialMedia/Telegram';
 
 import Account from './pages/admin/Setting/Account';
 import Login from './pages/Login';
+
+import ShopMain from './pages/ShopMain';
 
 import { useAuthContext } from './Hooks/useAuthContext';
 
@@ -63,6 +66,10 @@ export default function App() {
             <Route path='/' element={<HomeLayout />}>
               <Route index element={<Home />} />
               <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
+            </Route>
+
+            <Route path='/shop' element={<ShopLayout />}>
+              <Route index element={<ShopMain />} />
             </Route>
 
             <Route path='Unauthorized' element={<Unauthorized />} />
