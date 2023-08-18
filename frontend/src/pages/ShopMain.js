@@ -21,8 +21,7 @@ export default function ShopMain() {
     };
   }, []);
   return (
-    <div id='cards'>
-      <Card />
+    <div id='cards' className='flex flex-wrap gap-1 w-full place-content-center mx-auto p-10'>
       <Card />
       <Card />
       <Card />

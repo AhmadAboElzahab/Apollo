@@ -247,14 +247,6 @@ body {
   }
 }
 
-#cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  max-width: 916px;
-  width: calc(100% - 20px);
-}
-
 #cards:hover > .card::after {
   opacity: 1;
 }
@@ -264,10 +256,10 @@ body {
   border-radius: 10px;
   cursor: pointer;
   display: flex;
-  height: 260px;
+  height: 400px;
   flex-direction: column;
   position: relative;
-  width: 300px;
+  width: 500px;
 }
 
 .card:hover::before {
