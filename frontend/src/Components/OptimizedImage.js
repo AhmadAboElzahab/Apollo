@@ -1,6 +1,5 @@
 import { Blurhash } from 'react-blurhash';
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 
 export default function OptimizedImage({ src, blurHash }) {
   const [loaded, setLoaded] = useState(false);

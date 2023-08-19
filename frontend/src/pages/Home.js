@@ -23,7 +23,11 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className='h-screen  m-0 sec'></div>
+
+      <div className='h-screen  m-0 sec pt-20'>
+        <ShopMain />
+      </div>
+      <div className='h-screen  m-0 sec pt-20'></div>
     </div>
   );
 }

@@ -32,7 +32,7 @@ export default function ShopMain() {
   return (
     <div
       id='cards'
-      className='flex flex-wrap gap-4 w-full place-content-center mx-auto p-10  animate-fade-right animate-once animate-ease-in-out'
+      className='text-white flex flex-wrap gap-4 w-full place-content-center mx-auto p-10  animate-fade-right animate-once animate-ease-in-out'
     >
       <Card>
         <BsSoundwave className='text-gray-400 mx-auto' size='200' />

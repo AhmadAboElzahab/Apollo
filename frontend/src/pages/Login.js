@@ -14,7 +14,7 @@ const Login = () => {
   };
 
   return (
-    <div className='h-screen w-screen rounded-lg flex items-center lg:z-[99]  justify-center'>
+    <div className=' rounded-lg flex items-center lg:z-[99]  justify-center'>
       <form className=' w-80 mt-8 mx-auto ' onSubmit={handleSubmit}>
         <img src={logo} alt='logo' className='w-[200px] mx-auto mb-10  wobble' />
 
