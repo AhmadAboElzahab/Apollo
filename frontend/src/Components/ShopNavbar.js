@@ -48,10 +48,11 @@ export default function ShopNavbar() {
       <div className='hidden peer-checked:block lg:block lg:h-full'>
         <div className='h-screen  p-5 px-3'>
           <ul className='ml-4 font-light text-gray-500 '>
-            <li className='mb-5 bg-gradient-to-r from-teal-400 to-yellow-200 bg-clip-text text-3xl text-transparent'>
-              Artwork
-            </li>
-
+            <Link to='artworks'>
+              <li className='mb-5 bg-gradient-to-r from-teal-400 to-yellow-200 bg-clip-text text-3xl text-transparent'>
+                Artwork
+              </li>
+            </Link>
             <li>
               <Link>BsSoundwave</Link>
             </li>
@@ -64,18 +65,22 @@ export default function ShopNavbar() {
             <li>
               <Link>BsSoundwave</Link>
             </li>
-            <li className='my-5 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-3xl text-transparent'>
-              Beats
-            </li>
+            <Link to='beats'>
+              <li className='my-5 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-3xl text-transparent'>
+                Beats
+              </li>
+            </Link>
             <li>
               <Link>BsSoundwave</Link>
             </li>
             <li>
               <Link>BsSoundwave</Link>
             </li>
-            <li className='my-5 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-3xl text-transparent'>
-              Lyrics
-            </li>
+            <Link to='lyrics'>
+              <li className='my-5 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-3xl text-transparent'>
+                Lyrics
+              </li>
+            </Link>
             <li>
               <Link>BsSoundwave</Link>
             </li>
