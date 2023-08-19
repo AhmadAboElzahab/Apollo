@@ -34,6 +34,7 @@ import ShopArtworks from './pages/Shop/ShopArtworks';
 
 import { useAuthContext } from './Hooks/useAuthContext';
 import ShopBeats from './pages/Shop/ShopBeats';
+import ShopLyrics from './pages/Shop/ShopLyrics';
 
 export default function App() {
   const { user, role } = useAuthContext();
@@ -68,10 +69,10 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
               <Route path='/shop' element={<ShopLayout />}>
-                
-                <Route index element={<Navigate to="artworks" replace={true}/>} /> 
+                <Route index element={<Navigate to='artworks' replace={true} />} />
                 <Route index path='artworks' element={<ShopArtworks />} />
                 <Route index path='beats' element={<ShopBeats />} />
+                <Route index path='lyrics' element={<ShopLyrics />} />
               </Route>
             </Route>
 
