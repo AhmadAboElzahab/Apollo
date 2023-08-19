@@ -33,6 +33,7 @@ import Login from './pages/Login';
 import ShopArtworks from './pages/Shop/ShopArtworks';
 
 import { useAuthContext } from './Hooks/useAuthContext';
+import ShopBeats from './pages/Shop/ShopBeats';
 
 export default function App() {
   const { user, role } = useAuthContext();
@@ -70,6 +71,7 @@ export default function App() {
                 
                 <Route index element={<Navigate to="artworks" replace={true}/>} /> 
                 <Route index path='artworks' element={<ShopArtworks />} />
+                <Route index path='beats' element={<ShopBeats />} />
               </Route>
             </Route>
 
