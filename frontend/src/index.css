@@ -6,7 +6,15 @@
   font-family: poppins;
   src: url(./assets/Poppins-Regular.ttf);
 }
-
+.cn {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+}
+.sec {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
 body {
   font-family: poppins;
   background-color: black;
