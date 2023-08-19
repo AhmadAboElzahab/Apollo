@@ -1,5 +1,7 @@
 import useSWR from 'swr';
 import OptimizedImage from '../../Components/OptimizedImage';
+import { GoHeart, GoHeartFill } from 'react-icons/go';
+
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function ShopArtworks() {
@@ -41,6 +43,13 @@ export default function ShopArtworks() {
                   <span className='text-gray-400'>Category : </span>
                   {d.category}
                 </p>
+              </div>
+              <div className=' ml-[auto] flex items-center justify-center  w-28'>
+                {true ? (
+                  <GoHeartFill className='text-red-500' size={30} />
+                ) : (
+                  <GoHeart className='text-gray-800' size={30} />
+                )}
               </div>
             </div>
           </div>

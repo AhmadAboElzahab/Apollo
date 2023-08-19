@@ -1,6 +1,5 @@
 import useSWR from 'swr';
-import WavesurferComponent from '../../Components/WavesurferComponent';
-
+import { GoHeart, GoHeartFill } from 'react-icons/go';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function ShopLyrics() {
@@ -42,7 +41,13 @@ export default function ShopLyrics() {
                   {d.category}
                 </p>
               </div>
-              <div className=' ml-[auto]'></div>
+              <div className=' ml-[auto] flex items-center justify-center  w-28'>
+                {true ? (
+                  <GoHeartFill className='text-red-500' size={30} />
+                ) : (
+                  <GoHeart className='text-gray-800' size={30} />
+                )}
+              </div>
             </div>
           </div>
         ))}
