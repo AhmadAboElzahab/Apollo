@@ -4,15 +4,15 @@ export default function Navbar() {
     <div className='fixed top-0 w-screen bg-black/20 z-30 border-b border-gray-900'>
       <header>
         <div className='relative '>
-          <div className='px-6 lg:container md:px-12 lg:mx-auto lg:px-6 lg:py-4'>
+          <div className='px-6  md:px-12 lg:px-6 w-full lg:py-4'>
             <div className='flex items-center justify-between '>
-              <div className='relative z-30 '>
-                <div className='glitch lg:-ml-32 z-10' data-text='Apollo'>
+              <div className='relative z-30   w-full '>
+                <div className='glitch  z-10' data-text='Apollo'>
                   Apollo
                 </div>
               </div>
 
-              <div className='flex items-center justify-end '>
+              <div className='flex items-center w-full  justify-end '>
                 <input
                   type='checkbox'
                   name='hamburger'
