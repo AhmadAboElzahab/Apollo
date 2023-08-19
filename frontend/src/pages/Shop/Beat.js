@@ -1,3 +1,3 @@
-export default function Beat() {
+export default function ShopBeat() {
   return <div>Beat</div>;
 }

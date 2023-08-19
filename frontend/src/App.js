@@ -64,7 +64,10 @@ export default function App() {
             <Route path='/' element={<HomeLayout />}>
               <Route index element={<Home />} />
               <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
-              <Route path='/shop' element={<ShopLayout />}></Route>
+              <Route path='/shop' element={<ShopLayout />}>
+              <Route path='/Artworks' element={<Art />}/>
+
+              </Route>
             </Route>
 
             <Route path='Unauthorized' element={<Unauthorized />} />
