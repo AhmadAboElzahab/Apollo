@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import apollo from '../assets/apollo.png';
-import ShopMain from './ShopMain';
+import CategoryCards from '../Components/CategoryCards';
 
 export default function Home() {
   return (
@@ -25,7 +25,7 @@ export default function Home() {
       </div>
 
       <div className='h-screen  m-0 sec pt-20'>
-        <ShopMain />
+        <CategoryCards />
       </div>
       <div className='h-screen  m-0 sec pt-20'></div>
     </div>

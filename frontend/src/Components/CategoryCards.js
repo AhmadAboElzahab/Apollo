@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import Card from '../Components/Card';
+import Card from './Card';
 import { HiOutlinePhoto } from 'react-icons/hi2';
 import { BsSoundwave } from 'react-icons/bs';
 import { LuListMusic } from 'react-icons/lu';
-export default function ShopMain() {
+export default function CategoryCards() {
   useEffect(() => {
     const handleMouseMove = (e) => {
       const cards = document.querySelectorAll('.card');

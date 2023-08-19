@@ -30,8 +30,6 @@ import Telegram from './pages/admin/SocialMedia/Telegram';
 import Account from './pages/admin/Setting/Account';
 import Login from './pages/Login';
 
-import ShopMain from './pages/ShopMain';
-
 import { useAuthContext } from './Hooks/useAuthContext';
 
 export default function App() {
@@ -66,10 +64,7 @@ export default function App() {
             <Route path='/' element={<HomeLayout />}>
               <Route index element={<Home />} />
               <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
-            </Route>
-
-            <Route path='/shop' element={<ShopLayout />}>
-              <Route index element={<ShopMain />} />
+              <Route path='/shop' element={<ShopLayout />}></Route>
             </Route>
 
             <Route path='Unauthorized' element={<Unauthorized />} />
