@@ -1,3 +1,3 @@
 export default function ShopHeader() {
-  return <div>ShopHeader</div>;
+  return <div></div>;
 }
