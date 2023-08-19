@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function ShopNavbar() {
   return (
-    <nav className='fixed top-[60px] z-[3]  w-screen border-b  border-gray-900 bg-black/50 py-2 backdrop-blur-sm lg:top-20 lg:w-[30vh] lg:border-r lg:backdrop-blur-0'>
+    <nav className='fixed top-[60px] z-[10] w-screen border-b  border-gray-900 bg-black/90 lg:bg-black/20 py-2 lg:top-20 lg:w-[30vh] lg:border-r '>
       <div className='mx-auto flex items-center justify-between '>
         <div className='relative  w-full px-2 '>
           <div className='pointer-events-none absolute inset-y-0 left-6 flex  items-center'>
@@ -34,7 +34,7 @@ export default function ShopNavbar() {
           htmlFor='shopHamburger'
           className='peer-checked:shopHamburger relative z-10  block cursor-pointer text-center text-white lg:hidden'
         >
-          <BsThreeDotsVertical size={30} className='mr-4 text-gray-800 hover:text-white' />
+          <BsThreeDotsVertical size={30} className='mr-4 text-white' />
         </label>
       </div>
       <input
