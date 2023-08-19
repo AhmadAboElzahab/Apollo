@@ -67,7 +67,7 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
               <Route path='/shop' element={<ShopLayout />}>
-                <Route path='/Artworks' element={<ShopArtworks />} />
+                <Route index element={<ShopArtworks />} />
               </Route>
             </Route>
 
