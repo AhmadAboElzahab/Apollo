@@ -9,7 +9,7 @@ export default function ShopArtworks() {
     return <>{error}</>;
   }
   return (
-    <div className='grid lg:grid-cols-3 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
+    <div className='grid lg:grid-cols-2 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
       {data &&
         data.map((d) => (
           <div class='w-full bg-black border border-gray-800 rounded-lg shadow'>

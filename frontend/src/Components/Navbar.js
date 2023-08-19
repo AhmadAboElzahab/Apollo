@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 export default function Navbar() {
   return (
-    <div className='fixed top-0 w-screen bg-black/20 z-30 border-b border-gray-900'>
+    <div className='fixed top-0 w-screen bg-black/50 z-30 border-b border-gray-900'>
       <header>
         <div className='relative '>
           <div className='px-6  md:px-12 lg:px-6 w-full lg:py-4'>
