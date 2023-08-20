@@ -80,7 +80,7 @@ export default function ShopArtworks() {
                 </p>
                 <br />
                 <p className='hover:underline cursor-pointer'>
-                  <Link to={`${d.category}/${d.title}`}>Check</Link>
+                <Link to={d._id}>Check</Link>
                 </p>
               </div>
 

@@ -47,7 +47,7 @@ export default function ShopBeats() {
                 </p>
                 <br />
                 <p className='hover:underline cursor-pointer'>
-                  <Link to={`${d.category}/${d.title}`}>Check</Link>
+                <Link to={d._id}>Check</Link>
                 </p>
               </div>
               <div className=' ml-[auto] flex items-center justify-center  w-28'>
