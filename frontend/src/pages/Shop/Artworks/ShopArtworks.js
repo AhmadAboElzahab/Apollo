@@ -1,7 +1,6 @@
 import useSWR from 'swr';
 import OptimizedImage from '../../../Components/OptimizedImage';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
-import { HiOutlineEye } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
