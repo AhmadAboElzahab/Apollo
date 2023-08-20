@@ -1,7 +1,7 @@
 import { Blurhash } from 'react-blurhash';
 import { useState } from 'react';
 
-export default function OptimizedImage({ src, blurHash,styleName ,rounded }) {
+export default function OptimizedImage({ src, blurHash, styleName, rounded }) {
   const [loaded, setLoaded] = useState(false);
 
   return (

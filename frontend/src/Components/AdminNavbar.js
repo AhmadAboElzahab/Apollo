@@ -102,7 +102,7 @@ export default function AdminNavbar() {
             <NavLink onClick={close} to='Account' className='link_style'>
               Account
             </NavLink>
-           <Logout type='admin'/>
+            <Logout type='admin' />
           </div>
         </nav>
       </div>

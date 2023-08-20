@@ -53,9 +53,7 @@ export default function App() {
           <>
             <Route
               path='admin'
-              element={
-                role === 'admin' ? <AdminLayout /> : <Navigate to='/Unauthorized' replace={true} />
-              }
+              element={role === 'admin' ? <AdminLayout /> : <Navigate to='/Unauthorized' />}
             >
               <Route index element={<AdminHome />} />
               <Route path='Category' element={<Category />} />
@@ -75,8 +73,18 @@ export default function App() {
 
             <Route path='/' element={<HomeLayout />}>
               <Route index element={<Home />} />
-              <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
-              <Route path='signup' element={!user ? <Signup /> : <Navigate to={`/${role}`} />} />
+              <Route
+                path='login'
+                element={
+                  !user ? <Login /> : <Navigate to={role === 'admin' ? '/admin' : '/shop'} />
+                }
+              />
+              <Route
+                path='signup'
+                element={
+                  !user ? <Login /> : <Navigate to={role === 'admin' ? '/admin' : '/shop'} />
+                }
+              />
               <Route path='/shop' element={<ShopLayout />}>
                 <Route index element={<Navigate to='artworks' replace={true} />} />
 
