@@ -1,4 +1,4 @@
-import { BsThreeDotsVertical, BsSoundwave } from 'react-icons/bs';
+import { BsThreeDotsVertical} from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 export default function ShopNavbar() {
