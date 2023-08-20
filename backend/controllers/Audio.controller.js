@@ -160,9 +160,27 @@ async function getAllAudio(req, res) {
   }
 }
 
+const getAudioById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const AudioRecord = await Audio.findById({ _id: id });
+
+    if (!AudioRecord) {
+      return res.status(404).json({ error: 'Audio not found.' });
+    }
+
+    res.json(AudioRecord).status(200);
+  } catch (error) {
+    console.error('Error fetching Audio:', error);
+    res.status(500).json({ error: 'Failed to fetch Audio.' });
+  }
+};
+
 module.exports = {
   createAudio,
   deleteAudio,
   updateAudio,
   getAllAudio,
+  getAudioById,
 };
