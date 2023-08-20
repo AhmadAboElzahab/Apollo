@@ -82,7 +82,7 @@ export default function App() {
               <Route
                 path='signup'
                 element={
-                  !user ? <Login /> : <Navigate to={role === 'admin' ? '/admin' : '/shop'} />
+                  !user ? <Signup /> : <Navigate to={role === 'admin' ? '/admin' : '/shop'} />
                 }
               />
               <Route path='/shop' element={<ShopLayout />}>
