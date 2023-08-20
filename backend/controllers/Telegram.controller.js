@@ -38,8 +38,6 @@ const ShareLyrics = async (req, res) => {
     );
     const data = await response.json();
 
-    console.log('Telegram Response:', response); // Log the response
-    console.log('Telegram Data:', data); // Log the data
 
     if (response.ok) {
       const messageId = data.result.message_id;

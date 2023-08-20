@@ -21,9 +21,7 @@ export default function ShopArtworks() {
       });
 
       const result = await response.json();
-      console.log(result);
     } catch (err) {
-      console.log(err);
     }
   };
 
@@ -42,9 +40,7 @@ export default function ShopArtworks() {
       });
 
       const result = await response.json();
-      console.log(result);
     } catch (err) {
-      console.log(err);
     }
   };
 
