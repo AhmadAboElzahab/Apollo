@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import clsx from 'clsx';
+import Logout from './Logout';
 
 export default function AdminNavbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -101,9 +102,7 @@ export default function AdminNavbar() {
             <NavLink onClick={close} to='Account' className='link_style'>
               Account
             </NavLink>
-            <NavLink onClick={close} to='LogOut' className='link_style'>
-              Log out
-            </NavLink>
+           <Logout type='admin'/>
           </div>
         </nav>
       </div>

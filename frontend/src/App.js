@@ -29,6 +29,7 @@ import Telegram from './pages/admin/SocialMedia/Telegram';
 
 import Account from './pages/admin/Setting/Account';
 import Login from './pages/Login';
+import Signup from './pages/Signup';
 
 import ShopArtworks from './pages/Shop/Artworks/ShopArtworks';
 import ShopArtwork from './pages/Shop/Artworks/ShopArtwork';
@@ -75,6 +76,7 @@ export default function App() {
             <Route path='/' element={<HomeLayout />}>
               <Route index element={<Home />} />
               <Route path='login' element={!user ? <Login /> : <Navigate to={`/${role}`} />} />
+              <Route path='signup' element={!user ? <Signup /> : <Navigate to={`/${role}`} />} />
               <Route path='/shop' element={<ShopLayout />}>
                 <Route index element={<Navigate to='artworks' replace={true} />} />
 
