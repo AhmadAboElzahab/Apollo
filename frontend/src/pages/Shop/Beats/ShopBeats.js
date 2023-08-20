@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import WavesurferComponent from '../../Components/WavesurferComponent';
+import WavesurferComponent from '../../../Components/WavesurferComponent';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 

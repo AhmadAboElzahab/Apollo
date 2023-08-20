@@ -30,12 +30,19 @@ import Telegram from './pages/admin/SocialMedia/Telegram';
 import Account from './pages/admin/Setting/Account';
 import Login from './pages/Login';
 
-import ShopArtworks from './pages/Shop/ShopArtworks';
+import ShopArtworks from './pages/Shop/Artworks/ShopArtworks';
+import ShopArtwork from './pages/Shop/Artworks/ShopArtwork';
+import ShopArtworksCategory from './pages/Shop/Artworks/ShopArtworksCategory';
+
+import ShopBeats from './pages/Shop/Beats/ShopBeats';
+import ShopBeat from './pages/Shop/Beats/ShopBeat';
+import ShopBeatsCategory from './pages/Shop/Beats/ShopBeatsCategory';
+
+import ShopLyrics from './pages/Shop/Lyrics/ShopLyrics';
+import ShopLyric from './pages/Shop/Lyrics/ShopLyric';
+import ShopLyricsCategory from './pages/Shop/Lyrics/ShopLyricsCategory';
 
 import { useAuthContext } from './Hooks/useAuthContext';
-import ShopBeats from './pages/Shop/ShopBeats';
-import ShopLyrics from './pages/Shop/ShopLyrics';
-
 export default function App() {
   const { user, role } = useAuthContext();
   return (
@@ -71,20 +78,17 @@ export default function App() {
               <Route path='/shop' element={<ShopLayout />}>
                 <Route index element={<Navigate to='artworks' replace={true} />} />
 
-                <Route path='artworks' element={<ShopArtworks />}>
-                  <Route path=':category' element={<ShopArtworks />} />
-                  <Route path=':category/:product' element={<ShopArtworks />} />
-                </Route>
+                <Route path='artworks' element={<ShopArtworks />} />
+                <Route path='artworks/:category/' element={<ShopArtworksCategory />} />
+                <Route path='artworks/:category/:product' element={<ShopArtwork />} />
 
-                <Route path='beats' element={<ShopBeats />}>
-                  <Route path=':category' element={<ShopArtworks />} />
-                  <Route path=':category/:product' element={<ShopArtworks />} />
-                </Route>
+                <Route path='beats' element={<ShopBeats />} />
+                <Route path='beats/:category' element={<ShopBeatsCategory />} />
+                <Route path='beats/:category/:product' element={<ShopBeat />} />
 
-                <Route path='lyrics' element={<ShopLyrics />}>
-                  <Route path=':category' element={<ShopArtworks />} />
-                  <Route path=':category/:product' element={<ShopArtworks />} />
-                </Route>
+                <Route path='lyrics' element={<ShopLyrics />} />
+                <Route path='lyrics/:category' element={<ShopLyricsCategory />} />
+                <Route path='lyrics/:category/:product' element={<ShopLyric />} />
               </Route>
             </Route>
 
