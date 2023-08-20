@@ -1,3 +1,7 @@
+import { useParams } from 'react-router-dom';
+
 export default function ShopArtwork() {
-  return <div>ssss</div>;
+  const { category,product } = useParams();
+
+  return <div>{category +" / "+ product}</div>;
 }
