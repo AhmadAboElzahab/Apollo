@@ -6,9 +6,15 @@ const Lyrics = require('../models/Lyrics.model');
 const createCategory = async (req, res) => {
   try {
     const { title, type } = req.body;
+    const existingCategory = await Category.findOne({ title, type });
+
+    if (existingCategory) {
+      res.status(400).json({ error: 'Category with the same title and type already exists.' });
+      return;
+    }
     const newCategory = new Category({ title, type });
     const savedCategory = await newCategory.save();
-    res.json(savedCategory);
+    res.json(savedCategory).status(200);
   } catch (error) {
     res.status(500).json({ error: 'Failed to create a new Category.' });
   }
@@ -31,18 +37,24 @@ const getCategoriesByType = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch Categories.' });
   }
 };
-
 const updateCategory = async (req, res) => {
   try {
     const { title } = req.body;
-    const updatedCategory = await Category.findByIdAndUpdate(
-      req.params.id,
-      { title },
-      { new: true },
-    );
-    if (!updatedCategory) {
+    const categoryToUpdate = await Category.findById(req.params.id);
+
+    if (!categoryToUpdate) {
       return res.status(404).json({ error: 'Category not found.' });
     }
+    if (title !== categoryToUpdate.title) {
+      const existingCategory = await Category.findOne({ title });
+
+      if (existingCategory) {
+        return res.status(400).json({ error: 'Category with the same title already exists.' });
+      }
+    }
+
+    categoryToUpdate.title = title;
+    const updatedCategory = await categoryToUpdate.save();
     res.json(updatedCategory);
   } catch (error) {
     res.status(500).json({ error: 'Failed to update Category.' });

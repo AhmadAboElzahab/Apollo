@@ -19,14 +19,14 @@ export default function AddCategory() {
           },
           body: JSON.stringify({ title, type }),
         });
-
+        const output=await response.json()
         if (response.ok) {
           mutate('/api/admin/Category');
           setTitle('');
           setType('');
           toast.success('New Category Added');
         } else {
-          console.error('Failed to add code:', response.statusText);
+          toast.error(output.error);
         }
       } catch (error) {
         console.error('An error occurred:', error);
