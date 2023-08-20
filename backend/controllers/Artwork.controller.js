@@ -101,6 +101,36 @@ const getArtworks = async (req, res) => {
   }
 };
 
+const getArtworkById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const artwork = await Artwork.findById({ _id: id });
+
+    if (!artwork) {
+      return res.status(404).json({ error: 'Artwork not found.' });
+    }
+
+    const category = await Category.findById(artwork.category);
+
+    const artworkWithCategory = {
+      _id: artwork._id,
+      title: artwork.title,
+      description: artwork.description,
+      category: category ? category.title : null,
+      price: artwork.price,
+      art: artwork.art,
+      blurHash: artwork.blurHash,
+      likes: artwork.likes,
+    };
+
+    res.json(artworkWithCategory);
+  } catch (error) {
+    console.error('Error fetching Artwork:', error);
+    res.status(500).json({ error: 'Failed to fetch Artwork.' });
+  }
+};
+
 const updateArtwork = async (req, res) => {
   const artworkId = req.params.id;
   const { title, price, description } = req.body;
@@ -140,4 +170,5 @@ module.exports = {
   deleteArtwork,
   getArtworks,
   updateArtwork,
+  getArtworkById,
 };

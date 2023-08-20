@@ -46,7 +46,7 @@ export default function ShopBeatsCategory() {
                 </p>
                 <p>
                   <span className='text-gray-400'>Category : </span>
-                  {d.category}
+                  {category}
                 </p>
                 <br />
                 <p className='hover:underline cursor-pointer'>
