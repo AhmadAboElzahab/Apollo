@@ -1,7 +1,7 @@
 import { Blurhash } from 'react-blurhash';
 import { useState } from 'react';
 
-export default function OptimizedImage({ src, blurHash }) {
+export default function OptimizedImage({ src, blurHash,styleName }) {
   const [loaded, setLoaded] = useState(false);
 
   return (
@@ -14,14 +14,14 @@ export default function OptimizedImage({ src, blurHash }) {
 
       <div className='relative'>
         <img
-          className=' object-cover rounded-t-lg bg-cover h-[300px] w-full absolute z-[9] image'
+          className={` object-cover rounded-t-lg bg-cover h-[300px] w-full absolute z-[9] ${styleName}`}
           src={src}
           style={{ display: !loaded ? 'none' : 'block' }}
           alt={''}
           onLoad={() => setLoaded(true)}
         />
         <img
-          className=' object-cover rounded-t-lg bg-cover h-[300px] w-full blur-xl image  '
+          className={` object-cover rounded-t-lg bg-cover h-[300px] w-full blur-xl ${styleName}`}
           style={{ display: !loaded ? 'none' : 'block' }}
           src={src}
           alt={''}

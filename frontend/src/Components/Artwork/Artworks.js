@@ -30,6 +30,7 @@ export default function Artworks() {
                     <OptimizedImage
                       src={`http://localhost:4000/artworks/${d.art}`}
                       blurHash={d.blurHash}
+                      styleName='image'
                     />
                   </div>
                   <div class='py-3 px-3 text-sm flex flex-row'>

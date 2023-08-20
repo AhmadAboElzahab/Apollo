@@ -58,6 +58,7 @@ export default function ShopArtworksCategory() {
               <OptimizedImage
                 src={`http://localhost:4000/artworks/${d.art}`}
                 blurHash={d.blurHash}
+                styleName='image'
               />
             </div>
             <div className='py-3 px-3 text-sm flex flex-row'>

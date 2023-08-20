@@ -48,7 +48,7 @@ export default function ShopArtwork() {
     return <>{error}</>;
   }
   return (
-    <div className='grid lg:grid-cols-3 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
+    <div className='grid lg:grid-cols-1  text-white	gap-16 relative top-0 left-0 p-5 h-screen'>
       {data &&
        
           <div className='w-full bg-black border border-gray-800 rounded-lg shadow' >
@@ -59,6 +59,7 @@ export default function ShopArtwork() {
               <OptimizedImage
                 src={`http://localhost:4000/artworks/${data.art}`}
                 blurHash={data.blurHash}
+                styleName='image'
               />
             </div>
             <div className='py-3 px-3 text-sm flex flex-row'>

@@ -173,6 +173,17 @@ body {
   border-top-right-radius: 0.375rem; /* 6px */
   object-fit: cover;
 }
+.BigImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 600px;
+  width: 100%;
+  border-top-left-radius: 0.375rem; /* 6px */
+  border-top-right-radius: 0.375rem; /* 6px */
+  object-fit: cover;
+}
+
 
 .wobble {
   animation: wobble 2s ease infinite;
