@@ -1,32 +1,30 @@
-import { useState } from "react"
-import { useSignup } from "../Hooks/useSignup"
+import { useState } from 'react';
+import { useSignup } from '../Hooks/useSignup';
 import logo from '../assets/logo.png';
-import {toast} from 'react-toastify'
+import { toast } from 'react-toastify';
 
 const Signup = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
-  const {signup, error, isLoading,message} = useSignup()
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const { signup, error, isLoading, message } = useSignup();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    if(message){
-      toast.success('Good To Have You Please Head to log in page')
-      setEmail('')
-      setName('')
-      setPassword('')
+    e.preventDefault();
+    if (message) {
+      toast.success('Good To Have You Please Head to log in page');
+      setEmail('');
+      setName('');
+      setPassword('');
     }
 
-    await signup(email, password,name)
-
-  }
+    await signup(email, password, name);
+  };
 
   return (
     <div className=' rounded-lg flex items-center mt-[10%]  justify-center'>
       <form className=' w-80 mt-8 mx-auto ' onSubmit={handleSubmit}>
         <img src={logo} alt='logo' className='w-[200px] mx-auto mb-10  wobble' />
-
 
         <label className='block mb-2 text-glitch-white'>Name :</label>
         <input
@@ -64,4 +62,4 @@ const Signup = () => {
     </div>
   );
 };
-export default Signup
+export default Signup;
