@@ -1,23 +1,25 @@
 import { createContext, useReducer, useEffect } from 'react';
 import Cookies from 'js-cookie';
-
+import { useState } from 'react';
 export const AuthContext = createContext();
 
 export const authReducer = (state, action) => {
   switch (action.type) {
     case 'LOGIN':
-      return { user: action.payload.name, role: action.payload.role ,id:action.payload.id};
+      return { user: action.payload.name, role: action.payload.role, id: action.payload.id };
     case 'LOGOUT':
-      return { user: null, role: null,id:null };
+      return { user: null, role: null, id: null };
     default:
       return state;
   }
 };
-
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
+    role: null,
+    id: null,
   });
+  const [isLoading, setIsLoading] = useState(true); // New loading state
 
   useEffect(() => {
     const userCookie = Cookies.get('user');
@@ -29,9 +31,14 @@ export const AuthContextProvider = ({ children }) => {
         console.error('Error parsing user cookie:', error);
       }
     }
+    setIsLoading(false); // Set loading state to false once authentication check is done
   }, []);
 
   console.log('AuthContext state:', state);
+
+  if (isLoading) {
+    return <p>Loading...</p>; // Return a loading indicator while checking authentication
+  }
 
   return <AuthContext.Provider value={{ ...state, dispatch }}>{children}</AuthContext.Provider>;
 };
