@@ -1,6 +1,7 @@
 import useSWR from 'swr';
 import WavesurferComponent from '../../Components/WavesurferComponent';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { Link } from 'react-router-dom';
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
@@ -43,6 +44,10 @@ export default function ShopBeats() {
                 <p>
                   <span className='text-gray-400'>Category : </span>
                   {d.category}
+                </p>
+                <br />
+                <p className='hover:underline cursor-pointer'>
+                  <Link to={`${d.category}/${d.title}`}>Check</Link>
                 </p>
               </div>
               <div className=' ml-[auto] flex items-center justify-center  w-28'>

@@ -1,6 +1,8 @@
 import useSWR from 'swr';
 import OptimizedImage from '../../Components/OptimizedImage';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
+import { HiOutlineEye } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
@@ -21,8 +23,7 @@ export default function ShopArtworks() {
       });
 
       const result = await response.json();
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 
   const unlikePost = async (id) => {
@@ -40,8 +41,7 @@ export default function ShopArtworks() {
       });
 
       const result = await response.json();
-    } catch (err) {
-    }
+    } catch (err) {}
   };
 
   if (error) {
@@ -72,13 +72,16 @@ export default function ShopArtworks() {
                   {d.description.slice(0, 20) + '...'}
                 </p>
                 <p>
-                  {' '}
                   <span className='text-gray-400'>Price : </span>
                   {d.price}
                 </p>
                 <p>
                   <span className='text-gray-400'>Category : </span>
                   {d.category}
+                </p>
+                <br />
+                <p className='hover:underline cursor-pointer'>
+                  <Link to={`${d.category}/${d.title}`}>Check</Link>
                 </p>
               </div>
 
@@ -107,6 +110,7 @@ export default function ShopArtworks() {
                     />
                   </div>
                 )}
+
                 <p className='text-gray-400'> {d.likes.length}</p>
               </div>
             </div>

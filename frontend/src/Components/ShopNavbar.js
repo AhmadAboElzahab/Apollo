@@ -1,7 +1,10 @@
-import { BsThreeDotsVertical} from 'react-icons/bs';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import useSWR from 'swr';
 
+const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function ShopNavbar() {
+  const { data, error, isLoading } = useSWR('/api/shop/categories', fetcher);
   return (
     <nav className='fixed top-[60px] z-[10] w-screen border-b  border-gray-900 bg-black/90 lg:bg-black/20 py-2 lg:top-20 lg:w-[30vh] lg:border-r '>
       <div className='mx-auto flex items-center justify-between '>
@@ -53,40 +56,37 @@ export default function ShopNavbar() {
                 Artwork
               </li>
             </Link>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
+            {data?.map((d) =>
+              d.type === 'Artworks' ? (
+                <li key={d.id}>
+                  <Link>{d.title}</Link>
+                </li>
+              ) : null,
+            )}
             <Link to='beats'>
               <li className='my-5 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-3xl text-transparent'>
                 Beats
               </li>
             </Link>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
+            {data?.map((d) =>
+              d.type === 'Beats' ? (
+                <li key={d.id}>
+                  <Link>{d.title}</Link>
+                </li>
+              ) : null,
+            )}
             <Link to='lyrics'>
               <li className='my-5 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-3xl text-transparent'>
                 Lyrics
               </li>
             </Link>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
-            <li>
-              <Link>BsSoundwave</Link>
-            </li>
+            {data?.map((d) =>
+              d.type === 'Lyrics' ? (
+                <li key={d.id}>
+                  <Link to={`${d.title}`}>{d.title}</Link>
+                </li>
+              ) : null,
+            )}
           </ul>
         </div>
       </div>

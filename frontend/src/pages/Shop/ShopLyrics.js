@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+import { Link } from 'react-router-dom';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
@@ -31,7 +32,6 @@ export default function ShopLyrics() {
                   <span className='text-gray-400'>Title : </span>
                   {d.title}
                 </p>
-
                 <p>
                   <span className='text-gray-400'>Price : </span>
                   {d.price}
@@ -39,6 +39,10 @@ export default function ShopLyrics() {
                 <p>
                   <span className='text-gray-400'>Category : </span>
                   {d.category}
+                </p>
+                <br />
+                <p className='hover:underline cursor-pointer'>
+                  <Link to={`${d.category}/${d.title}`}>Check</Link>
                 </p>
               </div>
               <div className=' ml-[auto] flex items-center justify-center  w-28'>
