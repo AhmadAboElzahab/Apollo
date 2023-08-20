@@ -22,7 +22,7 @@ router.post('/login', async (req, res) => {
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.SECRET_KEY);
     res
       .cookie('token', token, { httpOnly: true, secure: true })
-      .json({ name: user.name, role: user.role })
+      .json({ name: user.name, role: user.role, id: user._id })
       .status(200);
   } catch (err) {
     console.error(err);
