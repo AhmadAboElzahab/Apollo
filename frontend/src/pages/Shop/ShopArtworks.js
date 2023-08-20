@@ -6,6 +6,47 @@ const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function ShopArtworks() {
   const { data, error } = useSWR('/api/admin/Artwork', fetcher);
+  const likePost = async (id) => {
+    try {
+      const response = await fetch('/api/user/likes/like', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({
+          postId: id,
+          UserId: '64c24a4681de7bcef0bad344',
+        }),
+      });
+
+      const result = await response.json();
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const unlikePost = async (id) => {
+    try {
+      const response = await fetch('/api/user/likes/unlike', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({
+          postId: id,
+          UserId: '64c24a4681de7bcef0bad344',
+        }),
+      });
+
+      const result = await response.json();
+      console.log(result);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   if (error) {
     return <>{error}</>;
@@ -13,8 +54,8 @@ export default function ShopArtworks() {
   return (
     <div className='grid lg:grid-cols-3 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
       {data &&
-        data.map((d) => (
-          <div class='w-full bg-black border border-gray-800 rounded-lg shadow'>
+        data.map((d, index) => (
+          <div className='w-full bg-black border border-gray-800 rounded-lg shadow' key={index}>
             <div
               className='flex flex-row flex-wrap gap-x-[10px] gap-y-[2em] visible'
               style={{ contentVisibility: 'visible' }}
@@ -24,7 +65,7 @@ export default function ShopArtworks() {
                 blurHash={d.blurHash}
               />
             </div>
-            <div class='py-3 px-3 text-sm flex flex-row'>
+            <div className='py-3 px-3 text-sm flex flex-row'>
               <div>
                 <p>
                   <span className='text-gray-400'>Title : </span>
@@ -45,10 +86,27 @@ export default function ShopArtworks() {
                 </p>
               </div>
               <div className=' ml-[auto] flex items-center justify-center  w-28'>
-                {true ? (
-                  <GoHeartFill className='text-red-500' size={30} />
+                {d.likes &&
+                d.likes.some((likedUserId) => likedUserId === '64c24a4681de7bcef0bad344') ? (
+                  <div className='flex items-center'>
+                    <GoHeart
+                      className='text-gray-800 cursor-pointer'
+                      size={30}
+                      onClick={() => {
+                        unlikePost(d._id);
+                      }}
+                    />
+                  </div>
                 ) : (
-                  <GoHeart className='text-gray-800' size={30} />
+                  <div className='flex items-center'>
+                    <GoHeartFill
+                      className='text-red-500 cursor-pointer'
+                      size={30}
+                      onClick={() => {
+                        likePost(d._id);
+                      }}
+                    />
+                  </div>
                 )}
               </div>
             </div>
