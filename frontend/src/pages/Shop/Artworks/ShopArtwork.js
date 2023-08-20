@@ -53,7 +53,7 @@ export default function ShopArtwork() {
     <div className='flex flex-col  lg:flex-row gap-3 text-white	relative top-0 left-0 p-5 '>
       
      
-          <div className='w-full lg:col-span-2 bg-black/30 border border-gray-800 rounded-lg shadow' >
+          <div className='h-[80vh] w-full bg-black/30 border border-gray-800 rounded-lg shadow' >
               <OptimizedImage
                 src={`http://localhost:4000/artworks/${data.art}`}
                 blurHash={data.blurHash}
