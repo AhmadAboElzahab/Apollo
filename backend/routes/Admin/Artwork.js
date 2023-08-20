@@ -118,6 +118,7 @@ router.get('/', async (req, res) => {
       price: art.price,
       art: art.art,
       blurHash: art.blurHash,
+      likes: art.likes,
     }));
 
     res.json(ArtworksWithCategories);

@@ -85,12 +85,15 @@ export default function ShopArtworks() {
                   {d.category}
                 </p>
               </div>
-              <div className=' ml-[auto] flex items-center justify-center  w-28'>
+
+              <div className=' ml-[auto] flex items-center justify-center w-28'>
                 {d.likes &&
-                d.likes.some((likedUserId) => likedUserId === '64c24a4681de7bcef0bad344') ? (
+                d.likes.some(
+                  (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
+                ) ? (
                   <div className='flex items-center'>
-                    <GoHeart
-                      className='text-gray-800 cursor-pointer'
+                    <GoHeartFill
+                      className='text-red-500 cursor-pointer'
                       size={30}
                       onClick={() => {
                         unlikePost(d._id);
@@ -99,8 +102,8 @@ export default function ShopArtworks() {
                   </div>
                 ) : (
                   <div className='flex items-center'>
-                    <GoHeartFill
-                      className='text-red-500 cursor-pointer'
+                    <GoHeart
+                      className='text-gray-800 cursor-pointer'
                       size={30}
                       onClick={() => {
                         likePost(d._id);
