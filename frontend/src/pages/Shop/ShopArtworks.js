@@ -86,7 +86,7 @@ export default function ShopArtworks() {
                 </p>
               </div>
 
-              <div className=' ml-[auto] flex items-center justify-center w-28'>
+              <div className=' ml-[auto] flex flex-col items-center justify-center w-28'>
                 {d.likes &&
                 d.likes.some(
                   (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
@@ -111,6 +111,7 @@ export default function ShopArtworks() {
                     />
                   </div>
                 )}
+                <p className='text-gray-400'> {d.likes.length}</p>
               </div>
             </div>
           </div>
