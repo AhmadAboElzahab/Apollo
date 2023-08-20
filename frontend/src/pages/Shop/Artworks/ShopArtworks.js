@@ -81,10 +81,10 @@ export default function ShopArtworks() {
                 </p>
                 <br />
                 <p className='hover:underline cursor-pointer'>
-                <Link to={`${d.category}/${d._id}`}>Check</Link>
+                <Link to={`${encodeURIComponent(d.category.replace(/\s+/g, '-'))}/${d._id}`}>Check</Link>
                 </p>
               </div>
-
+             
               <div className=' ml-[auto] flex flex-col items-center justify-center w-28'>
                 {d.likes &&
                 d.likes.some(
