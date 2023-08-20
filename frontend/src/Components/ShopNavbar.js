@@ -59,7 +59,9 @@ export default function ShopNavbar() {
             {data?.map((d) =>
               d.type === 'Artworks' ? (
                 <li key={d.id}>
-                  <Link>{d.title}</Link>
+                  <Link to={`artworks/${encodeURIComponent(d.title.replace(/\s+/g, '-'))}`}>
+                    {d.title}
+                  </Link>
                 </li>
               ) : null,
             )}
@@ -71,7 +73,9 @@ export default function ShopNavbar() {
             {data?.map((d) =>
               d.type === 'Beats' ? (
                 <li key={d.id}>
-                  <Link>{d.title}</Link>
+                  <Link to={`beats/${encodeURIComponent(d.title.replace(/\s+/g, '-'))}`}>
+                    {d.title}
+                  </Link>
                 </li>
               ) : null,
             )}
@@ -83,7 +87,9 @@ export default function ShopNavbar() {
             {data?.map((d) =>
               d.type === 'Lyrics' ? (
                 <li key={d.id}>
-                  <Link to={`${d.title}`}>{d.title}</Link>
+                  <Link to={`lyrics/${encodeURIComponent(d.title.replace(/\s+/g, '-'))}`}>
+                    {d.title}
+                  </Link>
                 </li>
               ) : null,
             )}
