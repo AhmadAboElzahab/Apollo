@@ -31,13 +31,13 @@ export const AuthContextProvider = ({ children }) => {
         console.error('Error parsing user cookie:', error);
       }
     }
-    setIsLoading(false); // Set loading state to false once authentication check is done
+    setIsLoading(false);
   }, []);
 
   console.log('AuthContext state:', state);
 
   if (isLoading) {
-    return <p>Loading...</p>; // Return a loading indicator while checking authentication
+    return <p>Loading...</p>;
   }
 
   return <AuthContext.Provider value={{ ...state, dispatch }}>{children}</AuthContext.Provider>;
