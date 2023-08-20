@@ -111,20 +111,7 @@ const getArtworkById = async (req, res) => {
       return res.status(404).json({ error: 'Artwork not found.' });
     }
 
-    const category = await Category.findById(artwork.category);
-
-    const artworkWithCategory = {
-      _id: artwork._id,
-      title: artwork.title,
-      description: artwork.description,
-      category: category ? category.title : null,
-      price: artwork.price,
-      art: artwork.art,
-      blurHash: artwork.blurHash,
-      likes: artwork.likes,
-    };
-
-    res.json(artworkWithCategory);
+    res.json(artwork);
   } catch (error) {
     console.error('Error fetching Artwork:', error);
     res.status(500).json({ error: 'Failed to fetch Artwork.' });

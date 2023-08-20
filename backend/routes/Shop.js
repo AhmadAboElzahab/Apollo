@@ -5,8 +5,8 @@ const { getArtworkById } = require('../controllers/Artwork.controller');
 
 router.get('/categories', getCategories);
 
-router.get('/:type/:title', getProductsByCategory);
+router.get('/getProducts/:type/:title', getProductsByCategory);
 
-router.get('getArtwork/:id', getArtworkById);
+router.get('/artwork/:id', getArtworkById);
 
 module.exports = router;

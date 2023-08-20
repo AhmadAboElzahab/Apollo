@@ -9,7 +9,7 @@ const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function ShopBeatsCategory() {
   const { category } = useParams();
 
-  const { data, error } = useSWR(`/api/shop/Beats/${category}`, fetcher);
+  const { data, error } = useSWR(`/api/shop/getProducts/Beats/${category}`, fetcher);
   if (error) {
     console.warn(error);
     return <>{error}</>;

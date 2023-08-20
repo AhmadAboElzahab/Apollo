@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function ShopArtworksCategory() {
   const { category } = useParams();
-  const { data, error } = useSWR(`/api/shop/Artworks/${category}`, fetcher);
+  const { data, error } = useSWR(`/api/shop/getProducts/Artworks/${category}`, fetcher);
   const likePost = async (id) => {
     try {
       const response = await fetch('/api/user/likes/like', {
