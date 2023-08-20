@@ -92,11 +92,45 @@ const deleteCategory = async (req, res) => {
     res.status(500).json(error);
   }
 };
+const getProductsByCategory = async (req, res) => {
+  try {
+    const { type, title } = req.params;
+    const formattedTitle = title.replace(/-/g, ' ');
+    const category = await Category.findOne({
+      type: { $regex: new RegExp(type, 'i') },
+      title: { $regex: new RegExp(formattedTitle, 'i') },
+    });
+
+    if (!category) {
+      return res.status(404).json({ message: 'Category not found' });
+    }
+
+    let products;
+    switch (type.toLowerCase()) {
+      case 'artworks':
+        products = await Artwork.find({ category: category._id });
+        break;
+      case 'lyrics':
+        products = await Lyrics.find({ category: category._id });
+        break;
+      case 'beats':
+        products = await Audio.find({ category: category._id });
+        break;
+      default:
+        break;
+    }
+
+    res.status(200).json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 
 module.exports = {
   createCategory,
   getCategories,
   getCategoriesByType,
+  getProductsByCategory,
   updateCategory,
   deleteCategory,
 };
