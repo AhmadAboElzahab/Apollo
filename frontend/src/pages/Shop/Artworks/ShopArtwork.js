@@ -63,7 +63,7 @@ export default function ShopArtwork() {
           </div>
 
 
-          <div className='py-3 px-3 text-sm flex flex-row lg:w-[50vh] h-full mt-[50vh] lg:mt-[0vh] bg-black border border-gray-800 rounded-lg shadow z-50'>
+          <div className='py-3 px-3 text-sm flex flex-row lg:w-[50vh] h-full  bg-black border border-gray-800 rounded-lg shadow z-50'>
               <div>
                 <p>
                   <span className='text-gray-400'>Title : </span>
