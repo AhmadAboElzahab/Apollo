@@ -1,49 +1,17 @@
 import useSWR from 'swr';
 import OptimizedImage from '../../../Components/OptimizedImage';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { Link } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
+import CardAction from '../../../Components/CardAction';
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function ShopArtworks() {
-  const { data, error } = useSWR('/api/shop/Artwork', fetcher);
-  const likePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/like', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
+  const { data, error, isLoading } = useSWR('/api/shop/Artwork', fetcher);
 
-      const result = await response.json();
-    } catch (err) {}
-  };
-
-  const unlikePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/unlike', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
-
-      const result = await response.json();
-    } catch (err) {}
-  };
-
+  if (isLoading) {
+    return <div className='text-6xl text-white'>Loading </div>;
+  }
   if (error) {
     return <>{error}</>;
   }
@@ -88,33 +56,9 @@ export default function ShopArtworks() {
                   </Link>
                 </p>
               </div>
-
               <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
                 <div>
-                  {d.likes &&
-                  d.likes.some(
-                    (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
-                  ) ? (
-                    <div className='flex items-center'>
-                      <GoHeartFill
-                        className='text-red-500 cursor-pointer'
-                        size={30}
-                        onClick={() => {
-                          unlikePost(d._id);
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className='flex items-center'>
-                      <GoHeart
-                        className='text-gray-800 cursor-pointer'
-                        size={30}
-                        onClick={() => {
-                          likePost(d._id);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <CardAction d={d} type='Artwork' url='/api/shop/Artwork' />
                   <p className='text-center'> {d.likes.length}</p>
                 </div>
                 <AddToCart id={d._id} name={d.title} price={d.price} type='Artwork' />

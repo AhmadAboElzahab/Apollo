@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import AddToCart from '../../../Components/AddToCart';
 import OptimizedImage from '../../../Components/OptimizedImage';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
+import CardAction from '../../../Components/CardAction';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
@@ -88,30 +88,11 @@ export default function ShopArtworksCategory() {
 
               <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
                 <div>
-                  {d.likes &&
-                  d.likes.some(
-                    (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
-                  ) ? (
-                    <div className='flex items-center'>
-                      <GoHeartFill
-                        className='text-red-500 cursor-pointer'
-                        size={30}
-                        onClick={() => {
-                          unlikePost(d._id);
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className='flex items-center'>
-                      <GoHeart
-                        className='text-gray-800 cursor-pointer'
-                        size={30}
-                        onClick={() => {
-                          likePost(d._id);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <CardAction
+                    d={d}
+                    type='Artwork'
+                    url={`/api/shop/getProducts/Artworks/${category}`}
+                  />
                   <p className='text-center'> {d.likes.length}</p>
                 </div>
                 <AddToCart id={d._id} name={d.title} price={d.price} type='Artwork' />
