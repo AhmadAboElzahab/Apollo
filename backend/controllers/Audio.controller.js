@@ -151,6 +151,7 @@ async function getAllAudio(req, res) {
       category: categoryMap[audio.category.toString()],
       price: audio.price,
       Audio: audio.Audio,
+      likes: audio.likes,
     }));
 
     res.json(AudioWithCategories);

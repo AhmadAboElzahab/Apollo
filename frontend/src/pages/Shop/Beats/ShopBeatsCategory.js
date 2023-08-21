@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import WavesurferComponent from '../../../Components/WavesurferComponent';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
+import CardAction from '../../../Components/CardAction';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
@@ -64,7 +64,7 @@ export default function ShopBeatsCategory() {
     <div className='grid lg:grid-cols-3 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
       {data &&
         data.map((d) => (
-          <div className='w-full border border-gray-800 rounded-lg shadow bg-black'>
+          <div className='w-full border border-gray-800 rounded-lg shadow bg-black' key={d._id}>
             <WavesurferComponent audioUrl={`/audio/${d.Audio}`} />
             <div className='py-3 px-3 text-sm flex flex-row'>
               <div>
@@ -91,30 +91,7 @@ export default function ShopBeatsCategory() {
               </div>
               <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
                 <div>
-                  {d.likes &&
-                  d.likes.some(
-                    (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
-                  ) ? (
-                    <div className='flex items-center'>
-                      <GoHeartFill
-                        className='text-red-500 cursor-pointer'
-                        size={30}
-                        onClick={() => {
-                          unlikePost(d._id);
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    <div className='flex items-center'>
-                      <GoHeart
-                        className='text-gray-800 cursor-pointer'
-                        size={30}
-                        onClick={() => {
-                          likePost(d._id);
-                        }}
-                      />
-                    </div>
-                  )}
+                  <CardAction d={d} type='Audio' url={`/api/shop/getProducts/Beats/${category}`} />
                   <p className='text-center'> {d.likes?.length}</p>
                 </div>
                 <AddToCart id={d._id} name={d.title} price={d.price} type='Beat' />

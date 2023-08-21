@@ -1,6 +1,6 @@
 import useSWR from 'swr';
 import WavesurferComponent from '../../../Components/WavesurferComponent';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
+import CardAction from '../../../Components/CardAction';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
 
@@ -9,41 +9,6 @@ const fetcher = (...args) => fetch(...args).then((response) => response.json());
 export default function ShopBeat() {
   const { product, category } = useParams();
   const { data, error } = useSWR(`/api/shop/audio/${product}`, fetcher);
-  const likePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/like', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
-
-      const result = await response.json();
-    } catch (err) {}
-  };
-
-  const unlikePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/unlike', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
-
-      const result = await response.json();
-    } catch (err) {}
-  };
 
   if (error) {
     return <>{error}</>;
@@ -79,30 +44,7 @@ export default function ShopBeat() {
 
             <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
               <div>
-                {data.likes &&
-                data.likes.some(
-                  (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
-                ) ? (
-                  <div className='flex items-center'>
-                    <GoHeartFill
-                      className='text-red-500 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        unlikePost(data._id);
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className='flex items-center'>
-                    <GoHeart
-                      className='text-gray-800 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        likePost(data._id);
-                      }}
-                    />
-                  </div>
-                )}
+                <CardAction d={data} type='Audio' url={`/api/shop/audio/${product}`} />
                 <p className='text-center'> {data.likes?.length}</p>
               </div>
               <AddToCart id={data._id} name={data.title} price={data.price} type='Beat' />

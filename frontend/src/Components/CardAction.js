@@ -45,7 +45,7 @@ export default function CardAction({ d, type, url }) {
   };
   return (
     <>
-      {UserId && d.likes.some((likedUserId) => likedUserId === String(UserId)) ? (
+      {UserId && d.likes?.some((likedUserId) => likedUserId === String(UserId)) ? (
         <div className='flex items-center'>
           <GoHeartFill
             className='text-red-500 cursor-pointer'

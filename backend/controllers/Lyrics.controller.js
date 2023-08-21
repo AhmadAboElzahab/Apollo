@@ -31,6 +31,7 @@ async function getAllLyrics(req, res) {
       lyrics: lyric.lyrics,
       category: categoryMap[lyric.category.toString()], // Map category name using category ID
       price: lyric.price,
+      likes: lyric.likes,
     }));
 
     res.json(lyricsWithCategories);
