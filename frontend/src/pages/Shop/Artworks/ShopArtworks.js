@@ -7,7 +7,7 @@ import AddToCart from '../../../Components/AddToCart';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function ShopArtworks() {
-  const { data, error } = useSWR('/api/admin/Artwork', fetcher);
+  const { data, error } = useSWR('/api/shop/Artwork', fetcher);
   const likePost = async (id) => {
     try {
       const response = await fetch('/api/user/likes/like', {

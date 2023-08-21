@@ -7,7 +7,7 @@ import AddToCart from '../../../Components/AddToCart';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function ShopBeats() {
-  const { data, error } = useSWR('/api/admin/audio', fetcher);
+  const { data, error } = useSWR('/api/shop/audio', fetcher);
   const likePost = async (id) => {
     try {
       const response = await fetch('/api/user/likes/like', {

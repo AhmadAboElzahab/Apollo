@@ -40,7 +40,7 @@ export default function ShopLyrics() {
       const result = await response.json();
     } catch (err) {}
   };
-  const { data, error } = useSWR('/api/admin/lyrics', fetcher);
+  const { data, error } = useSWR('/api/shop/lyrics', fetcher);
   if (error) {
     console.warn(error);
     return <>{error}</>;
