@@ -7,7 +7,7 @@ import { useCart } from '../Hooks/useCart';
 export default function Cart() {
   let [open, setOpen] = useState(false);
   const { Cart, dispatch, calculateTotalPrice } = useCart();
-  console.log(Cart);
+
   const remove = (id) => {
     dispatch({
       type: 'DELETE',
@@ -80,7 +80,12 @@ export default function Cart() {
                             <div className='flex flex-row justify-between' key={c.id}>
                               <p className='text-left w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
-                              <p className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
+                              <p
+                                onClick={() => {
+                                  remove(c.id);
+                                }}
+                                className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'
+                              >
                                 Remove
                               </p>
                             </div>
@@ -99,7 +104,12 @@ export default function Cart() {
                             <div className='flex flex-row justify-between' key={c.id}>
                               <p className='text-left w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
-                              <p className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
+                              <p
+                                onClick={() => {
+                                  remove(c.id);
+                                }}
+                                className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'
+                              >
                                 Remove
                               </p>
                             </div>
@@ -118,7 +128,12 @@ export default function Cart() {
                             <div className='flex flex-row justify-between' key={c.id}>
                               <p className='text-left w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
-                              <p className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
+                              <p
+                                onClick={() => {
+                                  remove(c.id);
+                                }}
+                                className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'
+                              >
                                 Remove
                               </p>
                             </div>
