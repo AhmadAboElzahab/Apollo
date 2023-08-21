@@ -31,9 +31,9 @@ export default function Beats() {
           <div className='grid lg:grid-cols-2 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
             {data &&
               data.map((d) => (
-                <div class='w-full border border-gray-800 rounded-lg shadow'>
+                <div className='w-full border border-gray-800 rounded-lg shadow'>
                   <WavesurferComponent audioUrl={`/audio/${d.Audio}`} />
-                  <div class='py-3 px-3 text-sm flex flex-row'>
+                  <div className='py-3 px-3 text-sm flex flex-row'>
                     <div>
                       <p>
                         <span className='text-gray-400'>Title : </span>

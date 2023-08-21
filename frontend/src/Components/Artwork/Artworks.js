@@ -22,7 +22,7 @@ export default function Artworks() {
           <div className='grid lg:grid-cols-2 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
             {data &&
               data.map((d) => (
-                <div class='w-full border border-gray-800 rounded-lg shadow'>
+                <div className='w-full border border-gray-800 rounded-lg shadow'>
                   <div
                     className='flex flex-row flex-wrap gap-x-[10px] gap-y-[2em] visible'
                     style={{ contentVisibility: 'visible' }}
@@ -33,7 +33,7 @@ export default function Artworks() {
                       styleName='image'
                     />
                   </div>
-                  <div class='py-3 px-3 text-sm flex flex-row'>
+                  <div className='py-3 px-3 text-sm flex flex-row'>
                     <div>
                       <p>
                         <span className='text-gray-400'>Title : </span>
@@ -44,7 +44,7 @@ export default function Artworks() {
                         {d.description.slice(0, 20) + '...'}
                       </p>
                       <p>
-                        {' '}
+                     
                         <span className='text-gray-400'>Price : </span>
                         {d.price}
                       </p>

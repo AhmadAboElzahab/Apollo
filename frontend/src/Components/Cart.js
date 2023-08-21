@@ -8,7 +8,14 @@ export default function Cart() {
   let [open, setOpen] = useState(false);
   const { Cart, dispatch, calculateTotalPrice } = useCart();
   console.log(Cart);
-
+  const remove = (id) => {
+    dispatch({
+      type: 'DELETE',
+      payload: {
+        id,
+      },
+    });
+  };
   return (
     <div>
       <button className='fixed bottom-0 flex flex-row justify-center left-0   w-screen lg:w-72 p-5 '>
@@ -64,14 +71,16 @@ export default function Cart() {
                     <div className='mt-20 relative flex-1 px-4 sm:px-6'>
                       <div>
                         {Cart?.some((c) => c.type === 'Artwork') && (
-                          <p className='text-xl text-center mb-4'>Artwork</p>
+                          <p className='text-xl text-center text-glitch-pink py-1 rounded-lg bg-black my-4'>
+                            Artwork
+                          </p>
                         )}
                         {Cart?.map((c) =>
                           c.type === 'Artwork' ? (
                             <div className='flex flex-row justify-between' key={c.id}>
-                              <p className='text-center w-full'>{c.name}</p>
+                              <p className='text-left w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
-                              <p className='text-center w-full text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
+                              <p className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
                                 Remove
                               </p>
                             </div>
@@ -81,14 +90,16 @@ export default function Cart() {
                         )}
 
                         {Cart?.some((c) => c.type === 'Beat') && (
-                          <p className='text-xl text-center mb-4'>Beats</p>
+                          <p className='text-xl text-center text-glitch-cyan bg-black py-1 rounded-lg my-4'>
+                            Beats
+                          </p>
                         )}
                         {Cart?.map((c) =>
                           c.type === 'Beat' ? (
                             <div className='flex flex-row justify-between' key={c.id}>
-                              <p className='text-center w-full'>{c.name}</p>
+                              <p className='text-left w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
-                              <p className='text-center w-full text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
+                              <p className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
                                 Remove
                               </p>
                             </div>
@@ -98,14 +109,16 @@ export default function Cart() {
                         )}
 
                         {Cart?.some((c) => c.type === 'Lyric') && (
-                          <p className='text-xl text-center mb-4'>Lyrics</p>
+                          <p className='text-xl text-glitch-yellow  text-center bg-black py-1 rounded-lg my-4'>
+                            Lyrics
+                          </p>
                         )}
                         {Cart?.map((c) =>
                           c.type === 'Lyric' ? (
                             <div className='flex flex-row justify-between' key={c.id}>
-                              <p className='text-center w-full'>{c.name}</p>
+                              <p className='text-left w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
-                              <p className='text-center w-full text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
+                              <p className='text-right w-full hover:underline text-red-400 hover:text-red-500 cursor-pointer font-extrabold'>
                                 Remove
                               </p>
                             </div>
