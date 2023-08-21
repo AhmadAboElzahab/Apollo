@@ -4,7 +4,7 @@ const responseHandler = require('./middleware/responseHandler.middleware');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const Likes = require('./routes/User/Likes');
+const Interactions = require('./routes/User/Interactions');
 const Comments = require('./routes/User/Comments');
 const Payment = require('./routes/User/Payments');
 
@@ -31,8 +31,7 @@ app.use(errorHandler);
 app.use(responseHandler);
 app.use(cookieParser());
 
-app.use('/api/user/likes', Likes);
-app.use('/api/user/Comments', Comments);
+app.use('/api/user/Interactions', Interactions);
 app.use('/api/user/Payment', Payment);
 
 app.use('/api/admin/AI', AI);
