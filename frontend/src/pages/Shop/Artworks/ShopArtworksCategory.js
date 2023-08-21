@@ -1,4 +1,5 @@
 import useSWR from 'swr';
+import AddToCart from '../../../Components/AddToCart';
 import OptimizedImage from '../../../Components/OptimizedImage';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { Link } from 'react-router-dom';
@@ -85,33 +86,35 @@ export default function ShopArtworksCategory() {
                 </p>
               </div>
 
-              <div className=' ml-[auto] flex flex-col items-center justify-center w-28'>
-                {d.likes &&
-                d.likes.some(
-                  (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
-                ) ? (
-                  <div className='flex items-center'>
-                    <GoHeartFill
-                      className='text-red-500 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        unlikePost(d._id);
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className='flex items-center'>
-                    <GoHeart
-                      className='text-gray-800 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        likePost(d._id);
-                      }}
-                    />
-                  </div>
-                )}
-
-                <p className='text-gray-400'> {d.likes.length}</p>
+              <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
+                <div>
+                  {d.likes &&
+                  d.likes.some(
+                    (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
+                  ) ? (
+                    <div className='flex items-center'>
+                      <GoHeartFill
+                        className='text-red-500 cursor-pointer'
+                        size={30}
+                        onClick={() => {
+                          unlikePost(d._id);
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className='flex items-center'>
+                      <GoHeart
+                        className='text-gray-800 cursor-pointer'
+                        size={30}
+                        onClick={() => {
+                          likePost(d._id);
+                        }}
+                      />
+                    </div>
+                  )}
+                  <p className='text-center'> {d.likes.length}</p>
+                </div>
+                <AddToCart id={d._id} name={d.title} price={d.price} type='Artwork' />
               </div>
             </div>
           </div>

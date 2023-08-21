@@ -2,11 +2,48 @@ import useSWR from 'swr';
 import WavesurferComponent from '../../../Components/WavesurferComponent';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import AddToCart from '../../../Components/AddToCart';
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
 export default function ShopBeats() {
   const { data, error } = useSWR('/api/admin/audio', fetcher);
+  const likePost = async (id) => {
+    try {
+      const response = await fetch('/api/user/likes/like', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({
+          postId: id,
+          UserId: '64c24a4681de7bcef0bad344',
+        }),
+      });
+
+      const result = await response.json();
+    } catch (err) {}
+  };
+
+  const unlikePost = async (id) => {
+    try {
+      const response = await fetch('/api/user/likes/unlike', {
+        method: 'put',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
+        },
+        body: JSON.stringify({
+          postId: id,
+          UserId: '64c24a4681de7bcef0bad344',
+        }),
+      });
+
+      const result = await response.json();
+    } catch (err) {}
+  };
+
   if (error) {
     console.warn(error);
     return <>{error}</>;
@@ -47,15 +84,40 @@ export default function ShopBeats() {
                 </p>
                 <br />
                 <p className='hover:underline cursor-pointer'>
-                <Link to={`${encodeURIComponent(d.category.replace(/\s+/g, '-'))}/${d._id}`}>Check</Link>
+                  <Link to={`${encodeURIComponent(d.category.replace(/\s+/g, '-'))}/${d._id}`}>
+                    Check
+                  </Link>
                 </p>
               </div>
-              <div className=' ml-[auto] flex items-center justify-center  w-28'>
-                {true ? (
-                  <GoHeartFill className='text-red-500' size={30} />
-                ) : (
-                  <GoHeart className='text-gray-800' size={30} />
-                )}
+              <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
+                <div>
+                  {d.likes &&
+                  d.likes.some(
+                    (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
+                  ) ? (
+                    <div className='flex items-center'>
+                      <GoHeartFill
+                        className='text-red-500 cursor-pointer'
+                        size={30}
+                        onClick={() => {
+                          unlikePost(d._id);
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className='flex items-center'>
+                      <GoHeart
+                        className='text-gray-800 cursor-pointer'
+                        size={30}
+                        onClick={() => {
+                          likePost(d._id);
+                        }}
+                      />
+                    </div>
+                  )}
+                  <p className='text-center'> {d.likes?.length}</p>
+                </div>
+                <AddToCart id={d._id} name={d.title} price={d.price} type='Beat' />
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ export const CartReducer = (state, action) => {
       const existingItem = state.Cart.find((item) => item.id === action.payload.id);
 
       if (existingItem) {
-        return newState;
+        return state;
       }
 
       const newState = {

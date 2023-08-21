@@ -80,11 +80,11 @@ export default function Cart() {
                           ),
                         )}
 
-                        {Cart?.some((c) => c.type === 'Beats') && (
+                        {Cart?.some((c) => c.type === 'Beat') && (
                           <p className='text-xl text-center mb-4'>Beats</p>
                         )}
                         {Cart?.map((c) =>
-                          c.type === 'Beats' ? (
+                          c.type === 'Beat' ? (
                             <div className='flex flex-row justify-between' key={c.id}>
                               <p className='text-center w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
@@ -97,11 +97,11 @@ export default function Cart() {
                           ),
                         )}
 
-                        {Cart?.some((c) => c.type === 'Lyrics') && (
+                        {Cart?.some((c) => c.type === 'Lyric') && (
                           <p className='text-xl text-center mb-4'>Lyrics</p>
                         )}
                         {Cart?.map((c) =>
-                          c.type === 'Lyrics' ? (
+                          c.type === 'Lyric' ? (
                             <div className='flex flex-row justify-between' key={c.id}>
                               <p className='text-center w-full'>{c.name}</p>
                               <p className='text-center w-full'>{c.price} $</p>
