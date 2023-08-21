@@ -8,6 +8,9 @@ const {
   GetLog,
   DeleteRecordFromLog,
 } = require('../../controllers/Telegram.controller');
+const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
+
+router.use(adminAuthorization);
 
 router.post('/ShareLyrics/:id', ShareLyrics);
 router.post('/SharePromo/:id', SharePromo);

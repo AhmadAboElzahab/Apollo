@@ -1,7 +1,9 @@
 const express = require('express');
-const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
 const router = express.Router();
+const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
 
-router.get('/', adminAuthorization, async (req, res) => {});
+router.use(adminAuthorization)
+
+router.get('/',  async (req, res) => {});
 
 module.exports = router;

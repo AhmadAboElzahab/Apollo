@@ -7,6 +7,9 @@ const {
   updateCategory,
   deleteCategory,
 } = require('../../controllers/Category.controller');
+const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
+
+router.use(adminAuthorization)
 
 router.post('/', createCategory);
 

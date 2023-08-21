@@ -1,5 +1,4 @@
 const express = require('express');
-const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
 const router = express.Router();
 
 const {
@@ -9,6 +8,9 @@ const {
   updateLyricById,
   deleteLyricById,
 } = require('../../controllers/Lyrics.controller');
+const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
+
+router.use(adminAuthorization);
 
 router.post('/', adminAuthorization, createLyric);
 router.get('/', getAllLyrics);

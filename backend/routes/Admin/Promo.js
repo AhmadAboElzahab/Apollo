@@ -1,13 +1,15 @@
 const express = require('express');
+const router = express.Router();
 const {
   getAllPromoCodes,
   createPromoCode,
   deletePromoCode,
   updatePromoCode,
   checkPromoCode,
-} = require('../../controllers/Promo.controller'); // Adjust the path as needed
+} = require('../../controllers/Promo.controller');
+const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
 
-const router = express.Router();
+router.use(adminAuthorization);
 
 router.get('/', getAllPromoCodes);
 router.post('/', createPromoCode);

@@ -7,6 +7,9 @@ const {
   getArtworks,
   updateArtwork,
 } = require('../../controllers/Artwork.controller');
+const adminAuthorization = require('../../middleware/adminAuthorization.middleware');
+
+router.use(adminAuthorization);
 
 router.post('/', upload.single('image'), createArtwork);
 router.delete('/:id', deleteArtwork);
