@@ -17,7 +17,9 @@ const LyricsSchema = new Schema({
     price: {
         type: Number,
         required: true
-    }
+    },
+    likes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+
 });
 
 module.exports = mongoose.model('Lyrics', LyricsSchema);
