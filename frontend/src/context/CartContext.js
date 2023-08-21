@@ -12,7 +12,7 @@ export const CartReducer = (state, action) => {
       const existingItem = state.Cart.find((item) => item.id === action.payload.id);
 
       if (existingItem) {
-        return state;
+        return newState;
       }
 
       const newState = {
@@ -53,5 +53,16 @@ export const CartContextProvider = ({ children }) => {
     }
   }, []);
 
-  return <CartContext.Provider value={{ ...state, dispatch }}>{children}</CartContext.Provider>;
+  const calculateTotalPrice = () => {
+    const totalPrice = state.Cart.reduce((total, item) => {
+      return total + item.price;
+    }, 0);
+    return totalPrice;
+  };
+
+  return (
+    <CartContext.Provider value={{ ...state, dispatch, calculateTotalPrice }}>
+      {children}
+    </CartContext.Provider>
+  );
 };
