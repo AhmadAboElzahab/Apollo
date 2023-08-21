@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useCart } from '../Hooks/useCart'; // Import your CartContext
-export default function AddToCart({ id, name, price }) {
+export default function AddToCart({ id, name, price, type }) {
   const { dispatch } = useCart();
 
   const handleAddToCart = () => {
@@ -15,7 +15,7 @@ export default function AddToCart({ id, name, price }) {
     });
   };
   return (
-    <button onClick={handleAddToCart} className='bg-red-500'>
+    <button onClick={handleAddToCart} className='hover:underline'>
       Add to Cart
     </button>
   );

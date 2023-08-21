@@ -2,6 +2,7 @@ import useSWR from 'swr';
 import OptimizedImage from '../../../Components/OptimizedImage';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { Link } from 'react-router-dom';
+import AddToCart from '../../../Components/AddToCart';
 
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
 
@@ -80,38 +81,43 @@ export default function ShopArtworks() {
                   {d.category}
                 </p>
                 <br />
+
                 <p className='hover:underline cursor-pointer'>
-                <Link to={`${encodeURIComponent(d.category.replace(/\s+/g, '-'))}/${d._id}`}>Check</Link>
+                  <Link to={`${encodeURIComponent(d.category.replace(/\s+/g, '-'))}/${d._id}`}>
+                    Check
+                  </Link>
                 </p>
               </div>
-             
-              <div className=' ml-[auto] flex flex-col items-center justify-center w-28'>
-                {d.likes &&
-                d.likes.some(
-                  (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
-                ) ? (
-                  <div className='flex items-center'>
-                    <GoHeartFill
-                      className='text-red-500 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        unlikePost(d._id);
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className='flex items-center'>
-                    <GoHeart
-                      className='text-gray-800 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        likePost(d._id);
-                      }}
-                    />
-                  </div>
-                )}
 
-                <p className='text-gray-400'> {d.likes.length}</p>
+              <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
+                <div>
+                  {d.likes &&
+                  d.likes.some(
+                    (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
+                  ) ? (
+                    <div className='flex items-center'>
+                      <GoHeartFill
+                        className='text-red-500 cursor-pointer'
+                        size={30}
+                        onClick={() => {
+                          unlikePost(d._id);
+                        }}
+                      />
+                    </div>
+                  ) : (
+                    <div className='flex items-center'>
+                      <GoHeart
+                        className='text-gray-800 cursor-pointer'
+                        size={30}
+                        onClick={() => {
+                          likePost(d._id);
+                        }}
+                      />
+                    </div>
+                  )}
+                  <p className='text-center'> {d.likes.length}</p>
+                </div>
+                <AddToCart id={d._id} name={d.title} price={d.price} type='Artwork' />
               </div>
             </div>
           </div>

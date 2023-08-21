@@ -15,14 +15,9 @@ export const CartReducer = (state, action) => {
         return state;
       }
 
-      const newItem = {
-        ...action.payload,
-        quantity: 1,
-      };
-
       const newState = {
         ...state,
-        Cart: [...state.Cart, newItem],
+        Cart: [...state.Cart, action.payload],
       };
 
       localStorage.setItem('cart', JSON.stringify(newState.Cart));
