@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const Interactions = require('./routes/User/Interactions');
-const Comments = require('./routes/User/Comments');
 const Payment = require('./routes/User/Payments');
 
 const AI = require('./routes/Admin/AI');
