@@ -1,5 +1,5 @@
 import useSWR from 'swr';
-import { GoHeart, GoHeartFill } from 'react-icons/go';
+import CardAction from '../../../Components/CardAction';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
 const fetcher = (...args) => fetch(...args).then((response) => response.json());
@@ -74,34 +74,10 @@ export default function ShopLyric() {
               </p>
               <br />
             </div>
-
             <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
               <div>
-                {data.likes &&
-                data.likes.some(
-                  (likedUserId) => likedUserId === String('64c24a4681de7bcef0bad344'),
-                ) ? (
-                  <div className='flex items-center'>
-                    <GoHeartFill
-                      className='text-red-500 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        unlikePost(data._id);
-                      }}
-                    />
-                  </div>
-                ) : (
-                  <div className='flex items-center'>
-                    <GoHeart
-                      className='text-gray-800 cursor-pointer'
-                      size={30}
-                      onClick={() => {
-                        likePost(data._id);
-                      }}
-                    />
-                  </div>
-                )}
-                <p className='text-center'> {data.likes?.length}</p>
+                <CardAction d={data} type='Lyrics' url={`/api/shop/lyric/${product}`} />
+                <p className='text-center'> {data.likes.length}</p>
               </div>
               <AddToCart id={data._id} name={data.title} price={data.price} type='Lyric' />
             </div>
