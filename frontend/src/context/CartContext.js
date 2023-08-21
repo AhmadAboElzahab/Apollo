@@ -9,56 +9,33 @@ export const CartReducer = (state, action) => {
         Cart: action.payload,
       };
     case 'ADD':
-      const updatedCart = state.Cart.map((item) => {
-        if (item.name === action.payload.name) {
-          return {
-            ...item,
-            quantity: item.quantity + action.payload.quantity,
-          };
-        }
-        return item;
-      });
+      const existingItem = state.Cart.find((item) => item.id === action.payload.id);
 
-      const existingDish = state.Cart.find((item) => item.name === action.payload.name);
-      if (existingDish) {
-        const newState = {
-          ...state,
-          Cart: updatedCart,
-        };
-
-        localStorage.setItem('cart', JSON.stringify(newState.Cart));
-        return newState;
+      if (existingItem) {
+        return state;
       }
+
+      const newItem = {
+        ...action.payload,
+        quantity: 1,
+      };
 
       const newState = {
         ...state,
-        Cart: [...state.Cart, action.payload],
+        Cart: [...state.Cart, newItem],
       };
 
       localStorage.setItem('cart', JSON.stringify(newState.Cart));
       return newState;
-    case 'UPDATE_COUNT':
-      const updatedCartCount = state.Cart.map((item) => {
-        if (item.name === action.payload.name) {
-          return {
-            ...item,
-            quantity: action.payload.quantity,
-          };
-        }
-        return item;
-      });
 
-      localStorage.setItem('cart', JSON.stringify(updatedCartCount));
-      return {
-        Cart: updatedCartCount,
-      };
     case 'DELETE_ITEM':
-      const updatedCartAfterDelete = state.Cart.filter((item) => item.name !== action.payload.name);
+      const updatedCartAfterDelete = state.Cart.filter((item) => item.id !== action.payload.id);
 
       localStorage.setItem('cart', JSON.stringify(updatedCartAfterDelete));
       return {
         Cart: updatedCartAfterDelete,
       };
+
     case 'CLEAR':
       localStorage.removeItem('cart');
       return {
