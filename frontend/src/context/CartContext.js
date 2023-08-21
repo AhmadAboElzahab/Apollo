@@ -28,7 +28,7 @@ export const CartReducer = (state, action) => {
       localStorage.setItem('cart', JSON.stringify(newState.Cart));
       return newState;
 
-    case 'DELETE_ITEM':
+    case 'DELETE':
       const updatedCartAfterDelete = state.Cart.filter((item) => item.id !== action.payload.id);
 
       localStorage.setItem('cart', JSON.stringify(updatedCartAfterDelete));
