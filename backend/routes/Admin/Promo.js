@@ -15,6 +15,5 @@ router.get('/', getAllPromoCodes);
 router.post('/', createPromoCode);
 router.delete('/:id', deletePromoCode);
 router.put('/:id', updatePromoCode);
-router.post('/check', checkPromoCode);
 
 module.exports = router;
