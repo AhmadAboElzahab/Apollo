@@ -18,6 +18,6 @@ router.get('/artwork', getArtworks);
 router.get('/audio', getAllAudio);
 router.get('/lyrics', getAllLyrics);
 
-router.get('/check', checkPromoCode);
+router.post('/newTotal', checkPromoCode);
 
 module.exports = router;

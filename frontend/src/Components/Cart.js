@@ -4,10 +4,42 @@ import { Fragment } from 'react';
 import { useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useCart } from '../Hooks/useCart';
+
 export default function Cart() {
   let [open, setOpen] = useState(false);
+  const [newTotal, setNewTotal] = useState('');
+  const [Loading, setLoading] = useState(false);
+  const [promo, setPromo] = useState('');
+  const [promoError, setPromoError] = useState('');
   const { Cart, dispatch, calculateTotalPrice } = useCart();
 
+  const checkTotal = async () => {
+    try {
+      setLoading(true);
+      const response = await fetch('/api/shop/newTotal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount: calculateTotalPrice(),
+          code: promo,
+        }),
+      });
+
+      const json = await response.json();
+      if (response.ok) {
+        setLoading(false);
+        setNewTotal(json.price);
+        setPromoError('');
+      } else {
+        setLoading(false);
+        setPromoError(json.error);
+      }
+    } catch (error) {
+      setLoading(false);
+    }
+  };
   const remove = (id) => {
     dispatch({
       type: 'DELETE',
@@ -144,17 +176,44 @@ export default function Cart() {
                       </div>
                     </div>
                     <div className='fixed bg-white w-full bottom-0 px-6 py-5 border-t border-gray-200'>
-                      <p className='text-xl'> Total : {calculateTotalPrice()} $ </p>
+                      <p className={`text-xl ${newTotal ? 'line-through	' : ''}  `}>
+                        Total : {calculateTotalPrice()} $
+                      </p>
+                      {newTotal && <p className={`text-xl`}>New Total : {newTotal} $</p>}
+
                       <div className='flex'>
                         <input
                           type='txt'
                           placeholder='Add Promo Code'
                           className='border border-gray-200 w-full rounded-md mt-4 px-4 py-2'
+                          value={promo}
+                          onChange={(e) => {
+                            setPromo(e.target.value);
+                          }}
                         />
-                        <button className='rounded-md mt-4 px-4 py-2 bg-black text-white ml-2 cursor-pointer hover:bg-zinc-600'>
+
+                        <button
+                          onClick={checkTotal}
+                          className={`rounded-md mt-4 px-4 py-2  text-white ml-2 cursor-pointer
+                          ${Loading ? 'bg-gray-300 cursor-wait' : 'bg-black hover:bg-zinc-600'}
+                          
+                          `}
+                          disabled={Loading}
+                        >
                           Add
                         </button>
                       </div>
+                      {newTotal && (
+                        <p
+                          className='text-sm text-blue-500 hover:underline cursor-pointer'
+                          onClick={() => {
+                            setNewTotal('');
+                          }}
+                        >
+                          Remove Promo
+                        </p>
+                      )}
+                      {promoError && <p className='text-sm text-red-500 '>{promoError}</p>}
                       <button className='rounded-md w-full mt-4 px-4 py-2 bg-black text-white cursor-pointer hover:bg-zinc-600'>
                         Check Out
                       </button>
