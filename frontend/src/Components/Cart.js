@@ -4,6 +4,7 @@ import { Fragment } from 'react';
 import { useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useCart } from '../Hooks/useCart';
+import Payment from './Payment';
 
 export default function Cart() {
   let [open, setOpen] = useState(false);
@@ -214,9 +215,11 @@ export default function Cart() {
                         </p>
                       )}
                       {promoError && <p className='text-sm text-red-500 '>{promoError}</p>}
-                      <button className='rounded-md w-full mt-4 px-4 py-2 bg-black text-white cursor-pointer hover:bg-zinc-600'>
-                        Check Out
-                      </button>
+
+                      <Payment
+                        products={Cart}
+                        price={newTotal ? newTotal : calculateTotalPrice()}
+                      />
                     </div>
                   </div>
                 </div>
