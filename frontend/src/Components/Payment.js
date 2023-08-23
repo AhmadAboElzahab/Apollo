@@ -1,28 +1,25 @@
-import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { Dialog, Transition } from '@headlessui/react';
 import CryptoJS from 'crypto-js';
-
+import { base64_encode } from 'base-64';
 export default function Payment({ products, price }) {
-  const secretKey = 'yourSecretKey';
+  const secretKey = process.env.REACT_APP_SECRET_KEY;
 
   function encrypt(data) {
-    try {
-      const encryptedData = CryptoJS.AES.encrypt(data, secretKey).toString();
-      return encryptedData;
-    } catch (error) {
-      console.error('Encryption error:', error);
-      return null;
-    }
+    const encryptedData = CryptoJS.AES.encrypt(data, secretKey).toString();
+    return encryptedData;
   }
-  const handlePaymentMethod = async () => {
-    const id = 'Sdad';
-    const name = 'Apollo E-commerce';
-    const hashedId = encrypt(id); // Hash the id using md5
-    const hashedName = encrypt(name); // Hash the name using md5
-    const hashedPrice = encrypt(price.toString()); // Hash the name using md5
+  const handlePaymentMethod = async (amount) => {
+    const id = '64e692f5476144dbdb017674';
+    const name = 'Apollo';
+    const hashedId = encrypt(id);
+    const hashedName = encrypt(name);
+    const hashedPrice = encrypt(price.toString());
 
-    const url = `http://localhost:3009/requestpayment?id=${hashedId}&p=${hashedPrice}&name=${hashedName}`;
+    const url = `http://localhost:3009/requestpayment?id=${encodeURIComponent(
+      hashedId,
+    )}&p=${encodeURIComponent(hashedPrice)}&name=${encodeURIComponent(hashedName)}`;
     const windowWidth = 800;
     const windowHeight = 600;
     const left = window.screen.width / 2 - windowWidth / 2;
@@ -38,6 +35,7 @@ export default function Payment({ products, price }) {
       }
     });
   };
+
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {

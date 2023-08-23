@@ -3,6 +3,7 @@ import apollo from '../assets/apollo.png';
 import CategoryCards from '../Components/CategoryCards';
 
 export default function Home() {
+  
   return (
     <div className='cn'>
       <div className='h-screen m-0 relative overflow-hidden  sec'>
