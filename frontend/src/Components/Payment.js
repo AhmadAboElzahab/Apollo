@@ -1,7 +1,43 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import CryptoJS from 'crypto-js';
+
 export default function Payment({ products, price }) {
+  const secretKey = 'yourSecretKey';
+
+  function encrypt(data) {
+    try {
+      const encryptedData = CryptoJS.AES.encrypt(data, secretKey).toString();
+      return encryptedData;
+    } catch (error) {
+      console.error('Encryption error:', error);
+      return null;
+    }
+  }
+  const handlePaymentMethod = async () => {
+    const id = 'Sdad';
+    const name = 'Apollo E-commerce';
+    const hashedId = encrypt(id); // Hash the id using md5
+    const hashedName = encrypt(name); // Hash the name using md5
+    const hashedPrice = encrypt(price.toString()); // Hash the name using md5
+
+    const url = `http://localhost:3009/requestpayment?id=${hashedId}&p=${hashedPrice}&name=${hashedName}`;
+    const windowWidth = 800;
+    const windowHeight = 600;
+    const left = window.screen.width / 2 - windowWidth / 2;
+    const top = window.screen.height / 2 - windowHeight / 2;
+    const windowFeatures = `width=${windowWidth},height=${windowHeight},left=${left},top=${top}`;
+
+    const paymentWindow = window.open(url, '_blank', windowFeatures);
+
+    window.addEventListener('message', (event) => {
+      if (event.data.paymentApproved) {
+        closeModal();
+        toast.success('Payment was successful!');
+      }
+    });
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   function closeModal() {
@@ -67,7 +103,10 @@ export default function Payment({ products, price }) {
                       </div>
                     ))}
                   </div>
-                  <button className='bg-fuchsia-700 text-white hover:bg-fuchsia-900 w-full text-xl py-2 rounded'>
+                  <button
+                    onClick={() => handlePaymentMethod(price)}
+                    className='bg-fuchsia-700 text-white hover:bg-fuchsia-900 w-full text-xl py-2 rounded'
+                  >
                     Pay with CashMate
                   </button>
                 </Dialog.Panel>
