@@ -5,7 +5,7 @@ import CryptoJS from 'crypto-js';
 import { useCart } from '../Hooks/useCart';
 export default function Payment({ products, price }) {
   const secretKey = process.env.REACT_APP_SECRET_KEY;
-  const { dispatch } = useCart();
+  const { dispatch, closeCart } = useCart();
   function encrypt(data) {
     const encryptedData = CryptoJS.AES.encrypt(data, secretKey).toString();
     return encryptedData;
@@ -32,6 +32,7 @@ export default function Payment({ products, price }) {
       if (event.data.paymentApproved) {
         closeModal();
         toast.success('Payment was successful!');
+        closeCart();
         dispatch({ type: 'CLEAR' });
       }
     });
