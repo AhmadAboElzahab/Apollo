@@ -89,7 +89,50 @@ const getPurchaseHistory = async (req, res) => {
   }
 };
 
+const getPayments = async (req, res) => {
+  try {
+    const payments = await Payment.find();
+    const data = {};
+
+    payments.forEach((payment) => {
+      const createdAt = new Date(payment.createdAt);
+      const year = createdAt.getFullYear();
+      const month = createdAt.toLocaleString('en-US', { month: 'long' });
+
+      if (!data[year]) {
+        data[year] = {
+          name: year,
+          total: 0,
+          months: [],
+        };
+      }
+
+      if (!data[year].months.find((m) => m.name === month)) {
+        data[year].months.push({
+          name: month,
+          total: 0,
+        });
+      }
+
+      data[year].months.find((m) => m.name === month).total += payment.totalPrice;
+      data[year].total += payment.totalPrice;
+    });
+
+    const formattedData = Object.values(data).map((yearData) => {
+      return {
+        year: yearData.name,
+        total: yearData.total,
+        months: yearData.months,
+      };
+    });
+
+    res.json(formattedData);
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
 module.exports = {
   addPayment,
   getPurchaseHistory,
+  getPayments,
 };

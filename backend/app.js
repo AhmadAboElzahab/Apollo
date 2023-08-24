@@ -15,6 +15,7 @@ const Promo = require('./routes/Admin/Promo');
 const Users = require('./routes/Admin/Users');
 const Telegram = require('./routes/Admin/Telegram');
 const Category = require('./routes/Admin/Category');
+const Accounting = require('./routes/Admin/Accounting');
 
 const Shop = require('./routes/Shop');
 
@@ -41,6 +42,7 @@ app.use('/api/admin/Promo', Promo);
 app.use('/api/admin/Users', Users);
 app.use('/api/admin/Category', Category);
 app.use('/api/admin/Telegram', Telegram);
+app.use('/api/admin/Accounting', Accounting);
 
 app.use('/api/shop', Shop);
 
