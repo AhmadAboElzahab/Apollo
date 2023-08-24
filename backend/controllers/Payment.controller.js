@@ -75,6 +75,21 @@ async function addPayment(req, res) {
   }
 }
 
+const getPurchaseHistory = async (req, res) => {
+  const userId = req.userId;
+  try {
+    const History = await Payment.find({ BuyerID: userId });
+    if (!History) {
+      res.status(404).json({ error: 'No Purchase history' });
+      return;
+    }
+    res.json(History).status(200);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to get History' });
+  }
+};
+
 module.exports = {
   addPayment,
+  getPurchaseHistory,
 };
