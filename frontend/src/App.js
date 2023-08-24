@@ -44,6 +44,7 @@ import ShopLyric from './pages/Shop/Lyrics/ShopLyric';
 import ShopLyricsCategory from './pages/Shop/Lyrics/ShopLyricsCategory';
 
 import { useAuthContext } from './Hooks/useAuthContext';
+import PurchaseHistory from './pages/Shop/PurchaseHistory';
 export default function App() {
   const { user, role } = useAuthContext();
   return (
@@ -102,6 +103,8 @@ export default function App() {
                 <Route path='lyrics' element={<ShopLyrics />} />
                 <Route path='lyrics/:category' element={<ShopLyricsCategory />} />
                 <Route path='lyrics/:category/:product' element={<ShopLyric />} />
+
+                <Route path='History' element={<PurchaseHistory />} />
               </Route>
             </Route>
 
