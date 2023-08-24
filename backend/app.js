@@ -19,7 +19,7 @@ const Accounting = require('./routes/Admin/Accounting');
 
 const Shop = require('./routes/Shop');
 
-const Auth = require('./routes/user.route');
+const Auth = require('./routes/Auth');
 
 const app = express();
 require('dotenv').config();

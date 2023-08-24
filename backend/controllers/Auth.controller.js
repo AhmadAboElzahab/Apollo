@@ -3,9 +3,8 @@ const router = express.Router();
 const User = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
 
-router.post('/login', async (req, res) => {
+const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -28,9 +27,9 @@ router.post('/login', async (req, res) => {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });
   }
-});
+};
 
-router.post('/register', async (req, res) => {
+const register = async (req, res) => {
   try {
     const { email, password, name } = req.body;
 
@@ -48,11 +47,37 @@ router.post('/register', async (req, res) => {
     console.error(err);
     res.status(500).json({ message: 'Internal server error' });
   }
-});
-
-router.get('/logout', (req, res) => {
+};
+const logout = async (req, res) => {
   res.cookie('Apollo-Token', '', { expires: new Date(0), httpOnly: true });
   res.json({ message: 'Logout successful' });
-});
+};
 
-module.exports = router;
+const changePassword = async (req, res) => {
+  const userId = req.userId;
+  const { oldPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json('User not found');
+    }
+    const isPasswordMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isPasswordMatch) {
+      return res.status(401).json('Invalid old password');
+    }
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+    user.password = hashedNewPassword;
+    await user.save();
+    res.status(200).json('Password changed successfully');
+  } catch (error) {
+    res.status(500).json('An error occurred');
+  }
+};
+
+module.exports = {
+  login,
+  logout,
+  register,
+  changePassword,
+};
