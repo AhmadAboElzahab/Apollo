@@ -5,8 +5,10 @@ import { useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { useCart } from '../Hooks/useCart';
 import Payment from './Payment';
-
+import { useAuthContext } from '../Hooks/useAuthContext';
+import { Link } from 'react-router-dom';
 export default function Cart() {
+  const { user } = useAuthContext();
   let [open, setOpen] = useState(false);
   const [newTotal, setNewTotal] = useState('');
   const [Loading, setLoading] = useState(false);
@@ -215,11 +217,16 @@ export default function Cart() {
                         </p>
                       )}
                       {promoError && <p className='text-sm text-red-500 '>{promoError}</p>}
-
-                      <Payment
-                        products={Cart}
-                        price={newTotal ? newTotal : calculateTotalPrice()}
-                      />
+                      {user ? (
+                        <Payment
+                          products={Cart}
+                          price={newTotal ? newTotal : calculateTotalPrice()}
+                        />
+                      ) : (
+                        <Link className='text-blue-600 hover:underline' to='/login'>
+                          You Need To login to Check out
+                        </Link>
+                      )}
                     </div>
                   </div>
                 </div>
