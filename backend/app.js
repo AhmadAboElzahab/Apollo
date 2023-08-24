@@ -16,6 +16,7 @@ const Users = require('./routes/Admin/Users');
 const Telegram = require('./routes/Admin/Telegram');
 const Category = require('./routes/Admin/Category');
 const Accounting = require('./routes/Admin/Accounting');
+const Account = require('./routes/Admin/Account');
 
 const Shop = require('./routes/Shop');
 
@@ -43,6 +44,7 @@ app.use('/api/admin/Users', Users);
 app.use('/api/admin/Category', Category);
 app.use('/api/admin/Telegram', Telegram);
 app.use('/api/admin/Accounting', Accounting);
+app.use('/api/admin/Account', Account);
 
 app.use('/api/shop', Shop);
 
