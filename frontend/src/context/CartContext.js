@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react';
+import React, { createContext, useEffect, useReducer, useState } from 'react';
 
 export const CartContext = createContext();
 
@@ -52,6 +52,7 @@ export const CartContextProvider = ({ children }) => {
       dispatch({ type: 'SET', payload: JSON.parse(storedCart) });
     }
   }, []);
+  const [open, setOpen] = useState(false);
 
   const calculateTotalPrice = () => {
     const totalPrice = state.Cart.reduce((total, item) => {
@@ -59,9 +60,17 @@ export const CartContextProvider = ({ children }) => {
     }, 0);
     return totalPrice;
   };
+  const openCart = () => {
+    setOpen(true);
+  };
 
+  const closeCart = () => {
+    setOpen(false);
+  };
   return (
-    <CartContext.Provider value={{ ...state, dispatch, calculateTotalPrice }}>
+    <CartContext.Provider
+      value={{ ...state, open, openCart, closeCart, dispatch, calculateTotalPrice }}
+    >
       {children}
     </CartContext.Provider>
   );

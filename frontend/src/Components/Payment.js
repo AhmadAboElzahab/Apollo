@@ -2,15 +2,16 @@ import { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Dialog, Transition } from '@headlessui/react';
 import CryptoJS from 'crypto-js';
+import { useCart } from '../Hooks/useCart';
 export default function Payment({ products, price }) {
   const secretKey = process.env.REACT_APP_SECRET_KEY;
-
+  const { dispatch } = useCart();
   function encrypt(data) {
     const encryptedData = CryptoJS.AES.encrypt(data, secretKey).toString();
     return encryptedData;
   }
   const handlePaymentMethod = async (amount) => {
-    const id = '64e692f5476144dbdb017674';
+    const id = '64e775bbe7b9da76e2ee6bda';
     const name = 'Apollo';
     const hashedId = encrypt(id);
     const hashedName = encrypt(name);
@@ -31,6 +32,7 @@ export default function Payment({ products, price }) {
       if (event.data.paymentApproved) {
         closeModal();
         toast.success('Payment was successful!');
+        dispatch({ type: 'CLEAR' });
       }
     });
   };

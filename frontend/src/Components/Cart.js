@@ -9,12 +9,11 @@ import { useAuthContext } from '../Hooks/useAuthContext';
 import { Link } from 'react-router-dom';
 export default function Cart() {
   const { user } = useAuthContext();
-  let [open, setOpen] = useState(false);
   const [newTotal, setNewTotal] = useState('');
   const [Loading, setLoading] = useState(false);
   const [promo, setPromo] = useState('');
   const [promoError, setPromoError] = useState('');
-  const { Cart, dispatch, calculateTotalPrice } = useCart();
+  const { Cart, dispatch, calculateTotalPrice, open, closeCart, openCart } = useCart();
 
   const checkTotal = async () => {
     try {
@@ -53,8 +52,8 @@ export default function Cart() {
   };
   return (
     <div>
-      <button className='fixed bottom-0 flex flex-row justify-center left-0   w-screen lg:w-72 p-5 '>
-        <BsCart size={40} onClick={() => setOpen(true)} className='mr-3' />
+      <button className='fixed bottom-0 flex flex-row justify-center left-0 w-screen lg:w-72 p-5'>
+        <BsCart size={40} onClick={openCart} className='mr-3' />
       </button>
       <Transition.Root show={open} as={Fragment}>
         <Dialog
@@ -62,7 +61,7 @@ export default function Cart() {
           static
           className='fixed inset-0 overflow-hidden z-50 '
           open={open}
-          onClose={setOpen}
+          onClose={closeCart}
         >
           <div className='absolute inset-0 overflow-hidden'>
             <Transition.Child
@@ -76,7 +75,7 @@ export default function Cart() {
             >
               <div
                 className='fixed inset-0 backdrop-blur-sm bg-black/30 '
-                onClick={() => setOpen(false)}
+                onClick={() => closeCart()}
                 aria-hidden='true'
               />
             </Transition.Child>
@@ -95,11 +94,7 @@ export default function Cart() {
                   <div className='h-full flex flex-col bg-white shadow-xl overflow-y-scroll'>
                     <div className='fixed w-full bg-white p-4 z-30 shadow '>
                       <Dialog.Title className='   text-lg font-medium text-gray-900 flex flex-row justify-between'>
-                        <RxCross2
-                          size={30}
-                          className='cursor-pointer'
-                          onClick={() => setOpen(false)}
-                        />
+                        <RxCross2 size={30} className='cursor-pointer' onClick={closeCart} />
                         <p className='text-center flex-grow text-2xl'>Cart</p>
                       </Dialog.Title>
                     </div>
