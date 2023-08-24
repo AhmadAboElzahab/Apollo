@@ -21,7 +21,7 @@ router.post('/login', async (req, res) => {
 
     const token = jwt.sign({ id: user._id, role: user.role }, process.env.SECRET_KEY);
     res
-      .cookie('token', token, { httpOnly: true, secure: true })
+      .cookie('Apollo-Token', token, { httpOnly: true, secure: true })
       .json({ name: user.name, role: user.role, UserId: user._id })
       .status(200);
   } catch (err) {
@@ -51,7 +51,7 @@ router.post('/register', async (req, res) => {
 });
 
 router.get('/logout', (req, res) => {
-  res.cookie('token', '', { expires: new Date(0), httpOnly: true });
+  res.cookie('Apollo-Token', '', { expires: new Date(0), httpOnly: true });
   res.json({ message: 'Logout successful' });
 });
 

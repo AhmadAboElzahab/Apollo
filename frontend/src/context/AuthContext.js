@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true); // New loading state
 
   useEffect(() => {
-    const userCookie = Cookies.get('user');
+    const userCookie = Cookies.get('Apollo-User');
     if (userCookie && userCookie !== 'undefined') {
       try {
         const user = JSON.parse(userCookie);

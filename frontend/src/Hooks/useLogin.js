@@ -23,7 +23,7 @@ export const useLogin = () => {
       setError(json.message);
     }
     if (response.ok) {
-      Cookies.set('user', JSON.stringify(json));
+      Cookies.set('Apollo-User', JSON.stringify(json));
       dispatch({ type: 'LOGIN', payload: json });
       setIsLoading(false);
     }

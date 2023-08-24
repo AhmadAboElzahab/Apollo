@@ -11,7 +11,7 @@ export default function Logout({ type }) {
     if (response.ok) {
       dispatch({ type: 'LOGOUT' });
 
-      document.cookie = 'user=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = 'Apollo-User=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
       navigate('/');
     } else {
     }

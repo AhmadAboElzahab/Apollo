@@ -42,7 +42,12 @@ export default function Payment({ products, price }) {
   }
 
   function openModal() {
-    setIsOpen(true);
+    if (products.length === 0) {
+      toast.warn('Cart Is Empty');
+      return;
+    } else {
+      setIsOpen(true);
+    }
   }
   return (
     <>
