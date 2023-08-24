@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { Dialog, Transition } from '@headlessui/react';
 import CryptoJS from 'crypto-js';
 import { useCart } from '../Hooks/useCart';
+
 export default function Payment({ products, price }) {
   const addPayment = async () => {
     const response = await fetch('/api/user/Payment', {
