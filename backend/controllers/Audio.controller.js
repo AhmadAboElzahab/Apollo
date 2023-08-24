@@ -143,7 +143,6 @@ async function getAllAudio(req, res) {
     categories.forEach((category) => {
       categoryMap[category._id.toString()] = category.title;
     });
-
     const AudioWithCategories = allAudio.map((audio) => ({
       _id: audio._id,
       title: audio.title,

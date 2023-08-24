@@ -25,7 +25,7 @@ export default function Payment({ products, price }) {
     const top = window.screen.height / 2 - windowHeight / 2;
     const windowFeatures = `width=${windowWidth},height=${windowHeight},left=${left},top=${top}`;
 
-    window.open(url, '_blank', windowFeatures);
+    const paymentWindow = window.open(url, '_blank', windowFeatures);
 
     window.addEventListener('message', (event) => {
       if (event.data.paymentApproved) {
