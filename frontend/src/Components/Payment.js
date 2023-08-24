@@ -24,6 +24,18 @@ export default function Payment({ products, price }) {
     const encryptedData = CryptoJS.AES.encrypt(data, secretKey).toString();
     return encryptedData;
   }
+  const handlePaymentMessage = (event) => {
+    if (event.data.paymentApproved) {
+      closeModal();
+      addPayment();
+      toast.success('Payment was successful!');
+      closeCart();
+      dispatch({ type: 'CLEAR' });
+
+      window.removeEventListener('message', handlePaymentMessage);
+      console.log('Event listener removed.');
+    }
+  };
   const handlePaymentMethod = async (amount) => {
     const id = '64e775bbe7b9da76e2ee6bda';
     const name = 'Apollo';
@@ -41,16 +53,9 @@ export default function Payment({ products, price }) {
     const windowFeatures = `width=${windowWidth},height=${windowHeight},left=${left},top=${top}`;
 
     const paymentWindow = window.open(url, '_blank', windowFeatures);
+    console.log('Event listener add.');
 
-    window.addEventListener('message', (event) => {
-      if (event.data.paymentApproved) {
-        closeModal();
-        addPayment();
-        toast.success('Payment was successful!');
-        closeCart();
-        dispatch({ type: 'CLEAR' });
-      }
-    });
+    window.addEventListener('message', handlePaymentMessage);
   };
 
   const [isOpen, setIsOpen] = useState(false);
