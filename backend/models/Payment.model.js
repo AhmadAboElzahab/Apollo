@@ -13,7 +13,14 @@ const PaymentSchema = new Schema(
       type: String,
       required: true,
     },
-    productsID: [{ type: mongoose.Schema.Types.ObjectId }],
+    products: [
+      {
+        id: { type: String, required: true },
+        name: { type: String, required: true },
+        price: { type: Number, required: true },
+        type: { type: String, required: true },
+      },
+    ],
     totalPrice: {
       type: Number,
       required: true,

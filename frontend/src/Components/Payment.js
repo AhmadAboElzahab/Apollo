@@ -4,6 +4,20 @@ import { Dialog, Transition } from '@headlessui/react';
 import CryptoJS from 'crypto-js';
 import { useCart } from '../Hooks/useCart';
 export default function Payment({ products, price }) {
+  const addPayment = async () => {
+    const response = await fetch('/api/user/Payment', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        credentials: 'include',
+      },
+      body: JSON.stringify({
+        products,
+        totalPrice: price,
+      }),
+    });
+  };
+
   const secretKey = process.env.REACT_APP_SECRET_KEY;
   const { dispatch, closeCart } = useCart();
   function encrypt(data) {
@@ -31,6 +45,7 @@ export default function Payment({ products, price }) {
     window.addEventListener('message', (event) => {
       if (event.data.paymentApproved) {
         closeModal();
+        addPayment();
         toast.success('Payment was successful!');
         closeCart();
         dispatch({ type: 'CLEAR' });

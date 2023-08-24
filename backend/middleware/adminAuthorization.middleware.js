@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const adminAuthorization = (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies['Apollo-Token']; 
   if (!token) {
     return res.status(401).json({ message: 'Authorization token missing' });
   }
