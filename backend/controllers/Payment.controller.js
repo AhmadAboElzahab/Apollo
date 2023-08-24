@@ -1,21 +1,16 @@
-const Lyrics = require('../models/Lyrics.model');
+const Payment = require('../models/Payment.model');
 
-async function createLyric(req, res) {
+async function addPayment(req, res) {
   try {
-    const { title, lyrics, category, price } = req.body;
-    const newLyric = new Lyrics({ title, lyrics, category, price });
-    const savedLyric = await newLyric.save();
-    res.json(savedLyric);
+    const { BuyerID, productsID, totalPrice } = req.body;
+    const newPayment = new Payment({ BuyerID, productsID, totalPrice });
+    const savedPayment = await newPayment.save();
+    res.json(savedPayment);
   } catch (error) {
-    res.status(500).json({ error: 'Failed to create a new lyric.' });
+    res.status(500).json({ error: 'Failed to create a add Payment.' });
   }
 }
 
-
 module.exports = {
-  createLyric,
-  getAllLyrics,
-  getLyricById,
-  updateLyricById,
-  deleteLyricById,
+  addPayment,
 };

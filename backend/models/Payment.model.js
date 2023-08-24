@@ -9,7 +9,7 @@ const PaymentSchema = new Schema(
       default: uuid.v4,
       required: true,
     },
-    BuyerName: {
+    BuyerID: {
       type: String,
       required: true,
     },
