@@ -3,6 +3,9 @@ import Logout from './Logout';
 import { useAuthContext } from '../Hooks/useAuthContext';
 export default function Navbar() {
   const { user, role } = useAuthContext();
+  const closeMenu = () => {
+    document.getElementById('hamburger').checked = false;
+  };
   return (
     <div className='fixed top-0 w-screen bg-black/90 lg:bg-black/20 z-30  lg:border-b  lg:border-gray-900 '>
       <header>
@@ -41,13 +44,18 @@ export default function Navbar() {
                   <div className='flex h-full flex-col justify-between lg:flex-row lg:items-center'>
                     <ul className='space-y-8 px-6 pt-32  md:px-12 lg:flex lg:space-x-4 lg:space-y-0 lg:pt-0 '>
                       <li>
-                        <Link to='/' className='group relative  before:inset-x-0 before:bottom-0 '>
+                        <Link
+                          onClick={() => closeMenu()}
+                          to='/'
+                          className='group relative  before:inset-x-0 before:bottom-0 '
+                        >
                           <span className='relative text-white text-xl'>Home</span>
                         </Link>
                       </li>
                       <li>
                         {role === 'admin' ? (
                           <Link
+                            onClick={() => closeMenu()}
                             to='/admin'
                             className='group relative  before:inset-x-0 before:bottom-0 '
                           >
@@ -55,6 +63,7 @@ export default function Navbar() {
                           </Link>
                         ) : (
                           <Link
+                            onClick={() => closeMenu()}
                             to='/shop'
                             className='group relative  before:inset-x-0 before:bottom-0 '
                           >
@@ -66,6 +75,7 @@ export default function Navbar() {
                         <>
                           <li>
                             <Link
+                              onClick={() => closeMenu()}
                               to='/login'
                               className='group relative before:inset-x-0 before:bottom-0'
                             >
@@ -74,6 +84,7 @@ export default function Navbar() {
                           </li>
                           <li>
                             <Link
+                              onClick={() => closeMenu()}
                               to='/signup'
                               className='group relative before:inset-x-0 before:bottom-0'
                             >
