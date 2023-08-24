@@ -2,7 +2,6 @@ import { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { Dialog, Transition } from '@headlessui/react';
 import CryptoJS from 'crypto-js';
-import { base64_encode } from 'base-64';
 export default function Payment({ products, price }) {
   const secretKey = process.env.REACT_APP_SECRET_KEY;
 
@@ -26,7 +25,7 @@ export default function Payment({ products, price }) {
     const top = window.screen.height / 2 - windowHeight / 2;
     const windowFeatures = `width=${windowWidth},height=${windowHeight},left=${left},top=${top}`;
 
-    const paymentWindow = window.open(url, '_blank', windowFeatures);
+    window.open(url, '_blank', windowFeatures);
 
     window.addEventListener('message', (event) => {
       if (event.data.paymentApproved) {

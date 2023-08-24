@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import Logout from './Logout';
 import { useAuthContext } from '../Hooks/useAuthContext';
 export default function Navbar() {
-  const { user } = useAuthContext();
+  const { user, role } = useAuthContext();
   return (
     <div className='fixed top-0 w-screen bg-black/90 lg:bg-black/20 z-30  lg:border-b  lg:border-gray-900 '>
       <header>
@@ -46,12 +46,21 @@ export default function Navbar() {
                         </Link>
                       </li>
                       <li>
-                        <Link
-                          to='/shop'
-                          className='group relative  before:inset-x-0 before:bottom-0 '
-                        >
-                          <span className='relative text-white text-xl'>Shop</span>
-                        </Link>
+                        {role === 'admin' ? (
+                          <Link
+                            to='/admin'
+                            className='group relative  before:inset-x-0 before:bottom-0 '
+                          >
+                            <span className='relative text-white text-xl'>Dashboard</span>
+                          </Link>
+                        ) : (
+                          <Link
+                            to='/shop'
+                            className='group relative  before:inset-x-0 before:bottom-0 '
+                          >
+                            <span className='relative text-white text-xl'>Shop</span>
+                          </Link>
+                        )}
                       </li>
                       {!user ? (
                         <>

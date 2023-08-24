@@ -3,7 +3,7 @@ import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { useAuthContext } from '../Hooks/useAuthContext';
 
 export default function CardAction({ d, type, url }) {
-  const { UserId } = useAuthContext();
+  const { user, UserId } = useAuthContext();
   const likePost = async (id) => {
     try {
       const response = await fetch('/api/user/Interactions/like', {
@@ -45,26 +45,30 @@ export default function CardAction({ d, type, url }) {
   };
   return (
     <>
-      {UserId && d.likes?.some((likedUserId) => likedUserId === String(UserId)) ? (
-        <div className='flex items-center'>
-          <GoHeartFill
-            className='text-red-500 cursor-pointer'
-            size={30}
-            onClick={() => {
-              unlikePost(d._id);
-            }}
-          />
-        </div>
+      {user ? (
+        UserId && d.likes?.some((likedUserId) => likedUserId === String(UserId)) ? (
+          <div className='flex items-center'>
+            <GoHeartFill
+              className='text-red-500 cursor-pointer'
+              size={30}
+              onClick={() => {
+                unlikePost(d._id);
+              }}
+            />
+          </div>
+        ) : (
+          <div className='flex items-center'>
+            <GoHeart
+              className='text-gray-800 cursor-pointer'
+              size={30}
+              onClick={() => {
+                likePost(d._id);
+              }}
+            />
+          </div>
+        )
       ) : (
-        <div className='flex items-center'>
-          <GoHeart
-            className='text-gray-800 cursor-pointer'
-            size={30}
-            onClick={() => {
-              likePost(d._id);
-            }}
-          />
-        </div>
+        ''
       )}
     </>
   );
