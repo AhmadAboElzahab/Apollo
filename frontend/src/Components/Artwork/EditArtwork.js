@@ -82,10 +82,10 @@ export default function EditArtwork({ a }) {
               >
                 <Dialog.Panel className='w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all'>
                   <Dialog.Title as='h3' className='text-xlg font-medium leading-6 text-gray-900'>
-                    Add New Artwork
+                    Edit Artwork
                   </Dialog.Title>
                   <div className='mt-2'>
-                    <p className='text-sm text-gray-500 mb-2'>You Are Trying to Add new Artwork</p>
+                    <p className='text-sm text-gray-500 mb-2'>You Are Trying to Edit Artwork</p>
 
                     <div className='mb-6'>
                       <label className='text-sm text-gray-500' htmlFor='value'>
