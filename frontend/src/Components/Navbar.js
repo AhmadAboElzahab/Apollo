@@ -17,7 +17,7 @@ export default function Navbar() {
                   Apollo
                 </div>
               </div>
-
+              s
               <div className='flex items-center w-full  justify-end '>
                 <input
                   type='checkbox'
