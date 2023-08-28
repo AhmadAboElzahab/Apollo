@@ -7,7 +7,6 @@ const path = require('path');
 const Interactions = require('./routes/User/Interactions');
 const Payment = require('./routes/User/Payments');
 
-const AI = require('./routes/Admin/AI');
 const Artwork = require('./routes/Admin/Artwork');
 const Audio = require('./routes/Admin/Audio');
 const Lyrics = require('./routes/Admin/Lyrics');
@@ -34,7 +33,6 @@ app.use(cookieParser());
 app.use('/api/user/Interactions', Interactions);
 app.use('/api/user/Payment', Payment);
 
-app.use('/api/admin/AI', AI);
 app.use('/api/admin/Artwork', Artwork);
 app.use('/api/admin/Audio', Audio);
 app.use('/api/admin/Lyrics', Lyrics);
