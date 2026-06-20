@@ -3,34 +3,9 @@ import { Bindings, Variables } from '../types';
 
 type Env = { Bindings: Bindings; Variables: Variables };
 
-async function sendEmail(env: Bindings, to: string, userName: string, products: any[], paymentId: string) {
-  const productsRows = products
-    .map((p) => `<tr><td>${p.name}</td><td>${p.type}</td></tr>`)
-    .join('');
-
-  const html = `
-    <div style="font-family: Arial, sans-serif; padding: 20px; background-color:black; color:white;">
-      <h1 style="font-size:60px;">Apollo</h1>
-      <h2>Thanks ${userName} For Purchasing From Apollo music Assets</h2>
-      <h2>You have the complete License to use these assets</h2>
-      <h2>License Number: ${paymentId}</h2>
-      <table style="width:100%; color:white;">
-        <thead><tr><th>Name</th><th>Type</th></tr></thead>
-        <tbody>${productsRows}</tbody>
-      </table>
-    </div>`;
-
-  // Send via Mailchannels (free on Cloudflare Workers, no API key needed)
-  await fetch('https://api.mailchannels.net/tx/v1/send', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      personalizations: [{ to: [{ email: to }] }],
-      from: { email: env.EMAIL, name: 'Apollo' },
-      subject: 'License',
-      content: [{ type: 'text/html', value: html }],
-    }),
-  });
+// Email sending is disabled — will be enabled once email config is ready
+async function sendEmail(_env: Bindings, _to: string, _userName: string, _products: any[], _paymentId: string) {
+  // no-op
 }
 
 export async function addPayment(c: Context<Env>) {

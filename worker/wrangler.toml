@@ -2,11 +2,12 @@ name = "apollo-worker"
 main = "src/index.ts"
 compatibility_date = "2024-06-20"
 compatibility_flags = ["nodejs_compat"]
+account_id = "e9b49b479bdf1ac20f888e497f0c117d"
 
 [[d1_databases]]
 binding = "DB"
 database_name = "apollo-db"
-database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+database_id = "c614064c-434d-40ab-ad6a-281b063f0769"
 
 [[r2_buckets]]
 binding = "R2"
