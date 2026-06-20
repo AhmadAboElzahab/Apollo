@@ -1,15 +1,16 @@
 import { Boundary } from '../boundary';
 
 import useSWR from 'swr';
+import { apiUrl } from '../../api';
 import DeleteItem from '../DeleteItem';
 import AddLyrics from './AddLyrics';
 import ViewLyrics from './ViewLyrics';
 import EditLyrics from './EditLyrics';
 import ShareToTelegram from '../SocialMedia/ShareToTelegram';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function LyricsComponent() {
-  const { data, error } = useSWR('/api/admin/Lyrics', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Lyrics'), fetcher);
 
   if (error) {
     return <>{error}</>;
@@ -46,7 +47,7 @@ export default function LyricsComponent() {
                         <EditLyrics l={d} />
                       </td>
                       <td>
-                        <DeleteItem Id={d._id} URL='/api/admin/Lyrics' />
+                        <DeleteItem Id={d._id} URL={apiUrl('/api/admin/Lyrics')} />
                       </td>
                       <td className='text-center'>
                         <ShareToTelegram type='ShareLyrics' id={d._id} />

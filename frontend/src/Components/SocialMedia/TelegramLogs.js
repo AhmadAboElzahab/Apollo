@@ -2,11 +2,12 @@ import { Boundary } from '../boundary';
 
 import useSWR from 'swr';
 import DeleteItem from '../DeleteItem';
+import { apiUrl } from '../../api';
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function LyricsComponent() {
-  const { data, error } = useSWR('/api/admin/Telegram', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Telegram'), fetcher);
 
   if (error) {
     return <>{error}</>;
@@ -50,7 +51,7 @@ export default function LyricsComponent() {
                       </td>
                       <td>{d.body}</td>
                       <td>
-                        <DeleteItem Id={d.Message_id} URL='/api/admin/Telegram' />
+                        <DeleteItem Id={d.Message_id} URL={apiUrl('/api/admin/Telegram')} />
                       </td>
                     </tr>
                   ))}

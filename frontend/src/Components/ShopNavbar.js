@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 import useSWR from 'swr';
 import Cart from './Cart';
 import { useAuthContext } from '../Hooks/useAuthContext';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl } from '../api';
+const fetcher = (url) => fetch(url).then((r) => r.json());
 export default function ShopNavbar() {
   const { user } = useAuthContext();
-  const { data } = useSWR('/api/shop/categories', fetcher);
+  const { data } = useSWR(apiUrl('/api/shop/categories'), fetcher);
   return (
     <nav className='fixed top-[60px] z-[10] w-screen border-b  border-gray-900 bg-black/90 lg:bg-black/20 py-2 lg:top-20 lg:w-72 lg:border-r '>
       <div className='mx-auto flex items-center justify-between '>

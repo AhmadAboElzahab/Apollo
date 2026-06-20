@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAuthContext } from './useAuthContext';
 import Cookies from 'js-cookie';
+import { apiUrl } from '../api';
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
@@ -11,9 +12,10 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch(apiUrl('/api/auth/login'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({ email, password }),
     });
     const json = await response.json();

@@ -1,4 +1,5 @@
 import { BsCart } from 'react-icons/bs';
+import { apiUrl } from '../api';
 import { RxCross2 } from 'react-icons/rx';
 import { Fragment } from 'react';
 import { useState } from 'react';
@@ -18,7 +19,7 @@ export default function Cart() {
   const checkTotal = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/shop/newTotal', {
+      const response = await fetch(apiUrl('/api/shop/newTotal'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

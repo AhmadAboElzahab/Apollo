@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import PageHeader from '../../../Components/PageHeader';
 import { Boundary } from '../../../Components/boundary';
+import { apiUrl } from '../../../api';
 
 export default function Account() {
   const [newPassword, setNewPassword] = useState('');
@@ -20,15 +21,11 @@ export default function Account() {
       return;
     }
     setIsLoading(true);
-    const response = await fetch('/api/admin/account/changepassword', {
+    const response = await fetch(apiUrl('/api/auth/changePassword'), {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        oldPassword,
-        newPassword,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ oldPassword, newPassword }),
     });
 
     setIsLoading(false);

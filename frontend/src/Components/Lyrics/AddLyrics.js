@@ -4,10 +4,11 @@ import { Fragment, useState } from 'react';
 import { mutate } from 'swr';
 import useSWR from 'swr';
 import { toast } from 'react-toastify';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl } from '../../api';
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function AddLyrics() {
-  const { data, error } = useSWR('/api/admin/Category/Lyrics', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Category/type/Lyrics'), fetcher);
 
   let [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState('');
@@ -20,16 +21,15 @@ export default function AddLyrics() {
       toast.error('All Field mus be filled');
     } else {
       try {
-        const response = await fetch('/api/admin/Lyrics', {
+        const response = await fetch(apiUrl('/api/admin/Lyrics'), {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ title, category, lyrics, price }),
         });
 
         if (response.ok) {
-          mutate('/api/admin/Lyrics');
+          mutate(apiUrl('/api/admin/Lyrics'));
           setTitle('');
           setCategory('');
           setLyrics('');

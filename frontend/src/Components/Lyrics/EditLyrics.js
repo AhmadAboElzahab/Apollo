@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-toastify';
+import { apiUrl } from '../../api';
 
 export default function EditLyrics({ l }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,16 +22,15 @@ export default function EditLyrics({ l }) {
       toast.error('All Field mus be filled');
     } else {
       try {
-        const response = await fetch(`/api/admin/Lyrics/${l._id}`, {
+        const response = await fetch(apiUrl(`/api/admin/Lyrics/${l._id}`), {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ title, lyrics, price }),
         });
 
         if (response.ok) {
-          mutate('/api/admin/Lyrics');
+          mutate(apiUrl('/api/admin/Lyrics'));
           closeModal();
           toast.success('Lyrics Updated');
         } else {

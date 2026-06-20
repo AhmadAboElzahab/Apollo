@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-toastify';
+import { apiUrl } from '../../../api';
 
 export default function EditPromo({ codeId, codeValue }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,16 +18,15 @@ export default function EditPromo({ codeId, codeValue }) {
       toast.error('Value Should be less than or equal to 100 !');
     } else {
       try {
-        const response = await fetch(`/api/admin/promo/${codeId}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        const response = await fetch(apiUrl(`/api/admin/Promo/${codeId}`), {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ value: value }),
         });
 
         if (response.ok) {
-          mutate('/api/admin/promo');
+          mutate(apiUrl('/api/admin/Promo'));
           closeModal();
           toast.success('Promo Code Updated');
         } else {

@@ -6,11 +6,12 @@ import EditBeat from './EditBeat';
 import WavesurferComponent from '../WavesurferComponent';
 import DeleteItem from '../DeleteItem';
 import ShareToTelegram from '../SocialMedia/ShareToTelegram';
+import { apiUrl, assetsUrl } from '../../api';
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function Beats() {
-  const { data, error } = useSWR('/api/admin/audio', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Audio'), fetcher);
   if (error) {
     console.warn(error);
     return <>{error}</>;
@@ -32,7 +33,7 @@ export default function Beats() {
             {data &&
               data.map((d) => (
                 <div className='w-full border border-gray-800 rounded-lg shadow'>
-                  <WavesurferComponent audioUrl={`/audio/${d.Audio}`} />
+                  <WavesurferComponent audioUrl={assetsUrl(d.Audio)} />
                   <div className='py-3 px-3 text-sm flex flex-row'>
                     <div>
                       <p>
@@ -62,7 +63,7 @@ export default function Beats() {
                         </Popover.Button>
 
                         <Popover.Panel>
-                          <DeleteItem Id={d._id} URL='/api/admin/audio' />
+                          <DeleteItem Id={d._id} URL={apiUrl('/api/admin/Audio')} />
                           <EditBeat a={d} />
                           <ShareToTelegram type='shareaudio' id={d._id} />
                         </Popover.Panel>

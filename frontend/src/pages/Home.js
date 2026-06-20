@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import apollo from '../assets/apollo.png';
+import apollo from '../assets/apollo.webp';
 import CategoryCards from '../Components/CategoryCards';
 
 export default function Home() {
-  
   return (
     <div className='cn'>
       <div className='h-screen m-0 relative overflow-hidden  sec'>

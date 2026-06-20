@@ -4,45 +4,11 @@ import OptimizedImage from '../../../Components/OptimizedImage';
 import CardAction from '../../../Components/CardAction';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl, assetsUrl } from '../../../api';
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((response) => response.json());
 export default function ShopArtworksCategory() {
   const { category } = useParams();
-  const { data, error } = useSWR(`/api/shop/getProducts/Artworks/${category}`, fetcher);
-  const likePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/like', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
-
-      const result = await response.json();
-    } catch (err) {}
-  };
-
-  const unlikePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/unlike', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
-
-      const result = await response.json();
-    } catch (err) {}
-  };
+  const { data, error } = useSWR(apiUrl(`/api/shop/getProducts/Artworks/${category}`), fetcher);
 
   if (error) {
     return <>{error}</>;
@@ -57,7 +23,7 @@ export default function ShopArtworksCategory() {
               style={{ contentVisibility: 'visible' }}
             >
               <OptimizedImage
-                src={`http://localhost:4000/artworks/${d.art}`}
+                src={assetsUrl(d.art)}
                 blurHash={d.blurHash}
                 styleName='image'
               />
@@ -82,7 +48,7 @@ export default function ShopArtworksCategory() {
                 </p>
                 <br />
                 <p className='hover:underline cursor-pointer'>
-                  <Link to={d._id}>Check</Link>
+                  <Link to={d.id}>Check</Link>
                 </p>
               </div>
 
@@ -91,11 +57,11 @@ export default function ShopArtworksCategory() {
                   <CardAction
                     d={d}
                     type='Artwork'
-                    url={`/api/shop/getProducts/Artworks/${category}`}
+                    url={apiUrl(`/api/shop/getProducts/Artworks/${category}`)}
                   />
-                  <p className='text-center'> {d.likes.length}</p>
+                  <p className='text-center'> {d.likes?.length}</p>
                 </div>
-                <AddToCart id={d._id} name={d.title} price={d.price} type='Artwork' />
+                <AddToCart id={d.id} name={d.title} price={d.price} type='Artwork' />
               </div>
             </div>
           </div>

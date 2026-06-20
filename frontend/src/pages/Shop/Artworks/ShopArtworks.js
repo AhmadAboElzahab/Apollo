@@ -3,11 +3,12 @@ import OptimizedImage from '../../../Components/OptimizedImage';
 import { Link } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
 import CardAction from '../../../Components/CardAction';
+import { apiUrl, assetsUrl } from '../../../api';
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((response) => response.json());
 
 export default function ShopArtworks() {
-  const { data, error, isLoading } = useSWR('/api/shop/Artwork', fetcher);
+  const { data, error, isLoading } = useSWR(apiUrl('/api/shop/artwork'), fetcher);
 
   if (isLoading) {
     return <div className='text-6xl text-white'>Loading </div>;
@@ -25,7 +26,7 @@ export default function ShopArtworks() {
               style={{ contentVisibility: 'visible' }}
             >
               <OptimizedImage
-                src={`http://localhost:4000/artworks/${d.art}`}
+                src={assetsUrl(d.art)}
                 blurHash={d.blurHash}
                 styleName='image'
               />
@@ -51,17 +52,17 @@ export default function ShopArtworks() {
                 <br />
 
                 <p className='hover:underline cursor-pointer'>
-                  <Link to={`${encodeURIComponent(d.category.replace(/\s+/g, '-'))}/${d._id}`}>
+                  <Link to={`${encodeURIComponent(d.category.replace(/\s+/g, '-'))}/${d.id}`}>
                     Check
                   </Link>
                 </p>
               </div>
               <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
                 <div>
-                  <CardAction d={d} type='Artwork' url='/api/shop/Artwork' />
-                  <p className='text-center'> {d.likes.length}</p>
+                  <CardAction d={d} type='Artwork' url={apiUrl('/api/shop/artwork')} />
+                  <p className='text-center'> {d.likes?.length}</p>
                 </div>
-                <AddToCart id={d._id} name={d.title} price={d.price} type='Artwork' />
+                <AddToCart id={d.id} name={d.title} price={d.price} type='Artwork' />
               </div>
             </div>
           </div>

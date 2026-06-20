@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import CardAction from '../../../Components/CardAction';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
+import { apiUrl } from '../../../api';
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((response) => response.json());
 
 export default function ShopLyricsCategory() {
   const { category } = useParams();
 
-  const { data, error } = useSWR(`/api/shop/getProducts/lyrics/${category}`, fetcher);
+  const { data, error } = useSWR(apiUrl(`/api/shop/getProducts/Lyrics/${category}`), fetcher);
   if (error) {
     console.warn(error);
     return <>{error}</>;
@@ -27,7 +28,7 @@ export default function ShopLyricsCategory() {
     <div className='grid lg:grid-cols-3 place-items-center text-white	gap-16 relative top-0 left-0 p-5'>
       {data &&
         data.map((d) => (
-          <div className='w-full border border-gray-800 rounded-lg shadow bg-black' key={d._id}>
+          <div className='w-full border border-gray-800 rounded-lg shadow bg-black' key={d.id}>
             <pre className='text-center py-5 border-b border-gray-800 '>
               {d.lyrics.slice(0, 150) + '...'}
             </pre>
@@ -47,7 +48,7 @@ export default function ShopLyricsCategory() {
                 </p>
                 <br />
                 <p className='hover:underline cursor-pointer'>
-                  <Link to={d._id}>Check</Link>
+                  <Link to={d.id}>Check</Link>
                 </p>
               </div>
               <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
@@ -55,11 +56,11 @@ export default function ShopLyricsCategory() {
                   <CardAction
                     d={d}
                     type='Lyrics'
-                    url={`/api/shop/getProducts/lyrics/${category}`}
+                    url={apiUrl(`/api/shop/getProducts/Lyrics/${category}`)}
                   />
-                  <p className='text-center'> {d.likes.length}</p>
+                  <p className='text-center'> {d.likes?.length}</p>
                 </div>
-                <AddToCart id={d._id} name={d.title} price={d.price} type='Lyric' />
+                <AddToCart id={d.id} name={d.title} price={d.price} type='Lyric' />
               </div>
             </div>
           </div>

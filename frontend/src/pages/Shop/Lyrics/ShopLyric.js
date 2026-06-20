@@ -2,46 +2,12 @@ import useSWR from 'swr';
 import CardAction from '../../../Components/CardAction';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl } from '../../../api';
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((response) => response.json());
 
 export default function ShopLyric() {
   const { product, category } = useParams();
-  const { data, error } = useSWR(`/api/shop/lyric/${product}`, fetcher);
-  const likePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/like', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
-
-      const result = await response.json();
-    } catch (err) {}
-  };
-
-  const unlikePost = async (id) => {
-    try {
-      const response = await fetch('/api/user/likes/unlike', {
-        method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('jwt'),
-        },
-        body: JSON.stringify({
-          postId: id,
-          UserId: '64c24a4681de7bcef0bad344',
-        }),
-      });
-
-      const result = await response.json();
-    } catch (err) {}
-  };
+  const { data, error } = useSWR(apiUrl(`/api/shop/lyric/${product}`), fetcher);
 
   if (error) {
     return <>{error}</>;
@@ -76,10 +42,10 @@ export default function ShopLyric() {
             </div>
             <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
               <div>
-                <CardAction d={data} type='Lyrics' url={`/api/shop/lyric/${product}`} />
-                <p className='text-center'> {data.likes.length}</p>
+                <CardAction d={data} type='Lyrics' url={apiUrl(`/api/shop/lyric/${product}`)} />
+                <p className='text-center'> {data.likes?.length}</p>
               </div>
-              <AddToCart id={data._id} name={data.title} price={data.price} type='Lyric' />
+              <AddToCart id={data.id} name={data.title} price={data.price} type='Lyric' />
             </div>
           </div>
         </div>

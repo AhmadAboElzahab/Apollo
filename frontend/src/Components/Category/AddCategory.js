@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Boundary } from '../boundary';
 import { mutate } from 'swr';
 import { toast } from 'react-toastify';
+import { apiUrl } from '../../api';
 
 export default function AddCategory() {
   const [type, setType] = useState('');
@@ -12,16 +13,15 @@ export default function AddCategory() {
       toast.error('All Field mus be filled');
     } else {
       try {
-        const response = await fetch('/api/admin/Category', {
+        const response = await fetch(apiUrl('/api/admin/Category'), {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ title, type }),
         });
         const output=await response.json()
         if (response.ok) {
-          mutate('/api/admin/Category');
+          mutate(apiUrl('/api/admin/Category'));
           setTitle('');
           setType('');
           toast.success('New Category Added');

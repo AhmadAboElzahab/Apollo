@@ -3,12 +3,13 @@ import OptimizedImage from '../../../Components/OptimizedImage';
 import CardAction from '../../../Components/CardAction';
 import { useParams } from 'react-router-dom';
 import AddToCart from '../../../Components/AddToCart';
+import { apiUrl, assetsUrl } from '../../../api';
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((response) => response.json());
 
 export default function ShopArtwork() {
   const { product, category } = useParams();
-  const { data, error } = useSWR(`/api/shop/artwork/${product}`, fetcher);
+  const { data, error } = useSWR(apiUrl(`/api/shop/artwork/${product}`), fetcher);
 
   if (error) {
     return <>{error}</>;
@@ -19,7 +20,7 @@ export default function ShopArtwork() {
         <div className='flex flex-col  lg:flex-row gap-3 text-white	relative top-0 left-0 p-5 '>
           <div className='h-[80vh] w-full bg-black/30 border border-gray-800 rounded-lg shadow'>
             <OptimizedImage
-              src={`http://localhost:4000/artworks/${data.art}`}
+              src={assetsUrl(data.art)}
               blurHash={data.blurHash}
               styleName='BigImage'
               rounded='rounded-b-lg'
@@ -49,10 +50,10 @@ export default function ShopArtwork() {
 
             <div className=' ml-[auto] flex flex-col items-center justify-between w-28'>
               <div>
-                <CardAction d={data} type='Artwork' url={`/api/shop/artwork/${product}`} />
-                <p className='text-center'> {data.likes.length}</p>
+                <CardAction d={data} type='Artwork' url={apiUrl(`/api/shop/artwork/${product}`)} />
+                <p className='text-center'> {data.likes?.length}</p>
               </div>
-              <AddToCart id={data._id} name={data.title} price={data.price} type='Artwork' />
+              <AddToCart id={data.id} name={data.title} price={data.price} type='Artwork' />
             </div>
           </div>
         </div>

@@ -1,13 +1,14 @@
 import React from 'react';
 import { useAuthContext } from '../Hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
+import { apiUrl } from '../api';
 
 export default function Logout({ type }) {
   const { dispatch } = useAuthContext();
   const navigate = useNavigate();
 
   const logout = async () => {
-    const response = await fetch('/api/auth/logout');
+    const response = await fetch(apiUrl('/api/auth/logout'), { credentials: 'include' });
     if (response.ok) {
       dispatch({ type: 'LOGOUT' });
 

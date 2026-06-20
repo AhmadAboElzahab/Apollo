@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { mutate } from 'swr';
 import { Boundary } from '../../boundary';
 import { toast } from 'react-toastify';
+import { apiUrl } from '../../../api';
 
 export default function AddPromo() {
   const [value, setValue] = useState('');
@@ -14,16 +15,15 @@ export default function AddPromo() {
       setValue('');
     } else {
       try {
-        const response = await fetch('/api/admin/promo', {
+        const response = await fetch(apiUrl('/api/admin/Promo'), {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ value: value }),
         });
 
         if (response.ok) {
-          mutate('/api/admin/promo');
+          mutate(apiUrl('/api/admin/Promo'));
           setValue('');
           toast.success('New Promo Code Added');
         } else {

@@ -2,10 +2,11 @@ import DeleteItem from '../DeleteItem';
 import { Boundary } from '../boundary';
 import EditCategory from './EditCategory';
 import useSWR from 'swr';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl } from '../../api';
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function Categories() {
-  const { data, error } = useSWR('/api/admin/Category', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Category'), fetcher);
 
   return (
     <div className='bg-vc-border-gradient rounded-lg p-px shadow-lg shadow-black/20'>
@@ -37,7 +38,7 @@ export default function Categories() {
                       <td>
                         <DeleteItem
                           Id={d._id}
-                          URL='/api/admin/Category'
+                          URL={apiUrl('/api/admin/Category')}
                           errMessage='Category Holds Items'
                         />
                       </td>

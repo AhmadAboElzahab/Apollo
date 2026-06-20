@@ -1,17 +1,16 @@
 import { mutate } from 'swr';
 import { GoHeart, GoHeartFill } from 'react-icons/go';
 import { useAuthContext } from '../Hooks/useAuthContext';
+import { apiUrl } from '../api';
 
 export default function CardAction({ d, type, url }) {
   const { user, UserId } = useAuthContext();
   const likePost = async (id) => {
     try {
-      const response = await fetch('/api/user/Interactions/like', {
+      const response = await fetch(apiUrl('/api/user/Interactions/like'), {
         method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          credentials: 'include',
-        },
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({
           postId: id,
           type,
@@ -26,12 +25,10 @@ export default function CardAction({ d, type, url }) {
 
   const unlikePost = async (id) => {
     try {
-      const response = await fetch('/api/user/Interactions/unlike', {
+      const response = await fetch(apiUrl('/api/user/Interactions/unlike'), {
         method: 'put',
-        headers: {
-          'Content-Type': 'application/json',
-          credentials: 'include',
-        },
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
         body: JSON.stringify({
           postId: id,
           type,

@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import useSWR from 'swr';
 import { mutate } from 'swr';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl } from '../../api';
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function AddArtwork() {
-  const { data, error } = useSWR('/api/admin/Category/Artworks', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Category/type/Artworks'), fetcher);
 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -54,7 +55,8 @@ export default function AddArtwork() {
     formData.append('price', price);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/admin/Artwork', true);
+    xhr.open('POST', apiUrl('/api/admin/Artwork'), true);
+    xhr.withCredentials = true;
 
     xhr.upload.addEventListener('progress', (event) => {
       if (event.lengthComputable) {
@@ -71,7 +73,7 @@ export default function AddArtwork() {
         if (xhr.status === 200) {
           const data = JSON.parse(xhr.responseText);
           toast.success('New Artwork Added');
-          mutate('/api/admin/Artwork');
+          mutate(apiUrl('/api/admin/Artwork'));
           resetForm();
         } else {
           toast.error('Artwork Could not be Added');

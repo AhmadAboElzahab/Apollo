@@ -1,4 +1,5 @@
 import { Fragment, useEffect, useState } from 'react';
+import { apiUrl } from '../api';
 import { toast } from 'react-toastify';
 import { Dialog, Transition } from '@headlessui/react';
 import CryptoJS from 'crypto-js';
@@ -6,12 +7,10 @@ import { useCart } from '../Hooks/useCart';
 
 export default function Payment({ products, price }) {
   const addPayment = async () => {
-    const response = await fetch('/api/user/Payment', {
+    const response = await fetch(apiUrl('/api/user/Payment'), {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        credentials: 'include',
-      },
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify({
         products,
         totalPrice: price,

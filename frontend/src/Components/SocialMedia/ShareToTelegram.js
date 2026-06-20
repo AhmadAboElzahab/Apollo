@@ -2,9 +2,10 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { toast } from 'react-toastify';
 import { BiLogoTelegram } from 'react-icons/bi';
+import { apiUrl } from '../../api';
 
 export default function ShareToTelegram({ type, id }) {
-  const url = `/api/admin/Telegram/${type}/${id}`;
+  const url = apiUrl(`/api/admin/Telegram/${type}/${id}`);
   const [isLoading, setIsLoading] = useState(false);
 
   const Share = async () => {
@@ -12,6 +13,7 @@ export default function ShareToTelegram({ type, id }) {
       setIsLoading(true);
       const response = await fetch(url, {
         method: 'POST',
+        credentials: 'include',
       });
 
       if (response.ok) {

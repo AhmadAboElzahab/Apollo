@@ -7,10 +7,11 @@ import useSWR from 'swr';
 import DeleteItem from '../DeleteItem';
 import OptimizedImage from '../OptimizedImage';
 import ShareToTelegram from '../SocialMedia/ShareToTelegram';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl, assetsUrl } from '../../api';
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function Artworks() {
-  const { data, error } = useSWR('/api/admin/Artwork', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Artwork'), fetcher);
 
   if (error) {
     return <>{error}</>;
@@ -28,7 +29,7 @@ export default function Artworks() {
                     style={{ contentVisibility: 'visible' }}
                   >
                     <OptimizedImage
-                      src={`http://localhost:4000/artworks/${d.art}`}
+                      src={assetsUrl(d.art)}
                       blurHash={d.blurHash}
                       styleName='image'
                     />
@@ -62,7 +63,7 @@ export default function Artworks() {
                         </Popover.Button>
 
                         <Popover.Panel>
-                          <DeleteItem Id={d._id} URL='/api/admin/Artwork' />
+                          <DeleteItem Id={d._id} URL={apiUrl('/api/admin/Artwork')} />
                           <EditArtwork a={d} />
                           <ShareToTelegram type='shareartwork' id={d._id} />
                         </Popover.Panel>

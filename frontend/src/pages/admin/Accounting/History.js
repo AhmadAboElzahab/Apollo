@@ -3,10 +3,11 @@ import PageHeader from '../../../Components/PageHeader';
 import { Boundary } from '../../../Components/boundary';
 import { Disclosure, Transition } from '@headlessui/react';
 import { SlArrowDown } from 'react-icons/sl';
+import { apiUrl } from '../../../api';
 export default function History() {
-  const fetcher = (...args) => fetch(...args).then((response) => response.json());
+  const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
-  const { data, error, isLoading } = useSWR(`/api/admin/accounting/`, fetcher);
+  const { data, error, isLoading } = useSWR(apiUrl('/api/admin/Accounting'), fetcher);
 
   if (error) {
     return <p>{error}</p>;

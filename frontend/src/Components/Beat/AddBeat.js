@@ -3,10 +3,11 @@ import { Boundary } from '../boundary';
 import useSWR, { mutate } from 'swr';
 import { toast } from 'react-toastify';
 import WavesurferComponent from '../WavesurferComponent';
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+import { apiUrl } from '../../api';
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((r) => r.json());
 
 export default function AddBeat() {
-  const { data, error } = useSWR('/api/admin/Category/Beats', fetcher);
+  const { data, error } = useSWR(apiUrl('/api/admin/Category/type/Beats'), fetcher);
 
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState('');
@@ -48,7 +49,8 @@ export default function AddBeat() {
     formData.append('category', category);
 
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/api/admin/Audio', true);
+    xhr.open('POST', apiUrl('/api/admin/Audio'), true);
+    xhr.withCredentials = true;
 
     xhr.upload.addEventListener('progress', (event) => {
       if (event.lengthComputable) {
@@ -64,7 +66,7 @@ export default function AddBeat() {
 
         if (xhr.status === 200) {
           toast.success('Beat Added Successfully');
-          mutate('/api/admin/audio');
+          mutate(apiUrl('/api/admin/Audio'));
           resetForm();
         } else {
           toast.error('Beat Could not Be Added ');

@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-toastify';
+import { apiUrl } from '../../api';
 
 export default function EditCategory({ categoryId, categoryTitle }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,16 +17,15 @@ export default function EditCategory({ categoryId, categoryTitle }) {
       toast.error('Title Should not Be Empty !');
     } else {
       try {
-        const response = await fetch(`/api/admin/Category/${categoryId}`, {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        const response = await fetch(apiUrl(`/api/admin/Category/${categoryId}`), {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ title }),
         });
 
         if (response.ok) {
-          mutate('/api/admin/Category');
+          mutate(apiUrl('/api/admin/Category'));
           closeModal();
           toast.success('Title Updated');
         } else {

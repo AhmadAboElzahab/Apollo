@@ -2,6 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { mutate } from 'swr';
 import { toast } from 'react-toastify';
+import { apiUrl } from '../../api';
 
 export default function EditArtwork({ a }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,16 +20,15 @@ export default function EditArtwork({ a }) {
       toast.error('All Field mus be filled');
     } else {
       try {
-        const response = await fetch(`/api/admin/Artwork/${a._id}`, {
+        const response = await fetch(apiUrl(`/api/admin/Artwork/${a._id}`), {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
           body: JSON.stringify({ title, description, price }),
         });
 
         if (response.ok) {
-          mutate('/api/admin/Artwork');
+          mutate(apiUrl('/api/admin/Artwork'));
           closeModal();
           toast.success('Artwork Updated');
         } else {

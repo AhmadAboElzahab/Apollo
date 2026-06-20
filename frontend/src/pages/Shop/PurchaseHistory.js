@@ -2,11 +2,12 @@ import useSWR from 'swr';
 import { Disclosure, Transition } from '@headlessui/react';
 import { SlArrowDown } from 'react-icons/sl';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import { apiUrl } from '../../api';
 
-const fetcher = (...args) => fetch(...args).then((response) => response.json());
+const fetcher = (url) => fetch(url, { credentials: 'include' }).then((response) => response.json());
 
 export default function PurchaseHistory() {
-  const { data, error, isLoading } = useSWR('/api/user/Payment/history', fetcher);
+  const { data, error, isLoading } = useSWR(apiUrl('/api/user/Payment/History'), fetcher);
   if (error) {
     return <>{error}</>;
   }
@@ -16,8 +17,8 @@ export default function PurchaseHistory() {
   return (
     <div className=' w-full bg-black/30 border border-gray-800 rounded-lg shadow p-4'>
       {data?.map((d) => (
-        <div key={d._id} className='flex flex-row justify-between'>
-          <div className='w-full  rounded-2xl m-4' key={d._id}>
+        <div key={d.id} className='flex flex-row justify-between'>
+          <div className='w-full  rounded-2xl m-4' key={d.id}>
             <Disclosure>
               {({ open }) => (
                 <>
