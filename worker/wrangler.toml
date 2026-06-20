@@ -1,0 +1,23 @@
+name = "apollo-worker"
+main = "src/index.ts"
+compatibility_date = "2024-06-20"
+compatibility_flags = ["nodejs_compat"]
+
+[[d1_databases]]
+binding = "DB"
+database_name = "apollo-db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "apollo-assets"
+
+[vars]
+DOMAIN = "https://yourdomain.com/"
+
+# Secrets (set via: wrangler secret put SECRET_NAME)
+# SECRET_KEY
+# EMAIL
+# EMAIL_PASSWORD
+# TELEGRAM_TOKEN
+# TELEGRAM_CHAT_ID
