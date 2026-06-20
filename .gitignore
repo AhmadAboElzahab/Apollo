@@ -1,10 +1,21 @@
 /frontend/node_modules
 /node_modules
 /backend/node_modules
-
+/worker/node_modules
 
 /uploads/artworks/
 /uploads/audio/
 *.jpeg
 *.wav
 *.webp
+
+# Secrets — never commit these
+.env
+.env.local
+.env.production
+.dev.vars
+
+# Build output
+/frontend/build
+/worker/dist
+/worker/.wrangler
